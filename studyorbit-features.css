@@ -1,0 +1,42 @@
+/* StudyOrbit IIT v4 additions. Existing styling and chapter controls remain intact. */
+.orbit-section{border:1px solid #cba75b77;background:linear-gradient(145deg,#15223adf,#10172cef)}
+.orbit-section>h2{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0}
+.orbit-section>h2:after{content:'⌄';font-size:24px;color:#e2c789}
+.orbit-section.closed>h2:after{content:'›'}
+.orbit-section.closed>.orbit-content,.orbit-section.closed>:not(h2){display:none!important}
+.orbit-content{padding-top:12px}
+.orbit-drawer{border:1px solid #7d7897a0;background:#121d33;border-radius:13px;margin:11px 0;overflow:hidden}
+.orbit-drawer>summary{padding:12px 13px;cursor:pointer;background:linear-gradient(105deg,#253352,#28253f);color:#f0e2bb;font-weight:650}
+.orbit-inside{padding:13px}
+.orbit-record{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid #65738a4d;padding:9px 0;color:#d7e5f8;flex-wrap:wrap}
+.orbit-record button{padding:6px 9px}
+.orbit-lock{margin:9px 0}.orbit-check{display:block;padding:5px;color:#dce7f5}
+.orbit-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+.orbit-graph{background:#0c172a;border:1px solid #566988;border-radius:12px;padding:10px;margin:12px 0;overflow:hidden}
+.orbit-graph-title{color:#e9f2ff;font-size:14px;font-weight:700;margin:0 0 7px}
+.orbit-graph-tools{display:flex;gap:9px;align-items:center;justify-content:flex-end;color:#a8bcd6;font-size:12px;margin-bottom:4px}
+.orbit-graph-tools button{padding:2px 9px;min-height:30px}
+.orbit-graph-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;touch-action:pan-x pan-y}
+.orbit-graph canvas{display:block;height:230px;max-width:none;min-width:100%}
+.orbit-legend{display:flex;flex-wrap:wrap;gap:13px;font-size:12px;padding-top:5px}
+#questionBankSection>.orbit-new-form,#dailyLogSection>.orbit-new-form{margin-top:14px}
+#orbLeaveSection{margin-top:0}
+#orbRevisionSection{border-color:#c6a3f5a0}
+#orbTestingSection{border-color:#e6b76da0}
+#orbAnalysisSection{border-color:#6abed0a0}
+@media(max-width:520px){.orbit-inside{padding:10px}.orbit-graph{padding:7px}.orbit-metrics{gap:5px}}
+
+/* V5: polished accordion and calm premium jewel-glass accents */
+.orbit-section,.accordion-section{border-color:#a79ac278!important;background:linear-gradient(135deg,rgba(23,30,55,.97),rgba(12,21,40,.96))!important;box-shadow:0 9px 28px #01071399,inset 0 1px #ffffff1b!important}
+.orbit-section>h2,.accordion-section>h2,.accordion-section>.qb-title-row{min-height:44px;cursor:pointer}
+.orbit-section>h2:after,.accordion-section>h2:after,.accordion-section>.qb-title-row:after,.orbit-drawer>summary:before{content:'»'!important;font:700 23px/1 Georgia,serif!important;color:#efcf88!important;transform:none!important;text-shadow:0 0 10px #c8a1ff50}
+.orbit-section>h2:after,.accordion-section>h2:after,.accordion-section>.qb-title-row:after{margin-left:auto;transition:transform .18s ease!important}
+.orbit-section:not(.closed)>h2:after,.accordion-section:not(.collapsed)>h2:after,.accordion-section:not(.collapsed)>.qb-title-row:after{transform:rotate(90deg)!important}
+.orbit-drawer>summary{display:flex;align-items:center;gap:9px;list-style:none;background:linear-gradient(100deg,#2a3151,#292340 72%,#3b2c3d);border-bottom:1px solid #d3b87526}
+.orbit-drawer>summary::-webkit-details-marker{display:none}
+.orbit-drawer>summary:before{display:inline-block;flex:none;transition:transform .18s}
+.orbit-drawer[open]>summary:before{transform:rotate(90deg)!important}
+.orbit-subject-instruction{border:1px solid #e9c77e80;background:linear-gradient(100deg,#4b3c2666,#282646);color:#ffe7a9!important;border-radius:11px;padding:10px 13px;font-weight:700;letter-spacing:.25px;margin:15px 0 10px}
+.orbit-lock .note{border:1px solid #e3bf7390;background:#3b2e273f;color:#f7dfb0!important}
+#orbRevisionSection{border-color:#bc9df59c!important}#orbTestingSection{border-color:#e6bb779c!important}#orbAnalysisSection{border-color:#8cbedb9c!important}
+@media(prefers-reduced-motion:reduce){.orbit-section>h2:after,.orbit-drawer>summary:before{transition:none!important}}

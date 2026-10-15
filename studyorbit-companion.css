@@ -1,0 +1,85 @@
+/* Panda Study Buddy V6: isolated from tracker controls and existing companion. */
+#orbitBuddy{display:none!important}
+#pandaBuddy{position:fixed;top:10px;right:10px;z-index:9999;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#f9f7ff;pointer-events:none}
+#pandaBuddy *{box-sizing:border-box}
+#pandaToggle{display:flex;align-items:center;flex-direction:column;gap:1px;width:128px;padding:0 3px 7px;border:1px solid #ffdf99b5;border-radius:22px;background:linear-gradient(155deg,#192a4ce8,#241a45f0);box-shadow:0 6px 26px #0008,0 0 18px #c5a6ff55;color:#fff;cursor:pointer;pointer-events:auto;backdrop-filter:blur(10px)}
+#pandaToggle .panda-art{width:91px;height:95px;object-fit:contain;filter:drop-shadow(0 6px 5px #0008);animation:pandaBreathe 5s ease-in-out infinite}
+#pandaToggle:hover .panda-art{animation:pandaWave .65s ease-in-out 2}
+#pandaToggle .panda-label{font:750 10px/1.3 system-ui;text-align:center;color:#ffe6a8}
+#pandaToggle .panda-online{font:500 9px/1.3 system-ui;color:#aee8d4}
+#pandaPanel{position:absolute;right:0;top:0;width:min(360px,calc(100vw - 18px));height:min(620px,calc(100dvh - 20px));display:flex;flex-direction:column;overflow:hidden;background:linear-gradient(155deg,#151e38,#221c42 65%,#121d31);border:1px solid #f7d7a7;border-radius:20px;box-shadow:0 14px 48px #000c;pointer-events:auto}
+#pandaPanel[hidden]{display:none!important}
+#pandaPanel .panda-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#ffffff0c;border-bottom:1px solid #ffffff20}
+#pandaPanel .panda-head strong{display:block;font-size:15px;color:#ffe5a7}#pandaPanel .panda-head small{display:block;font-size:10px;color:#c7d7f2;margin-top:3px}
+#pandaClose{border:0;background:#ffffff1c;color:white;border-radius:10px;padding:7px 11px;cursor:pointer}
+#pandaChat{flex:1;min-height:70px;overflow:auto;padding:14px 12px;display:flex;flex-direction:column;gap:10px;overscroll-behavior:contain}
+#pandaChat .panda-msg{font:500 13px/1.48 system-ui;padding:10px 12px;max-width:90%;border-radius:15px;white-space:pre-wrap;overflow-wrap:anywhere}
+#pandaChat .panda-bot{align-self:flex-start;background:#354266;color:#f4f8ff;border:1px solid #6678a05c;border-bottom-left-radius:4px}
+#pandaChat .panda-user{align-self:flex-end;background:linear-gradient(135deg,#694ba9,#4d71b4);color:#fff;border-bottom-right-radius:4px}
+#pandaChat .panda-typing{opacity:.7;font-style:italic}
+#pandaQuick{display:flex;gap:5px;overflow-x:auto;padding:8px 9px;border-top:1px solid #ffffff1a;scrollbar-width:thin}
+#pandaQuick button{white-space:nowrap;background:#344a6a;color:#fff;border:1px solid #7288b5;border-radius:12px;padding:7px 10px;font-size:11px;cursor:pointer}
+#pandaSettings{margin:0 10px 6px;background:#ffffff0b;border:1px solid #ffffff25;border-radius:10px;padding:6px 9px;font-size:12px}
+#pandaSettings summary{cursor:pointer;color:#ffe0a2;font-weight:650}
+#pandaSettings label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
+#pandaSettings input,#pandaSettings select{width:60%;min-width:0;background:#253552;color:#fff;border:1px solid #637697;border-radius:7px;padding:5px;font-size:12px}
+#pandaClear{margin-top:9px;background:#6b3448;border:1px solid #c17a92;color:#fff;border-radius:8px;padding:5px 9px;font-size:11px;cursor:pointer}
+#pandaForm{display:flex;gap:7px;padding:8px 9px}#pandaInput{flex:1;min-width:0;background:#0d172d;color:#fff;border:1px solid #7d88a9;border-radius:11px;padding:11px;font-size:13px}
+#pandaForm button{border:0;border-radius:11px;background:linear-gradient(135deg,#ffda91,#f2a7bc);color:#2e2544;font-weight:800;padding:9px 11px;cursor:pointer}
+#pandaPanel .panda-disclaimer{font:400 9px/1.4 system-ui;color:#a9bbd6;text-align:center;padding:0 10px 8px;margin:0}
+@keyframes pandaBreathe{0%,100%{transform:rotate(-2deg) scale(1)}50%{transform:rotate(2deg) scale(1.04)}}@keyframes pandaWave{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(8deg)}}
+@media(max-width:600px){#pandaBuddy{top:5px;right:5px}#pandaToggle{width:88px;border-radius:14px;padding-bottom:5px}#pandaToggle .panda-art{width:66px;height:70px}#pandaToggle .panda-label{font-size:8px}#pandaToggle .panda-online{font-size:8px}#pandaPanel{width:min(355px,calc(100vw - 10px));height:min(590px,calc(100dvh - 10px))}}
+@media(prefers-reduced-motion:reduce){#pandaBuddy .panda-art{animation:none!important}}
+
+/* SARTHI overlay upgrade; tracker underneath remains scrollable. */
+#pandaBuddy{top:8px;right:8px;z-index:10020}
+#pandaToggle{width:112px;border-color:#7defff;background:linear-gradient(155deg,#15294fef,#39236aee)}
+#pandaToggle .sarthi-art{width:86px;height:91px;animation:sarthiFloat 3.8s ease-in-out infinite;filter:drop-shadow(0 0 12px #74dfff99)}
+#pandaPanel{position:fixed!important;top:0!important;left:0!important;right:0!important;bottom:auto!important;width:100vw!important;max-width:none!important;height:50dvh!important;min-height:300px;max-height:none!important;border-radius:0 0 22px 22px!important;box-shadow:0 16px 42px #000b,0 0 25px #8d78ff44!important;background:linear-gradient(155deg,#111d3bf9,#231b42fc)!important;display:flex;flex-direction:column;overflow:hidden;pointer-events:auto}
+#pandaPanel[hidden]{display:none!important}
+#pandaPanel .panda-head{flex:0 0 auto;padding:10px 15px}
+#sarthiModes{display:flex;gap:6px;padding:5px 12px 8px;flex:0 0 auto}
+#sarthiModes button{flex:1;border:1px solid #7183b5;background:#1e3055;color:#dbeaff;border-radius:12px;padding:7px 3px;font-size:11px;font-weight:700}
+#sarthiModes button[aria-pressed="true"]{background:linear-gradient(100deg,#384e9b,#633f96);border-color:#b8e8ff;color:#fff;box-shadow:0 0 10px #81cfff55}
+#pandaChat{flex:1 1 auto!important;min-height:0!important;max-height:none!important;overflow-y:auto!important}
+#pandaQuick{flex:0 0 auto;overflow-x:auto}
+#pandaSettings{flex:0 0 auto;max-height:27%;overflow-y:auto}
+#pandaForm{flex:0 0 auto}
+#pandaPanel .panda-disclaimer{flex:0 0 auto}
+@keyframes sarthiFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
+@media(max-width:600px){#pandaBuddy{top:5px;right:5px}#pandaToggle{width:83px}#pandaToggle .sarthi-art{width:65px;height:68px}#pandaPanel{height:49dvh!important;min-height:285px}#pandaPanel .panda-head{padding:7px 12px}#pandaQuick button{font-size:10px;padding:5px 7px}#pandaForm{padding:6px}}
+@media(prefers-reduced-motion:reduce){#pandaToggle .sarthi-art{animation:none!important}}
+
+/* V6.6: chat-first, mobile-friendly SARTHI layout. */
+#pandaPanel{height:60dvh!important;min-height:360px!important;max-height:100dvh!important;}
+#pandaPanel .panda-head{padding:7px 12px!important;min-height:49px;}
+#pandaPanel .panda-head strong{font-size:14px;line-height:1.2}
+#pandaPanel .panda-head small{font-size:9px;margin-top:2px}
+#pandaClose{padding:5px 9px;font-size:17px}
+#sarthiModes{padding:5px 9px!important;gap:5px!important}
+#sarthiModes button{padding:5px 3px!important;border-radius:10px!important;font-size:10px!important;min-height:30px;box-shadow:none}
+#pandaChat{flex:1 1 0!important;min-height:0!important;padding:12px 11px 15px!important;gap:9px!important;background:radial-gradient(circle at 85% 20%,#395b7b20,transparent 42%),linear-gradient(165deg,#101a30,#142038 65%,#18233a);scrollbar-width:thin;}
+#pandaChat .panda-msg{max-width:85%;font:500 13px/1.5 system-ui;padding:9px 12px;border-radius:15px;box-shadow:0 2px 8px #0002;}
+#pandaChat .panda-bot{border-radius:14px 14px 14px 4px;background:#2b3b59;border:1px solid #8197bd38;align-self:flex-start}
+#pandaChat .panda-user{border-radius:14px 14px 4px 14px;background:linear-gradient(130deg,#4c579a,#6250a0);align-self:flex-end}
+#pandaQuick{display:none!important}
+#sarthiUtility{display:flex;align-items:center;justify-content:space-between;gap:9px;flex:0 0 auto;padding:5px 10px 3px;border-top:1px solid #ffffff17;min-height:34px}
+#pandaSettings{margin:0!important;max-height:none!important;overflow:visible!important;padding:0!important;border:0!important;background:none!important;min-width:0;position:relative}
+#pandaSettings summary{font:650 11px/1.3 system-ui;color:#d7e8ff;list-style:none;white-space:nowrap;padding:5px 8px;border:1px solid #697ba07d;border-radius:9px;background:#263555;cursor:pointer}
+#pandaSettings summary::-webkit-details-marker{display:none}
+#pandaSettings[open]{z-index:5}
+#pandaSettings[open]::before{content:'';position:absolute;bottom:calc(100% + 2px);left:0;width:min(265px,calc(100vw - 24px));height:119px;background:#1e2a49;border:1px solid #788ab2;border-radius:12px;box-shadow:0 -6px 22px #0008;pointer-events:none}
+#pandaSettings label{position:absolute;bottom:calc(100% + 65px);left:10px;width:min(242px,calc(100vw - 44px));margin:0!important;z-index:2;font:500 11px system-ui;white-space:nowrap}
+#pandaSettings label+label{bottom:calc(100% + 18px)}
+#pandaSettings input,#pandaSettings select{width:60%;font-size:12px;padding:6px!important}
+#pandaClear{margin:0!important;padding:5px 9px!important;background:#46283f!important;border:1px solid #8b647f!important;color:#ffdeea!important;border-radius:9px;font:650 11px/1.2 system-ui;white-space:nowrap}
+#pandaForm{padding:6px 10px 7px!important;gap:7px!important}
+#pandaInput{min-height:39px;padding:9px 11px!important;font-size:13px!important;border-radius:13px!important}
+#pandaForm button{min-width:66px;padding:7px 10px!important;font-size:12px!important;border-radius:12px!important}
+#pandaPanel .panda-disclaimer{font-size:8px!important;line-height:1.2!important;padding:0 8px 5px!important;opacity:.7}
+@media(max-width:600px){#pandaPanel{height:60dvh!important;min-height:330px!important}#pandaChat{padding:10px 9px 12px!important}#pandaChat .panda-msg{font-size:12.5px;max-width:88%}}
+@media(max-height:560px){#pandaPanel{min-height:0!important;height:68dvh!important}#pandaPanel .panda-disclaimer{display:none}}
+/* V6.7: avoid viewport jumping when Android keyboard opens */
+#pandaPanel{overscroll-behavior:contain;overflow:hidden;}
+#pandaChat{overscroll-behavior:contain;overflow-anchor:none;}
+#pandaInput{scroll-margin:0!important;}
