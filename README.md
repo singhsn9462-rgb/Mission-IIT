@@ -6,7 +6,3 @@ Changes: RACE stage limits and fixed question totals (Maths 55 x 10; Physics 69 
 IMPORTANT: Export a tracker snapshot before updating. Test on Mission-IIT-Test before replacing production. Existing saved records are not deleted by this update. If previously saved RACE attempts exceed the newly specified fixed total, they remain in storage but new submissions may need review.
 
 Verification: JavaScript syntax and ZIP integrity checked. Full Android browser interaction testing has not been performed.
-
-V7.3 axis refinement: dual-axis gap reduced to approximately 37% of prior spacing; green accuracy ticks left of green axis and yellow average-time ticks right of yellow axis.
-
-V7.3 graph hotfix: repaired dual-axis graph rendering, closer axes, numeric-only point labels, dashboard emoji.
