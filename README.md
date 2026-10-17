@@ -1,13 +1,8 @@
-StudyOrbit IIT V7.2 · Daily Log, QB and Analysis refinements
+# StudyOrbit IIT V7.3
+Based on V7.2. Upload extracted root files to the test GitHub Pages repository.
 
-Based on the supplied V7.1 Analytics Refined ZIP.
+Changes: RACE stage limits and fixed question totals (Maths 55 x 10; Physics 69 x 10; PC 30 x 11; OC 25 x 11; IOC 22 x 11); direct entry for Extra Source, Theory, JEE MAIN Booklet and Additional Material; Enter-to-lock and editable normal-stage totals; exclusive subject test marks drawers; saved tests display only; refined chart labels, dual axes, touch point values, holiday dotted bridges, subject study consistency, section headings.
 
-Changes:
-- Compact subject study-hours table in Daily Log, Tasks status with Not Recorded default, date-based edits, no Daily History drawer.
-- QB date + subject + chapter + exercise entry editing replaces the same day's entry rather than adding; Extra Source and Theory do not require fixed question totals.
-- Overall average time per question, three-status graph, dual-axis speed/accuracy charts for overall and five subjects.
-- Analysis graph range controls, date/month zoom and horizontal scrolling, holiday and Not Recorded markers.
-- Subject order: Maths, Physics, Physical Chemistry, Organic Chemistry, Inorganic Chemistry.
-- RACE summary combined in chapter-stage analysis, leave analysis as table, cleaned efficiency graph.
+IMPORTANT: Export a tracker snapshot before updating. Test on Mission-IIT-Test before replacing production. Existing saved records are not deleted by this update. If previously saved RACE attempts exceed the newly specified fixed total, they remain in storage but new submissions may need review.
 
-IMPORTANT: Test in Mission-IIT-Test first. JavaScript syntax and ZIP checks passed. Browser functional test could not be completed in this environment. Back up your tracker snapshot before replacing files.
+Verification: JavaScript syntax and ZIP integrity checked. Full Android browser interaction testing has not been performed.
