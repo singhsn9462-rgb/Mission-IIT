@@ -263,14 +263,17 @@ body .motivation-toast,body .note,body .status,body pre{font-weight:400!importan
 body:before{background-image:linear-gradient(180deg,rgba(4,9,20,.70),rgba(5,12,25,.82)),url("./studyorbit-background.png");background-size:cover;background-position:center;background-repeat:no-repeat}
 
 .hero .maker-credit{color:#ffd84a!important;font-size:clamp(14px,3.8vw,18px);font-weight:800!important;line-height:1.45;text-align:center;margin:5px auto 12px;text-shadow:0 1px 5px rgba(0,0,0,.5)!important;letter-spacing:.25px}
+
+/* V7.3 final: compact centered architect plaque; presentation only */
+.hero .architect-credit{display:block;width:fit-content;max-width:100%;margin:9px auto 3px;padding:10px 15px;text-align:center;color:#dce3ed;font-size:clamp(12px,3.25vw,16px);font-weight:650;line-height:1.8;letter-spacing:.12px;border:2px solid #f5c95d;border-radius:12px;background:linear-gradient(130deg,rgba(10,17,38,.88),rgba(29,24,44,.9));box-shadow:0 0 5px #ffda76,0 0 15px #e8a72e80,inset 0 0 12px #e8a72e28;overflow-wrap:anywhere}
+.hero .architect-credit mark{display:inline-block;padding:0 5px;border-radius:5px;background:#c9ef55;color:#1c2a12;font-weight:850;box-shadow:0 0 7px #c5f75c88}
 </style><link rel="stylesheet" href="./studyorbit-features.css?v=731"></head><body>
 <div id="symbolRain" class="symbol-rain" aria-hidden="true"></div>
 <main class="wrap">
 <header class="hero">
 <img src="./studyorbit-logo.png" alt="StudyOrbit IIT logo" class="studyorbit-logo" width="140" onerror="this.hidden=true">
 <h1>StudyOrbit IIT</h1>
-<p class="maker-credit">Mfd.by SATYA SINGH<br>Age:16</p>
-<p>Your syllabus, stages, question bank and daily work. Linked Current / Backlog completion; independent Revision progress. One chapter counts once.</p>
+<div class="architect-credit" aria-label="System Architect SATYA SINGH, Author Tag singhsn9462, Age 16, Developed by passion"><div>System Architect: <mark>SATYA SINGH</mark></div><div>Author Tag : <mark>singhsn9462</mark> , Age:<mark>16</mark> Developed by <mark>Passion</mark></div></div>
 </header>
 <section class="card" id="summary"><h2>📋🏷Summary dashboard</h2><div class="stats"><div class="stat"><span>Total Chapters</span><strong id="totalChapters">51</strong></div><div class="stat"><span>Completed Chapters</span><strong id="completedCount">0</strong></div><div class="stat"><span>Overall Progress</span><strong id="percent">0%</strong></div></div><div class="bar"><div id="progressBar"></div></div><div class="small" id="distribution"></div><div class="stats" style="margin-top:14px"><div class="stat"><span>Median Study Hours / Day</span><strong id="medianStudyHours">—</strong></div><div class="stat"><span>Consistency Meter</span><strong id="consistencyPercent">—</strong></div></div><div class="bar" aria-label="Consistency meter"><div id="consistencyBar" style="width:0%"></div></div><div class="small" id="studyMetricsHint">Log daily study time to start measuring consistency.</div></section>
 <section class="card accordion-section collapsed" id="chapterPlanSection"><h2 tabindex="0" role="button" aria-expanded="false">📑 Chapter plan</h2><div class="field"><label for="planSubject">Planning Subject</label><select id="planSubject"></select></div><p class="section-label"></p><div id="drawers"></div></section>
