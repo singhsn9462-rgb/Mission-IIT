@@ -286,6 +286,22 @@ pre{max-width:100%;overflow-x:auto}
 #orbLeaveSection .orb-leave-row:focus-within>input,#orbLeaveSection .orb-leave-row:focus-within>select{outline:none!important;box-shadow:none!important}
 #orbLeaveSection .orb-leave-row input:focus,#orbLeaveSection .orb-leave-row select:focus{outline:none!important;box-shadow:none!important;border-color:#465677!important}
 @media(max-width:420px){#questionBankSection .orbit-new-form>.grid,#questionBankSection #orbQBEntry>.grid{grid-template-columns:minmax(0,1fr)!important}#questionBankSection .orbit-new-form>.grid>.field,#questionBankSection #orbQBEntry>.grid>.field{grid-template-columns:minmax(98px,39%) minmax(0,1fr)!important}}
+
+/* V7.4.8: Daily Log uses the same compact report rows as QB and Add Leave. */
+#dailyLogSection .orb-daily-compact-form{margin:10px 0 14px;border:1px solid #ffffff30;border-radius:9px;overflow:hidden;background:#15263c}
+#dailyLogSection .orb-daily-row{display:grid;grid-template-columns:minmax(110px,42%) minmax(0,1fr);align-items:center;min-height:48px;border-bottom:1px solid #ffffff30;cursor:pointer}
+#dailyLogSection .orb-daily-row:nth-child(even){background:#ffffff0b}
+#dailyLogSection .orb-daily-row>label,#dailyLogSection .orb-daily-row>span:first-child{display:flex;align-items:center;align-self:stretch;padding:8px 9px;margin:0;background:#253d5b;color:#e7f2ff;font-size:12px;font-weight:700;line-height:1.3;border-right:1px solid #ffffff30}
+#dailyLogSection .orb-daily-row>input,#dailyLogSection .orb-daily-row>select,#dailyLogSection .orb-daily-row>textarea{width:calc(100% - 16px);min-width:0;max-width:none;margin:5px 8px;min-height:36px;box-sizing:border-box;font-size:13px}
+#dailyLogSection .orb-daily-row>textarea{resize:vertical;min-height:55px}
+#dailyLogSection .orb-daily-row>output{padding:9px 12px;font-weight:800;color:#ccecf5}
+#dailyLogSection .orb-daily-subject-heading{display:grid;grid-template-columns:42% 58%;background:#1c3855;color:#e9f4ff;font-size:12px;font-weight:800;border-bottom:1px solid #ffffff30}
+#dailyLogSection .orb-daily-subject-heading span{padding:8px 9px}
+#dailyLogSection .orb-daily-subject-heading span:first-child{border-right:1px solid #ffffff30}
+#dailyLogSection .orb-daily-submit{width:100%;min-height:45px;margin:0;border:0;border-radius:0;background:linear-gradient(110deg,#253d5b,#34547a);color:#f0e9ce;font-weight:750}
+#dailyLogSection .orb-daily-row:focus-within{outline:none;box-shadow:none}
+@media(max-width:380px){#dailyLogSection .orb-daily-row{grid-template-columns:minmax(100px,44%) minmax(0,1fr)}#dailyLogSection .orb-daily-subject-heading{grid-template-columns:44% 56%}}
+
 </style><style id="physics-leaf-flight">
 /* Override the original linear CSS fall only for the decorative physics layer. */
 .symbol-rain.physics-flight .drop{left:0;top:0;animation:none!important;will-change:transform,opacity;}
@@ -690,7 +706,7 @@ initSelects();el('planSubject').value=state.planSubject;state.drawers=activeDraw
 </script>
 <script>
 if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("./sw.js").catch(error=>console.error("StudyOrbit service worker registration failed:",error));});}
-</script><script src="./studyorbit-features.js?v=746"></script><script src="./studyorbit-storage.js?v=747"></script><script>
+</script><script src="./studyorbit-features.js?v=748"></script><script src="./studyorbit-storage.js?v=747"></script><script>
 (()=>{
 const count=document.getElementById('completedCount');if(!count)return;
 const card=count.closest('.stat');
