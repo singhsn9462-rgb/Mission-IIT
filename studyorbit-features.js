@@ -122,18 +122,18 @@ function drawGraphs(host){host.querySelectorAll('canvas[data-graph]').forEach(ca
  const mode=scroller.dataset.range||'overall',visible=(mode==='current'&&p.isDates)?labels.map((d,i)=>d.slice(0,7)===today().slice(0,7)?i:-1).filter(i=>i>=0):labels.map((_,i)=>i);const plottedLabels=visible.map(i=>labels[i]);const plottedSeries=series.map(z=>({...z,values:visible.map(i=>z.values[i])}));const monthMode=p.isDates&&mode==='overall'&&scale<.85;const px=Math.max(scroller.clientWidth,Math.min(20000,plottedLabels.length*(monthMode?16:42)*scale+110)),h=290,dpr=devicePixelRatio||1;
  canvas.style.width=px+'px';canvas.width=Math.round(px*dpr);canvas.height=Math.round(h*dpr);
  const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,px,h);
- const dual=plottedSeries.some(z=>z.axis==='right'),left=dual?92:56,greenAxisX=dual?87.5:0,plotLeft=dual?155:left,right=px-22,top=33,bottom=226,values=plottedSeries.filter(z=>z.axis!=='right').flatMap(z=>z.values).filter(Number.isFinite),rightValues=plottedSeries.filter(z=>z.axis==='right').flatMap(z=>z.values).filter(Number.isFinite),rightMax=100;
+ const dual=plottedSeries.some(z=>z.axis==='right'),left=dual?112:56,greenAxisX=dual?60:0,plotLeft=dual?164:left,right=px-22,top=33,bottom=226,values=plottedSeries.filter(z=>z.axis!=='right').flatMap(z=>z.values).filter(Number.isFinite),rightValues=plottedSeries.filter(z=>z.axis==='right').flatMap(z=>z.values).filter(Number.isFinite),rightMax=100;
  let max=Math.max(1,...values),min=Math.min(0,...values);if(max===min)max=min+1;
  ctx.font='11px sans-serif';ctx.lineWidth=1;
- for(let i=0;i<=4;i++){const yy=bottom-(bottom-top)*i/4;ctx.strokeStyle='#54658155';ctx.beginPath();ctx.moveTo(plotLeft,yy);ctx.lineTo(right,yy);ctx.stroke();ctx.fillStyle=dual?'#facc15':'#b9c9dc';ctx.textAlign=dual?'right':'left';ctx.fillText(fmt(min+(max-min)*i/4,1),dual?left-4:4,yy+4)}
+ for(let i=0;i<=4;i++){const yy=bottom-(bottom-top)*i/4;ctx.strokeStyle='#54658155';ctx.beginPath();ctx.moveTo(plotLeft,yy);ctx.lineTo(right,yy);ctx.stroke();ctx.fillStyle=dual?'#facc15':'#b9c9dc';ctx.textAlign='left';ctx.fillText(fmt(min+(max-min)*i/4,1),dual?left+5:4,yy+4)}
  const x=i=>p.type==='bar'?plotLeft+(right-plotLeft)*(i+.5)/Math.max(1,plottedLabels.length):plotLeft+(right-plotLeft)*(plottedLabels.length===1?.5:i/Math.max(1,plottedLabels.length-1)),y=v=>bottom-(v-min)/(max-min)*(bottom-top),yr=v=>bottom-v/rightMax*(bottom-top);
  ctx.strokeStyle=dual?'#facc15':'#b9c9dc';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(left,top);ctx.lineTo(left,bottom);ctx.lineTo(right,bottom);ctx.moveTo(right-7,bottom-4);ctx.lineTo(right,bottom);ctx.lineTo(right-7,bottom+4);ctx.moveTo(left-4,top+7);ctx.lineTo(left,top);ctx.lineTo(left+4,top+7);ctx.stroke();
  ctx.fillStyle=dual?'#facc15':'#d4e5f6';ctx.font='bold 11px sans-serif';ctx.textAlign='left';ctx.fillText('↑ '+(dual?'Avg time (min/Q)':p.yAxis),dual?left+5:left+5,15);ctx.textAlign='right';ctx.fillStyle='#d4e5f6';ctx.fillText('→ '+p.xAxis,right,282);ctx.textAlign='left';
  if(dual){
-   ctx.fillStyle='#22c55e';ctx.font='bold 10px sans-serif';ctx.fillText('Acc % ↑',greenAxisX-4,27);
+   ctx.fillStyle='#22c55e';ctx.font='bold 10px sans-serif';ctx.fillText('Acc % ↑',3,27);
    ctx.strokeStyle='#22c55e';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(greenAxisX,top);ctx.lineTo(greenAxisX,bottom);ctx.stroke();
-   ctx.fillStyle='#22c55e';ctx.font='10px sans-serif';ctx.textAlign='left';
-   for(let i=0;i<=4;i++){const yy=bottom-(bottom-top)*i/4;ctx.fillText(String(i*25)+'%',greenAxisX+2,yy-6)}
+   ctx.fillStyle='#22c55e';ctx.font='10px sans-serif';ctx.textAlign='right';
+   for(let i=0;i<=4;i++){const yy=bottom-(bottom-top)*i/4;ctx.fillText(String(i*25)+'%',greenAxisX-5,yy+4)}
    ctx.textAlign='left';
  }
  plottedLabels.forEach((lab,i)=>{if(p.isDates&&isLeave(lab)){ctx.fillStyle='#ef4444';ctx.font='900 16px sans-serif';ctx.fillText('H',x(i)-6,242);return}const spacing=monthMode?Math.max(1,Math.ceil(90/(16*scale))):Math.max(1,Math.ceil(85/(42*scale)));if(p.type!=='bar'&&i%spacing!==0&&i!==plottedLabels.length-1)return;ctx.fillStyle='#b9c9dc';ctx.font='11px sans-serif';const display=monthMode?new Date(lab+'T12:00:00').toLocaleString('en-US',{month:'short'}):p.isDates?lab.slice(5):String(lab).slice(0,13);ctx.textAlign=p.type==='bar'?'center':'left';ctx.fillText(display,p.type==='bar'?x(i):Math.min(px-95,x(i)-18),242);ctx.textAlign='left'});
