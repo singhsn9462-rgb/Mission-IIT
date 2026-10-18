@@ -215,6 +215,33 @@ pre{max-width:100%;overflow-x:auto}
  .actions button{flex:1 1 125px}
 }
 @media(min-width:1100px){.wrap{max-width:1020px}}
+
+/* V7.4: focused UI refinements, no changes to data schema */
+#drawers .drawer .drawerhead h3:before{content:none!important;display:none!important}
+#drawers .drawer{transition:border-color .15s,box-shadow .15s}
+#drawers .drawer:has(.drawerbody:not(.hidden)){border-color:#77dfff!important;box-shadow:0 0 0 1px #77dfff55,0 0 14px #65d8ff2c}
+#drawers .drawer:has(.drawerbody.hidden){opacity:.88}
+#summary #completedCount{cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:5px}
+#summary .stat:has(#completedCount){cursor:pointer}
+.orb-completed-backdrop{position:fixed;inset:0;z-index:99999;background:#020714b8;display:flex;align-items:center;justify-content:center;padding:14px}
+.orb-completed-panel{position:relative;width:min(78vw,330px);height:min(54vh,430px);max-height:80vh;min-height:240px;overflow:hidden;display:flex;flex-direction:column;border:1px solid #e9c977;border-radius:16px;background:linear-gradient(150deg,#16233b,#0b1227);box-shadow:0 0 25px #cda85a50;padding:15px}
+.orb-completed-panel h3{margin:0 42px 12px 0;color:#f4e0ad;font-size:16px}
+.orb-completed-scroll{overflow-y:auto;flex:1;font-size:12px;line-height:1.6}
+.orb-completed-scroll h4{color:#8ae6f7;margin:10px 0 4px;font-size:13px}
+.orb-completed-scroll ul{padding-left:19px;margin:0 0 9px}
+.orb-completed-close{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;padding:0;display:grid;place-items:center;font-size:20px}
+.orb-leave-form{display:grid;gap:8px}
+.orb-leave-row{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:center;gap:10px;border:1px solid #78cde155;border-radius:10px;padding:8px 10px;cursor:pointer;background:#111e33b8;min-height:52px}
+.orb-leave-row span{font-weight:700;color:#ccecf5}
+.orb-leave-row input,.orb-leave-row select{width:100%;min-width:0;margin:0}
+.orb-leave-submit{width:100%;min-height:44px}
+.orb-leave-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+#orbLeaveSettings{font-size:18px;min-width:42px;min-height:36px;border-radius:9px}
+#orbLeaveSettings.active{border-color:#f5c968;box-shadow:0 0 10px #f5c96888}
+.orb-leave-table{width:100%;font-size:12px}
+.orb-leave-table th,.orb-leave-table td{padding:8px 6px;white-space:nowrap}
+.orb-leave-table button{padding:5px 7px;font-size:11px}
+
 </style><style id="physics-leaf-flight">
 /* Override the original linear CSS fall only for the decorative physics layer. */
 .symbol-rain.physics-flight .drop{left:0;top:0;animation:none!important;will-change:transform,opacity;}
@@ -272,7 +299,7 @@ body:before{background-image:linear-gradient(180deg,rgba(4,9,20,.70),rgba(5,12,2
 <h1>StudyOrbit IIT</h1>
 <div class="orbit-architect-credit" aria-label="StudyOrbit IIT creator credit"><div>System Architect: <strong>SATYA SINGH</strong></div><div>Author Tag : <strong>singhsn9462</strong> , Age:<strong>16</strong> Developed by <strong>Passion</strong></div></div>
 </header>
-<section class="card" id="summary"><h2>📋🏷Summary dashboard</h2><div class="stats"><div class="stat"><span>Total Chapters</span><strong id="totalChapters">51</strong></div><div class="stat"><span>Completed Chapters</span><strong id="completedCount">0</strong></div><div class="stat"><span>Overall Progress</span><strong id="percent">0%</strong></div></div><div class="bar"><div id="progressBar"></div></div><div class="small" id="distribution"></div><div class="stats" style="margin-top:14px"><div class="stat"><span>Median Study Hours / Day</span><strong id="medianStudyHours">—</strong></div><div class="stat"><span>Consistency Meter</span><strong id="consistencyPercent">—</strong></div></div><div class="bar" aria-label="Consistency meter"><div id="consistencyBar" style="width:0%"></div></div><div class="small" id="studyMetricsHint">Log daily study time to start measuring consistency.</div></section>
+<section class="card" id="summary"><h2>📋🏷Summary dashboard</h2><div class="stats"><div class="stat"><span>Total Chapters</span><strong id="totalChapters">51</strong></div><div class="stat"><span>Completed Chapters</span><strong id="completedCount">0</strong></div><div class="stat"><span>Overall Progress</span><strong id="percent">0%</strong></div></div><div class="bar"><div id="progressBar"></div></div><div class="small" id="distribution"></div><div class="stats" style="margin-top:14px"><div class="stat"><span>Avg. Study hr/Day</span><strong id="medianStudyHours">—</strong></div><div class="stat"><span>Consistency Meter</span><strong id="consistencyPercent">—</strong></div></div><div class="bar" aria-label="Consistency meter"><div id="consistencyBar" style="width:0%"></div></div><div class="small" id="studyMetricsHint">Log daily study time to start measuring consistency.</div></section>
 <section class="card accordion-section collapsed" id="chapterPlanSection"><h2 tabindex="0" role="button" aria-expanded="false">📑 Chapter plan</h2><div class="field"><label for="planSubject">Planning Subject</label><select id="planSubject"></select></div><p class="section-label"></p><div id="drawers"></div></section>
 <section class="card qb-card accordion-section collapsed" id="questionBankSection"><div class="qb-title-row" tabindex="0" role="button" aria-expanded="false"><h2>🏅Integrated Question Bank</h2></div><p class="section-label">Cumulative records only. Unknown totals stay blank.</p><div class="grid"><div class="field"><label for="qbSubject">Subject</label><select id="qbSubject"></select></div><div class="field"><label for="qbChapter">Chapter</label><select id="qbChapter"></select></div><div class="field"><label for="qbCategory">Exercise / PYQ Category</label><select id="qbCategory"></select></div></div><div class="grid"><div class="field"><label for="qbTotal">Total Questions</label><input id="qbTotal" type="number" min="0" step="1" placeholder="Unknown"></div><div class="field" id="qbSolvedField"><label for="qbSolved">Questions Solved</label><input id="qbSolved" type="number" min="0" step="1" placeholder="Not entered"><div id="qbAvgWrap"><label for="qbAvgTime" style="margin-top:5px">⚡ Average Time per Question (minutes)</label><input id="qbAvgTime" type="number" min="0" step="0.1" placeholder="e.g. 2.5"></div></div><div class="field hidden" id="qbTheoryField"><label for="qbTheoryMinutes">⏳ Time for Theory Reading (minutes)</label><input id="qbTheoryMinutes" type="number" min="0" step="1" placeholder="Minutes spent reading theory"></div><div class="field"><label for="qbCorrect">Correct Answers</label><input id="qbCorrect" type="number" min="0" step="1" placeholder="Not entered"></div></div><div class="actions"><button id="copyQB">Copy Question Bank Entry</button></div><div class="status" id="qbStatus"></div></section>
 <section class="card accordion-section collapsed" id="dailyLogSection"><h2 tabindex="0" role="button" aria-expanded="false">🔖📇Daily Log</h2><div class="grid"><div class="field"><label for="dailySubject">Subject</label><select id="dailySubject"></select></div><div class="field"><label for="dailyChapter">Chapter</label><select id="dailyChapter"></select></div><div class="field"><label for="dailyDate">Date</label><input id="dailyDate" type="date"></div><div class="field"><label for="dailyExercise">Today's Exercise</label><select id="dailyExercise"></select></div><div class="field" id="dailySolvedField"><label for="dailySolved">Questions Solved Today</label><input id="dailySolved" type="number" min="0" step="1" value="0"></div><div class="field hidden" id="dailyTheoryField"><label for="dailyTheoryMinutes">⏳ Time for Theory Reading (minutes)</label><input id="dailyTheoryMinutes" type="number" min="0" step="1" value="0"></div><div class="field" id="dailyAvgField"><label for="dailyAvgTime">⚡ Average Time per Question</label><input id="dailyAvgTime" type="text" readonly value="—" aria-describedby="dailyAvgHint"><small id="dailyAvgHint" class="small">Calculated from question practice time ÷ questions solved.</small></div><div class="field"><label for="dailyTime">Question Practice (minutes)</label><input id="dailyTime" type="number" min="0" step="1" value="0"></div></div><div class="check"><input id="dailyRevision" type="checkbox"><label for="dailyRevision">Today's Revision completed</label></div><div class="check"><input id="dailyHW" type="checkbox"><label for="dailyHW">Today's HW completed</label></div><div class="field"><label for="dailyNote">Today's Note (optional)</label><textarea id="dailyNote" placeholder="What did you study today?"></textarea></div><div class="field"><label for="dailyDoubts">Doubts / Questions (optional)</label><textarea id="dailyDoubts" placeholder="Conceptual doubts or unsolved questions"></textarea></div><p class="small">Submitting adds practice + theory minutes to the selected date. For a no-study day, submit 0 minutes. Repeated submissions add time again.</p><div class="actions"><button class="primary" id="submitUpdate">Submit Tracker Update</button></div><div class="status" id="dailyStatus"></div><div id="snapshotWrap" class="hidden"><p class="small">Copy this update and paste it into your ChatGPT conversation so I can process it.</p><pre id="dailySnapshot"></pre><button id="copyDailySnapshot">Copy Daily Snapshot</button></div></section>
@@ -464,10 +491,11 @@ function renderChapterSelect(which){
 }
 function localISODate(){const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
 function studyDays(){
- const records=state.studyHistory||{};const dates=Object.keys(records).filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)&&d<=localISODate()).sort();
+ const records=state.studyHistory||{},orbitDays=state.orbit?.daily||{};
+ const dates=[...new Set([...Object.keys(records),...Object.keys(orbitDays)])].filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)&&d<=localISODate()).sort();
  if(!dates.length)return [];
  const days=[];let cursor=new Date(dates[0]+'T12:00:00'),last=new Date(localISODate()+'T12:00:00');
- while(cursor<=last && days.length<36500){const day=[cursor.getFullYear(),String(cursor.getMonth()+1).padStart(2,'0'),String(cursor.getDate()).padStart(2,'0')].join('-');days.push(Math.max(0,Number(records[day])||0)/60);cursor.setDate(cursor.getDate()+1)}
+ while(cursor<=last && days.length<36500){const day=[cursor.getFullYear(),String(cursor.getMonth()+1).padStart(2,'0'),String(cursor.getDate()).padStart(2,'0')].join('-');const legacy=Math.max(0,Number(records[day])||0)/60,modern=Math.max(0,Number(orbitDays[day]?.hours)||0);days.push(modern||legacy);cursor.setDate(cursor.getDate()+1)}
  return days;
 }
 function renderSummary(){
@@ -484,13 +512,13 @@ function renderSummary(){
  el('percent').textContent=p.toFixed(1)+'%';el('progressBar').style.width=p+'%';
  el('distribution').textContent=`${doneStages} / ${totalStages} eligible stage ticks · Current + Backlog shared · TEST, Revision & subject-specific optional stages excluded`;
  const days=studyDays();
- if(!days.length){el('medianStudyHours').textContent='—';el('consistencyPercent').textContent='—';el('consistencyBar').style.width='0%';el('studyMetricsHint').textContent='Submit a Daily Log to begin. Missed days count as 0 hours from the first logged day.';return}
+ if(!days.length){el('medianStudyHours').textContent='—';el('consistencyPercent').textContent='—';el('consistencyBar').style.width='0%';el('studyMetricsHint').textContent='No study logs';return}
  const ordered=[...days].sort((a,b)=>a-b),middle=Math.floor(ordered.length/2),median=ordered.length%2?ordered[middle]:(ordered[middle-1]+ordered[middle])/2;
  const mean=days.reduce((a,b)=>a+b,0)/days.length;
  const consistent=days.filter(h=>h>0 && h>=mean-1e-9).length;
  const consistency=100*consistent/days.length;
- el('medianStudyHours').textContent=median.toFixed(2)+' h';el('consistencyPercent').textContent=consistency.toFixed(1)+'%';el('consistencyBar').style.width=consistency+'%';
- el('studyMetricsHint').textContent=`${consistent} / ${days.length} days ≥ mean (${mean.toFixed(2)} h/day). Zero-study days included since first log. Median shown separately.`;
+ el('medianStudyHours').textContent=mean.toFixed(2)+' h';el('consistencyPercent').textContent=consistency.toFixed(1)+'%';el('consistencyBar').style.width=consistency+'%';
+ el('studyMetricsHint').textContent=`${consistent}/${days.length} consistent days`;
 }
 function premiumTintWords(root){ /* Deliberately disabled: consistent text hierarchy. */ }
 
@@ -618,4 +646,17 @@ initSelects();el('planSubject').value=state.planSubject;state.drawers=activeDraw
 </script>
 <script>
 if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("./sw.js").catch(error=>console.error("StudyOrbit service worker registration failed:",error));});}
-</script><script src="./studyorbit-features.js?v=731"></script></body></html>
+</script><script src="./studyorbit-features.js?v=731"></script><script>
+(()=>{
+const count=document.getElementById('completedCount');if(!count)return;
+const card=count.closest('.stat');
+function showCompleted(){const old=document.getElementById('orbCompletedModal');if(old)old.remove();
+ const overlay=document.createElement('div');overlay.id='orbCompletedModal';overlay.className='orb-completed-backdrop';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','Completed chapters');
+ const panel=document.createElement('div');panel.className='orb-completed-panel';panel.innerHTML='<h3>Completed Chapters</h3><button class="orb-completed-close" aria-label="Close">×</button><div class="orb-completed-scroll"></div>';
+ overlay.appendChild(panel);const content=panel.querySelector('.orb-completed-scroll');
+ try{let any=false;for(const subject of SUBJECTS.filter(s=>s!=='TEST')){const done=CHAPTERS[subject].filter(ch=>{const stages=stagesFor(subject,ch,'Current Chapter').filter(st=>!(subject==='Maths'&&['JEE MAIN Booklet ©','Gyanoday','ADDITIONAL MATERIAL'].includes(st))&&!(subject==='Physics'&&['JEE MAIN Booklet ©','ADDITIONAL MATERIAL'].includes(st))&&!(subject!=='Maths'&&subject!=='Physics'&&st==='JEE MAIN Booklet ©'));return stages.length&&stages.every(st=>state.stageStatus[stageKey(subject,ch,st,'Current Chapter')]||state.stageStatus[stageKey(subject,ch,st,'Backlog')])});if(done.length){any=true;const h=document.createElement('h4');h.textContent=subject+' ('+done.length+')';content.appendChild(h);const ul=document.createElement('ul');for(const ch of done){const li=document.createElement('li');li.textContent=ch;ul.appendChild(li)}content.appendChild(ul)}}if(!any)content.textContent='No completed chapters yet.'}catch(e){content.textContent='Unable to load chapter list.'}
+ const close=()=>{overlay.remove();document.removeEventListener('keydown',onKey)};const onKey=e=>{if(e.key==='Escape')close()};panel.querySelector('button').onclick=close;overlay.onclick=e=>{if(e.target===overlay)close()};document.addEventListener('keydown',onKey);document.body.appendChild(overlay);panel.querySelector('button').focus();}
+ card?.addEventListener('click',showCompleted);card?.setAttribute('role','button');card?.setAttribute('tabindex','0');card?.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showCompleted()}});
+})();
+</script>
+</body></html>
