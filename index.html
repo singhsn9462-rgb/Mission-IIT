@@ -270,6 +270,22 @@ pre{max-width:100%;overflow-x:auto}
 #orbLeaveSection .orb-leave-submit:active{filter:brightness(1.15)}
 @media(max-width:400px){#orbLeaveSection .orb-leave-row{grid-template-columns:70px minmax(0,1fr)}#orbLeaveSection .orb-leave-row>span{padding:8px 7px}}
 
+
+/* V7.4.3: QB uses the same full-width, compact two-column report rows as Add Leave. */
+#questionBankSection .orbit-new-form>.grid,#questionBankSection #orbQBEntry>.grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:0!important;margin:9px 0!important;border:1px solid #ffffff30!important;border-radius:9px!important;overflow:hidden;background:#15263c!important}
+#questionBankSection .orbit-new-form>.grid>.field,#questionBankSection #orbQBEntry>.grid>.field{display:grid!important;grid-template-columns:minmax(100px,39%) minmax(0,1fr)!important;align-items:center;gap:0!important;margin:0!important;padding:0!important;min-height:48px;border:0!important;border-bottom:1px solid #ffffff30!important;background:transparent!important;cursor:pointer;outline:none!important;box-shadow:none!important}
+#questionBankSection .orbit-new-form>.grid>.field:nth-child(odd),#questionBankSection #orbQBEntry>.grid>.field:nth-child(odd){background:#ffffff0b!important}
+#questionBankSection .orbit-new-form>.grid>.field:last-child,#questionBankSection #orbQBEntry>.grid>.field:last-child{border-bottom:0!important}
+#questionBankSection .orbit-new-form>.grid>.field>label,#questionBankSection #orbQBEntry>.grid>.field>label{display:flex!important;align-items:center!important;align-self:stretch!important;min-height:46px!important;padding:8px 9px!important;margin:0!important;background:#253d5b!important;border-right:1px solid #ffffff30!important;font-size:12px!important;line-height:1.3!important;font-weight:700!important;color:#e7f2ff!important}
+#questionBankSection .orbit-new-form>.grid>.field>input,#questionBankSection .orbit-new-form>.grid>.field>select,#questionBankSection #orbQBEntry>.grid>.field>input,#questionBankSection #orbQBEntry>.grid>.field>select{width:calc(100% - 16px)!important;min-width:0!important;min-height:36px!important;margin:5px 8px!important;padding:7px 8px!important;box-sizing:border-box!important;font-size:13px!important}
+#questionBankSection .orbit-new-form>.grid>.field:focus-within,#questionBankSection #orbQBEntry>.grid>.field:focus-within{outline:none!important;box-shadow:none!important}
+#questionBankSection .orbit-new-form>.grid>.field:focus-within>input,#questionBankSection .orbit-new-form>.grid>.field:focus-within>select{outline:none!important;box-shadow:none!important}
+#questionBankSection #orbQBEntry>.grid>.field:focus-within>input{outline:none!important;box-shadow:none!important}
+#questionBankSection .orbit-new-form>.grid>.field:has(>input:disabled),#questionBankSection .orbit-new-form>.grid>.field:has(>select:disabled){cursor:default}
+#orbLeaveSection .orb-leave-row:focus-within{outline:none!important;box-shadow:none!important;background:transparent!important}
+#orbLeaveSection .orb-leave-row:focus-within>input,#orbLeaveSection .orb-leave-row:focus-within>select{outline:none!important;box-shadow:none!important}
+#orbLeaveSection .orb-leave-row input:focus,#orbLeaveSection .orb-leave-row select:focus{outline:none!important;box-shadow:none!important;border-color:#465677!important}
+@media(max-width:420px){#questionBankSection .orbit-new-form>.grid,#questionBankSection #orbQBEntry>.grid{grid-template-columns:minmax(0,1fr)!important}#questionBankSection .orbit-new-form>.grid>.field,#questionBankSection #orbQBEntry>.grid>.field{grid-template-columns:minmax(98px,39%) minmax(0,1fr)!important}}
 </style><style id="physics-leaf-flight">
 /* Override the original linear CSS fall only for the decorative physics layer. */
 .symbol-rain.physics-flight .drop{left:0;top:0;animation:none!important;will-change:transform,opacity;}
