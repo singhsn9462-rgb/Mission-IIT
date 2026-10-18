@@ -1,4 +1,4 @@
-const CACHE_NAME = 'studyorbit-tracker-v746';
+const CACHE_NAME = 'studyorbit-tracker-v71';
 const CORE = ['./','./index.html','./manifest.json','./studyorbit-features.js','./studyorbit-features.css'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(CORE)));
