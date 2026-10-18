@@ -242,6 +242,23 @@ pre{max-width:100%;overflow-x:auto}
 .orb-leave-table th,.orb-leave-table td{padding:8px 6px;white-space:nowrap}
 .orb-leave-table button{padding:5px 7px;font-size:11px}
 
+/* V7.4.2: Compact QB tables, scoped to Integrated Question Bank only. */
+#questionBankSection .orbit-new-form>.grid,#questionBankSection #orbQBEntry>.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid #ffffff30;border-radius:9px;overflow:hidden;background:#15263c;margin:10px 0}
+#questionBankSection .orbit-new-form>.grid>.field,#questionBankSection #orbQBEntry>.grid>.field{min-width:0;padding:7px 9px;border-right:1px solid #ffffff30;border-bottom:1px solid #ffffff30;background:#ffffff07;margin:0}
+#questionBankSection .orbit-new-form>.grid>.field:nth-child(4n+1),#questionBankSection .orbit-new-form>.grid>.field:nth-child(4n+2){background:#ffffff0c}
+#questionBankSection .orbit-new-form>.grid>.field label{font-size:12px;color:#e7f2ff;font-weight:750;line-height:1.35;min-height:29px;display:flex;align-items:center;margin:0 0 5px}
+#questionBankSection .orbit-new-form>.grid>.field select,#questionBankSection .orbit-new-form>.grid>.field input{width:100%;max-width:none;min-width:0;box-sizing:border-box;margin:0;min-height:37px;font-size:13px}
+#questionBankSection .orbit-new-form>.grid>.field:focus-within{background:#27445d77;outline:1px solid #89d6ef;outline-offset:-1px}
+#questionBankSection #orbQBEntry>.actions{margin:6px 0 10px}
+#questionBankSection #orbQBSave{width:100%;min-height:43px}
+#questionBankSection .orb-qb-toolbar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:9px;font-size:12px;color:#c9e1f3}
+#questionBankSection #orbQBSettings{font-size:18px;min-width:42px;min-height:36px;border-radius:9px}
+#questionBankSection #orbQBSettings.active{border-color:#f5c968;box-shadow:0 0 10px #f5c96888}
+#questionBankSection .orb-qb-record-table{font-size:12px;width:100%;min-width:410px}
+#questionBankSection .orb-qb-record-table th,#questionBankSection .orb-qb-record-table td{padding:8px 7px;white-space:nowrap}
+#questionBankSection .orb-qb-manage{white-space:nowrap}
+#questionBankSection .orb-qb-manage button{padding:5px 7px;font-size:11px;margin:2px}
+@media(max-width:420px){#questionBankSection .orbit-new-form>.grid,#questionBankSection #orbQBEntry>.grid{grid-template-columns:minmax(0,1fr)}#questionBankSection .orbit-new-form>.grid>.field label{min-height:0}}
 /* V7.4.1: Add Leave matches the compact Preparation Progress Report table. */
 #orbLeaveSection .orb-leave-form{gap:0;margin:10px 0 14px;border:1px solid #ffffff30;border-radius:9px;overflow:hidden;background:#15263c}
 #orbLeaveSection .orb-leave-row{display:grid;grid-template-columns:82px minmax(0,1fr);gap:0;min-height:48px;padding:0;border:0;border-radius:0;border-bottom:1px solid #ffffff30;background:transparent;box-shadow:none}
