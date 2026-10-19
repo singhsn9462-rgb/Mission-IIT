@@ -88,5 +88,8 @@
 .orbit-data-modal-card{position:relative;width:94vw;height:68vh;max-height:760px;min-height:260px;overflow:auto;box-sizing:border-box;padding:18px 13px 14px;border:1px solid #7285a4;border-radius:16px;background:linear-gradient(145deg,#1b2a45,#101a2e);box-shadow:0 12px 42px #0009}
 .orbit-data-modal-card h3{margin:3px 48px 12px 0;color:#eaf2ff;font-size:16px}
 .orbit-data-modal-close{position:absolute;top:9px;right:9px;width:38px;height:38px;min-height:38px;padding:0;border-radius:50%;border:1px solid #a6b5cf;background:#263653;color:#fff;font-size:27px;line-height:1;display:grid;place-items:center}
-.orbit-test-subject-table{min-width:560px!important}.orbit-test-subject-table input{width:100%;min-width:0;box-sizing:border-box}
+.orbit-test-subject-table input{width:100%;min-width:0;box-sizing:border-box}
 @media(min-width:650px){.orbit-data-modal-card{width:78vw;padding:20px}}
+
+/* Preserved from S7.5: JEE Improvement Insights panel. */
+.orbit-insight-panel{margin:14px 0;padding:12px 14px;border:1px solid #6f8dc566;border-radius:12px;background:#101b2acc}.orbit-insight-panel h3{margin:0 0 8px;color:#c8ddff}.orbit-insight-panel ul{margin:7px 0;padding-left:22px}.orbit-insight-panel li{margin:5px 0;line-height:1.45}

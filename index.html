@@ -690,11 +690,10 @@ initSelects();el('planSubject').value=state.planSubject;state.drawers=activeDraw
 <script>
 if("serviceWorker" in navigator){
  window.addEventListener("load",()=>{
-  let reloadingForWorker=false;
+  // Do not force-reload a live tracker when a new worker takes control.
+  // This avoids an old-shell/new-shell flash and preserves an in-progress restore.
   navigator.serviceWorker.addEventListener("controllerchange",()=>{
-   if(reloadingForWorker)return;
-   reloadingForWorker=true;
-   window.location.reload();
+   console.info("StudyOrbit update is ready; it will be used on the next navigation.");
   });
   navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).then(registration=>{
    // Check for a newer worker on each app launch; browser may throttle repeated checks.

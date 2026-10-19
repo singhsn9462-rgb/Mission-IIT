@@ -1,112 +1,72 @@
-# StudyOrbit IIT — Codebase & UI Map (S7.4.11)
+# StudyOrbit IIT S7.6 — Codebase & UI Map
 
-This is a navigation guide for future targeted changes. It describes source structure and data flow; it is not a substitute for testing the live GitHub Pages deployment.
+This map documents the available S7.5-based S7.6 source. It is a navigation guide, not a substitute for testing the live GitHub Pages deployment.
 
-## Files and responsibilities
+## File responsibilities
 
-- `index.html`: original app shell, original tracker UI, inline CSS, original chapter/stage engine, summary, legacy Question Bank and Daily Log forms, localStorage persistence, snapshot export/import/reset, accordion interactions, and Service Worker registration.
-- `studyorbit-features.js`: augments the existing page at runtime. It preserves old Question Bank/Daily Log DOM in hidden legacy containers and adds date-based practice records, subject-wise daily hours, leave management, test tracking, and analytics.
-- `studyorbit-features.css`: layout and appearance for dynamically injected feature sections, responsive tables, forms, graphs, drawers, and charts.
-- `sw.js`: PWA cache install/activation/fetch strategy. Current release cache: `studyorbit-tracker-v7410`.
-- `manifest.json`: PWA name, start URL, scope, standalone display, theme, and icon declarations.
-- `README.md`: release/deployment notes.
-- `icon-192.png`, `icon-512.png`, `icon-512-maskable.png`: app icons at declared pixel sizes.
-- `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png`: visual assets; inspect their references before replacing/renaming.
+- `index.html`: static app shell, original chapter/stage engine, summary dashboard, original Chapter Plan / Integrated Question Bank / Daily Log containers, snapshot/restore card, header, inline styling, and Service Worker registration.
+- `studyorbit-features.js`: runtime enhancement layer. It preserves legacy QB/Daily Log DOM, injects dated practice forms and Leave/Testing/Analysis sections, loads/saves records through the existing tracker state, draws charts, and handles edit modes.
+- `studyorbit-features.css`: dynamic section/table/modal/chart styling, responsive layouts, and S7.5 Improvement Insights panel.
+- `sw.js`: PWA cache install, activation, and fetch behavior. Cache: `studyorbit-tracker-s76-fix1`.
+- `manifest.json`: app metadata, start URL, scope, display mode, theme, and icons.
+- `icon-192.png`, `icon-512.png`, `icon-512-maskable.png`: declared PWA icons.
+- `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png`: image assets referenced by the page/metadata.
+- `inline0.js`–`inline3.js`: retained project files; current `index.html` does not directly reference them.
+- `.nojekyll`: GitHub Pages processing marker.
+- `README.md`: release notes and deployment/test guidance.
 
-## Main page order and orientation
+## Rendered section order
 
-The visible root page is a single vertically scrolling `<main class="wrap">` with a hero header. Main original sections appear in this order:
+The HTML starts with these static sections:
 
-1. `#summary` — always-visible summary dashboard; total/completed chapters, progress bar, average study hours, consistency meter.
-2. `#chapterPlanSection` — collapsible Chapter Plan; subject selector and dynamically generated Current Chapter, Backlog, Revision drawers. Each drawer has chapter selector, chapter-complete checkbox, stage selector, stage completion checkboxes, and ON/OFF state.
-3. `#questionBankSection` — collapsible Integrated Question Bank. Feature JS keeps the old form mounted in a legacy drawer and injects a newer date-based form (`orbQB*` IDs).
-4. `#dailyLogSection` — collapsible Daily Log. Feature JS keeps the original cumulative form mounted in a legacy container and injects a newer subject-hours/date form (`orbDaily*` IDs).
-5. `#orbLeaveSection` — dynamically inserted after the summary: leave date range, reason, saved leave list/edit mode.
-6. `#orbTestingSection` — dynamically inserted Testing section: test date/type/session, overall and subject marks, saved tests, selectable test-analysis charts.
-7. `#orbAnalysisSection` — dynamically inserted Analysis section: analysis window, metrics, study/question/subject/speed/task/reality/stage/progress/leave analysis drawers.
-8. Original Save / Export Tracker Snapshot card — copy/export JSON, restore JSON, reset local tracker data.
-9. Footer/photo credit.
+1. `#summary` — summary metrics and study consistency.
+2. `#chapterPlanSection` — Chapter Plan.
+3. `#questionBankSection` — Integrated Question Bank; the feature script moves legacy content into a preserved container and injects the date-based QB form.
+4. `#dailyLogSection` — Daily Log; the feature script preserves the legacy form and injects the subject-hours form.
+5. Snapshot/restore card — retained from the S7.5 source.
 
-Original accordion sections are collapsed by default except the summary. Dynamically inserted feature sections use `.orbit-section.closed`; clicking their heading toggles the content. Many inner feature groups use native `<details class="orbit-drawer">` drawers. Test subject-mark drawers have an additional one-at-a-time opening behaviour.
+At runtime, `studyorbit-features.js` inserts `#orbLeaveSection` before `#summary`, then inserts `#orbTestingSection` and `#orbAnalysisSection` before the snapshot card. If the snapshot card is absent, the script appends Testing and Analysis to `<main>` instead of failing.
 
-## Important selectors for targeted UI changes
+## Important IDs
 
-### Original page (`index.html`)
+### Static shell (`index.html`)
+- Header: `.hero`, `.studyorbit-logo`, `.orbit-architect-credit`, `.orbit-model-label`.
 - Summary: `#summary`, `#totalChapters`, `#completedCount`, `#percent`, `#progressBar`, `#distribution`, `#medianStudyHours`, `#consistencyPercent`, `#consistencyBar`.
-- Chapter planner: `#chapterPlanSection`, `#planSubject`, `#drawers`.
-- Legacy Question Bank: `#questionBankSection`, `#qbSubject`, `#qbChapter`, `#qbCategory`, `#qbTotal`, `#qbSolved`, `#qbCorrect`, `#qbTheoryMinutes`, `#qbAvgTime`.
-- Legacy Daily Log: `#dailyLogSection`, `#dailySubject`, `#dailyChapter`, `#dailyDate`, `#dailyExercise`, `#dailySolved`, `#dailyTheoryMinutes`, `#dailyTime`, `#dailyRevision`, `#dailyHW`, `#dailyNote`, `#dailyDoubts`.
+- Chapter Plan: `#chapterPlanSection`, `#planSubject`, `#drawers`.
+- Legacy QB/Daily: `#questionBankSection`, `#dailyLogSection` and their original input IDs.
 - Backup/restore: `#copyAll`, `#exportJSON`, `#importJSON`, `#restoreJSON`, `#resetTracker`.
-- Original state and persistence: `STORE`, `defaults()`, `load()`, `merge()`, `persist()`, `snapshot()`, restore handler, `renderSummary()`, `renderDrawers()`.
 
-### Dynamically injected features (`studyorbit-features.js`)
-- Exercise Question Bank: `#orbQBSubject`, `#orbQBChapter`, `#orbQBExercise`, `#orbQBDate`, `#orbQBSolved`, `#orbQBRepeat`, `#orbQBCorrect`, `#orbQBTime`, `#orbQBTheory`, `#orbQBSave`, `#orbQBList`.
-- Revision Tracker: corresponding `orbRev*` IDs.
-- Daily subject hours: `#orbDailySection`, `#orbDailyDate`, `#orbDailyMathsHours`, `#orbDailyPhysicsHours`, `#orbDailyPCHours`, `#orbDailyOCHours`, `#orbDailyIOCHours`, `#orbDailySave`.
-- Leave management: `#orbLeaveSection`, `#orbLeaveFrom`, `#orbLeaveTo`, `#orbLeaveReason`, `#orbLeaveSave`, `#orbLeaveList`.
-- Tests: `#orbTestingSection`, `#orbTestDate`, `#orbTestType`, `#orbTestSession`, `#orbTestScore`, `#orbTestMax`, `#orbTestSave`, `#orbTestList`, `#orbTestCharts`.
-- Analytics: `#orbAnalysisSection`, `#orbWindow`, `#orbAnalysisOverview`, `#orbStudyCharts`, `#orbQuestionCharts`, `#orbSubjectCharts`, `#orbSpeedCharts`, `#orbTaskCharts`, `#orbRealityCharts`, `#orbStageTable`, `#orbProgressReport`, `#orbLeaveCharts`.
+### Runtime feature layer (`studyorbit-features.js`)
+- Dated QB: `#orbQBSubject`, `#orbQBChapter`, `#orbQBExercise`, `#orbQBDate`, `#orbQBSolved`, `#orbQBRepeat`, `#orbQBCorrect`, `#orbQBTime`, `#orbQBTheory`, `#orbQBSave`, `#orbQBList`.
+- Revision: corresponding `orbRev*` IDs.
+- Daily hours: `#orbDailySection`, `#orbDailyDate`, `#orbDailyMathsHours`, `#orbDailyPhysicsHours`, `#orbDailyPCHours`, `#orbDailyOCHours`, `#orbDailyIOCHours`, `#orbDailySave`.
+- Leave: `#orbLeaveSection`, `#orbLeaveFrom`, `#orbLeaveTo`, `#orbLeaveReason`, `#orbLeaveSave`, `#orbLeaveList`.
+- Testing: `#orbTestingSection`, `#orbTestDate`, `#orbTestType`, `#orbTestSession`, `#orbTestScore`, `#orbTestMax`, `#orbTestPercentile`, `#orbTestNegative`, `#orbTestTotalQ`, `#orbTestAttempted`, `#orbTestCorrect`, `#orbTestSave`, `#orbTestList`, `#orbTestCharts`.
+- Analysis: `#orbAnalysisSection`, `#orbWindow`, `#orbAnalysisOverview`, `#orbStudyCharts`, `#orbQuestionCharts`, `#orbSubjectCharts`, `#orbSpeedCharts`, `#orbTaskCharts`, `#orbRealityCharts`, `#orbStageTable`, `#orbProgressReport`, `#orbLeaveCharts`.
 
-## Data flow and persistence
+## State and compatibility
 
-- Original state is stored under localStorage key `teraJEEAdvancedTracker_v3_51chapters` with state `version: 3`.
-- New feature data lives under `state.orbit`; `ensure()` supplies missing containers for `daily`, `qb`, `rev`, `tests`, `leaves`, and `start`.
-- `persist()` writes the whole state object to localStorage. Feature `save()` calls `persist()` then `renderAll()`.
-- `snapshot()` exports original state plus `orbit` into a JSON snapshot. The restore handler validates core structure and migrates older chapter/stage key formats before applying state.
-- Browser localStorage is device/browser-origin-specific; GitHub deployment does not sync user data. Export JSON before releases and test restoring a copy.
-- Service Worker cache and localStorage are separate systems. Updating cached HTML/JS does not inherently migrate or erase localStorage records.
+- Original tracker state remains under localStorage key `teraJEEAdvancedTracker_v3_51chapters`.
+- Feature records are stored under `state.orbit` (`daily`, `qb`, `rev`, `tests`, `leaves`, `start`).
+- `ensure()` supplies missing containers and normalizes legacy S7.5 test property names (`negative` → `negativeMarks`, `totalQ` → `totalQuestions`, including subject records) in memory. Existing values are preserved; normal persistence occurs through the existing save flow.
+- Optional percentile is stored separately from whether it was actually supplied. A blank percentile must not be interpreted as an observed percentile of zero.
+- Browser `localStorage` is device/browser-origin-specific. The Service Worker cache is separate from saved study data.
 
-## Core function map
+## Critical initialization order
 
-- Original planning: `chaptersFor()`, `stagesFor()`, `completionInfo()`, `renderDrawers()`, `renderSummary()`.
-- Original question/daily: `getQB()`, `loadQB()`, `loadDaily()`, `syncDailyFromUI()`, daily submit handler.
-- Snapshot/persistence: `load()`, `merge()`, `persist()`, `snapshot()`, export/restore/reset handlers.
-- Feature setup: `ensure()`, `makeSection()`, `initStage()`, `refreshStage()`, `loadStageDate()`.
-- Feature records: `renderDaily()`, `loadDay()`, `renderLeaves()`, `renderTests()`.
-- Analytics: `activity()`, `effectiveDates()`, `analysisTargets()`, `dataFor()`, `points()`, `consistency()`, `renderAnalysis()`, `renderReality()`, `renderStageTable()`, `renderNewAnalytics()`, `renderAll()`.
-- Graph engine: `graph()`, `drawGraphs()` and canvas interaction handlers.
-- RACE fixed totals: `RACE_LIMITS`, `raceFixed()`, `raceStages()`.
+`testSubjects` must be declared **before** the `testHTML` template is evaluated because that template calls `testSubjects.map(...)`. A temporal-dead-zone `ReferenceError` here aborts the whole feature script before Leave, Testing, and Analysis are inserted. This was the cause of the new header appearing above the old static tracker layout.
 
-## Change-safety rules
+## Cache/link alignment
 
-1. Before editing, identify whether the visible control belongs to the original form or the injected feature form; some old forms are intentionally preserved but hidden.
-2. For UI changes, inspect both HTML-generated markup and CSS selectors. Feature sections are created in JS, not present as static HTML in the source file.
-3. For data changes, preserve the existing localStorage key and state schema unless a deliberate migration is designed and tested.
-4. For analytics changes, distinguish stored event date from any leave-adjusted analytical attribution date.
-5. For RACE changes, inspect stage generation, fixed totals, total validation, and revision stage options together.
-6. For PWA changes, keep Service Worker cache URLs aligned with the exact asset query strings in `index.html`; delete only project-owned caches.
-7. Test backup/export/restore and offline launch after each relevant change. Syntax checks alone do not prove UI correctness.
+- `index.html` loads `./studyorbit-features.js?v=7601` and `./studyorbit-features.css?v=7601`.
+- `sw.js` caches those exact versioned URLs in `CORE`.
+- The HTML registers `./sw.js` with `updateViaCache: 'none'`.
+- Cache cleanup is scoped to names beginning `studyorbit-tracker-`; localStorage is not cleared by cache activation.
 
+## Change safety and testing
 
-## S7.4.11 UI update
-- Integrated Question Bank form: Subject, Chapter, Exercise/PYQ Category, Practice Date, attempted/repeated/correct counts, solving time, and theory time are rendered as table rows. Existing IDs and event-driven data logic are retained.
-- Testing form: test metadata uses label/input table rows; Maths, Physics, and Chemistry marks use a subject/score/out-of table. Saved Tests and Test Analysis drawers are unchanged.
-
-
-## S7.4.11 cache/update hardening
-- Service Worker uses `studyorbit-tracker-v7410`, revalidates app-shell files, and keeps offline cache fallback.
-- Activation removes prior caches with the StudyOrbit cache prefix only.
-
-
-## S7.4.11 update handling
-- Service Worker update checks bypass the browser HTTP cache for the worker script.
-- App-shell HTML/JS/CSS/JSON requests use network-first with cached offline fallback.
-- Static images and icons remain cache-first for faster repeat loads.
-- Existing localStorage study data is not cleared by this update code.
-
-
-## S7.4.11 — Daily Log table layout
-Daily Log entry fields are arranged in the shared two-column table style. Testing subject-score columns use equal widths for symmetry.
-
-
-## S7.6 additions
-- Test records now include manually entered percentile, negative marks, overall and subject question counts, and inline edit/delete actions.
-- Test analysis includes selected/all/particular modes, efficiency calculations, subject comparisons, data-table modal controls, and legend-series visibility controls.
-- Numeric blanks normalize to zero on save; metrics with invalid denominators are treated as unavailable rather than penalized.
-- Header model label updated to S7.6 and service-worker cache namespace bumped.
-
-
-## S7.6 correction pass
-- Creator credit border styling is restored to the S7.5 gold glow.
-- Test subject inputs are rendered as two separate tables (marks/negative marks; question counts).
-- Test Analysis uses saved-test-only short date labels, preventing calendar holiday markers and gap connectors from being applied to test points.
+1. Build from the immediately preceding approved model unless the user explicitly selects another base.
+2. Change only requested/approved areas; preserve unrelated UI, data schema, and behavior.
+3. For runtime-injected sections, inspect HTML generation, CSS selectors, IDs, handlers, state shape, and render order together.
+4. Before deployment, check JavaScript syntax, ZIP integrity, all referenced local assets, CSS/JS query versions, and Service Worker `CORE` URLs.
+5. Test live section injection, saving/editing, JSON export/restore, graphs, and offline launch on the target browser. Static checks alone do not prove interactive correctness.

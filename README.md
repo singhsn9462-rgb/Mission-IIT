@@ -1,59 +1,47 @@
-# StudyOrbit IIT S7.4.11
+# StudyOrbit IIT — S7.6
 
-Static, browser-based study tracker published with GitHub Pages and installable as a Progressive Web App (PWA). Application records are stored locally in the browser; publishing files to GitHub does not synchronize study records between devices.
+StudyOrbit IIT is a static, browser-based study tracker published through GitHub Pages and installable as a Progressive Web App (PWA). Study records are stored in browser `localStorage`; GitHub Pages does not sync them between devices.
 
-## S7.4.11 form-layout update
-- Integrated Question Bank selectors and practice inputs now use compact label/input tables.
-- Testing metadata and subject-wise marks now use table-based forms while preserving existing element IDs and save logic.
-- Added responsive table-form styling for narrow mobile screens.
-- Updated stylesheet/script query versions and Service Worker cache to `v7410`.
+## Build lineage
 
-## V7.4.7 maintenance changes
-- Aligned feature stylesheet and JavaScript query-string versions to `v=747`.
-- Scoped Service Worker cache cleanup to StudyOrbit-owned cache names so unrelated origin caches are not deleted.
-- Cached the exact versioned CSS/JavaScript asset URLs used by `index.html` to improve offline cache matching.
-- Added snapshot root, version, section-type, and core-section validation before restoring tracker data.
-- Resized app icons to the dimensions declared by the web app manifest and optimized PNG encoding.
-- Preserved the existing tracker state format and existing features; no storage key or data schema version change was made.
+- S7.6 is based on the available **S7.5 JEE Improvement Insights Full** archive.
+- S7.5's existing sections and Improvement Insights are retained while the S7.6 Testing/Analysis features and requested UI corrections are integrated.
+- The S7.5 creator-credit golden glow and existing identity typography are preserved. The S7.6 label is placed at the hero's top-right without a surrounding badge.
 
-## Data safety and deployment
-1. Export a JSON tracker snapshot before deploying any update.
-2. Test the extracted root files on a test GitHub Pages repository before replacing production.
-3. After deployment, open the site online once so the current Service Worker can install and cache its core resources.
-4. Test app launch, offline launch, JSON export, and JSON restore on the target Android browser.
+## S7.6 changes and integration fixes
 
-The application uses browser `localStorage` for saved records. Clearing browser/site data can remove those records. A GitHub Pages update does not automatically upload or sync them.
+- Adds Testing analysis modes: Selected Tests, All Tests, and Particular Test.
+- Adds the requested efficiency, accuracy, marks, subject-contribution graphs and per-graph data-table modal.
+- Keeps the two separate subject-entry tables: marks/negative marks and question counts.
+- Keeps manual percentile entry optional; blank percentile is not counted as a real percentile observation.
+- Normalizes legacy S7.5 test record field names in memory so older saved test entries remain readable.
+- Fixes a startup-order bug where `testHTML` referenced `testSubjects` before initialization. That ReferenceError stopped `studyorbit-features.js` before it could inject Leave, Testing, and Analysis sections; the static old layout therefore remained visible under the new header.
+- Keeps saved-test edit/delete controls behind the existing settings-style toggle and uses the form for editing instead of sequential prompts.
+- Aligns the versioned JavaScript/CSS URLs with the Service Worker cache URLs (`v=7601`) and keeps cache cleanup scoped to StudyOrbit caches.
+- Preserves S7.5's no-forced-reload behavior when a new Service Worker takes control.
+
+## Files
+
+- `index.html` — app shell, original chapter/stage engine, summary, static sections, service-worker registration, and model/creator header.
+- `studyorbit-features.js` — dynamically injects and operates Leave, date-based QB/Revision/Daily Log, Testing, Analysis, graphs, data tables, and saved-record editing.
+- `studyorbit-features.css` — feature section layout, responsive tables, modal, graph controls, and Improvement Insights styling.
+- `sw.js` — PWA cache install/activation/fetch behavior; cache name `studyorbit-tracker-s76-fix1`.
+- `manifest.json` — app metadata and icon references.
+- `icon-192.png`, `icon-512.png`, `icon-512-maskable.png` — app icons.
+- `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png` — visual assets.
+- `inline0.js`–`inline3.js` — retained original project files; not directly referenced by the current HTML shell.
+- `CODEBASE-MAP.md` — selector, insertion-order, data-flow, and deployment map.
+- `.nojekyll` — disables GitHub Pages Jekyll processing.
+
+## Deployment and data safety
+
+1. Export a JSON tracker snapshot before replacing deployed files.
+2. Upload the ZIP's **root files** to the same GitHub Pages source directory, preserving filenames and folder structure.
+3. Ensure `index.html`, `studyorbit-features.js`, `studyorbit-features.css`, and `sw.js` are uploaded together. If the feature script is absent or fails before initialization, the static legacy layout can remain visible even though the header looks new.
+4. Open the site online once to install the new Service Worker, then reload. If the UI still looks stale, verify the deployed files before clearing site data; clearing site data can delete local tracker records.
+5. Test JSON export/restore and offline launch on the target browser.
 
 ## Verification status
-- ZIP archive integrity verified.
-- Inline and external JavaScript syntax checked with Node.js.
-- Manifest JSON parsed successfully.
-- Icon pixel dimensions aligned with manifest declarations.
-- Full interactive Android browser testing has not been performed in this environment.
 
-## S7.4.11 safer update handling
-- Bumped app asset versions and the Service Worker cache name.
-- App-shell requests use a reload/revalidation fetch strategy, with cached fallback for offline use.
-- Old StudyOrbit-prefixed caches are cleaned on activation; browser localStorage study records are not touched by this code.
-
-
-## S7.4.11 update handling
-- Service Worker update checks bypass the browser HTTP cache for the worker script.
-- App-shell HTML/JS/CSS/JSON requests use network-first with cached offline fallback.
-- Static images and icons remain cache-first for faster repeat loads.
-- Existing localStorage study data is not cleared by this update code.
-
-
-## S7.4.11 — Daily Log table layout
-Daily Log entry fields are arranged in the shared two-column table style. Testing subject-score columns use equal widths for symmetry.
-
-
-## S7.6
-S7.6 is built directly from the S7.4.15 foundation. It adds expanded test analytics, manual percentile and negative-mark recording, blank numeric input normalization, test record editing, graph data tables, and updated graph legend interactions.
-
-
-## S7.6 correction pass
-- Restored the S7.5 golden glowing frame around the three-line creator credit; the S7.6 model label remains a small absolute-positioned label and does not reserve layout space.
-- Restored the two-table subject input layout: subject marks/negative marks in the first table, and subject question counts in the second.
-- Test Analysis chart X-axis labels now use only saved test entries in `DD-Mon` format. These charts do not expand dates across the calendar, so no holiday `H`, vertical holiday markers, or white dotted leave-gap connectors are drawn.
-- Bumped CSS/JS asset query versions and the StudyOrbit cache namespace so the corrected S7.6 files can refresh after deployment.
+- ZIP integrity, JavaScript syntax, manifest JSON, internal asset references, and versioned CSS/JS-to-Service-Worker URL alignment checked.
+- A headless Chromium DOM run could not complete in this environment, so end-to-end interactive browser testing is **not verified**.
