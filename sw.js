@@ -1,17 +1,75 @@
-const CACHE_NAME = 'studyorbit-tracker-v71';
-const CORE = ['./','./index.html','./manifest.json','./studyorbit-features.js','./studyorbit-features.css'];
+/* StudyOrbit IIT S7.4.12 — update-aware PWA cache. */
+const CACHE_NAME = 'studyorbit-tracker-v7415';
+const CACHE_PREFIX = 'studyorbit-tracker-';
+const CORE = [
+  './',
+  './index.html',
+  './manifest.json',
+  './studyorbit-features.js?v=7411',
+  './studyorbit-features.css?v=7411'
+];
+
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(CORE)));
-  self.skipWaiting();
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    // Cache the app shell for offline startup. A failed optional URL should not
+    // prevent the worker from installing; each core URL is attempted separately.
+    await Promise.all(CORE.map(async url => {
+      try {
+        const response = await fetch(url, { cache: 'reload' });
+        if (response.ok) await cache.put(url, response);
+      } catch (_) { /* Keep installing; online fetch will retry later. */ }
+    }));
+    await self.skipWaiting();
+  })());
 });
+
 self.addEventListener('activate', event => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))));
-  self.clients.claim();
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys
+      .filter(key => key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME)
+      .map(key => caches.delete(key)));
+    await self.clients.claim();
+  })());
 });
+
 self.addEventListener('fetch', event => {
-  if(event.request.method!=='GET'||new URL(event.request.url).origin!==self.location.origin)return;
-  event.respondWith(fetch(event.request).then(response=>{
-    if(response.ok){const copy=response.clone();event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.put(event.request,copy)))}
-    return response;
-  }).catch(()=>caches.match(event.request)));
+  const request = event.request;
+  if (request.method !== 'GET') return;
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) return;
+
+  const path = url.pathname;
+  const isNavigation = request.mode === 'navigate';
+  const isAppCode = /\.(?:html|js|css|json)$/i.test(path);
+  if (isNavigation || isAppCode) {
+    // Network-first keeps updated app files current; cache is only the offline fallback.
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE_NAME);
+      try {
+        const response = await fetch(request, { cache: 'no-cache' });
+        if (response && response.ok) await cache.put(request, response.clone());
+        return response;
+      } catch (_) {
+        const cached = await caches.match(request) || await caches.match('./index.html');
+        return cached || Response.error();
+      }
+    })());
+    return;
+  }
+
+  // Static images/icons: serve cached copies quickly, populate cache on first fetch.
+  event.respondWith((async () => {
+    const cached = await caches.match(request);
+    if (cached) return cached;
+    try {
+      const response = await fetch(request);
+      if (response && response.ok) {
+        const cache = await caches.open(CACHE_NAME);
+        await cache.put(request, response.clone());
+      }
+      return response;
+    } catch (_) { return Response.error(); }
+  })());
 });

@@ -49,3 +49,33 @@
 
 /* V7.3 visual refinements */
 .orbit-graph-scroll{position:relative;min-height:290px}.orbit-graph-scroll canvas{height:290px}.orbit-point-tip{position:absolute;left:8px;top:8px;z-index:5;display:none;width:max-content;max-width:90%;padding:7px 11px;border-radius:9px;background:#172b42;color:#fff;border:1px solid #8bd8ec;box-shadow:0 2px 12px #0009;font-size:12px;pointer-events:none}.orbit-edit-total{padding:4px 11px;margin-left:9px;font-size:12px}.orbit-graph-title{font-weight:700}.orbit-axis-label{display:flex;flex-wrap:wrap;gap:6px;justify-content:space-between}
+
+/* S7.4.11: Shared table-form layout for Daily Log, Integrated Question Bank and Testing. */
+.orbit-form-table-scroll{margin:10px 0 14px}
+.orbit-form-table{min-width:0!important;table-layout:fixed;width:100%}
+.orbit-form-table th{width:50%;white-space:normal;vertical-align:middle}
+.orbit-form-table td{width:50%;white-space:normal;vertical-align:middle}
+.orbit-form-table th label{display:block;margin:0;color:inherit;font-weight:700;line-height:1.35}
+.orbit-form-table input,.orbit-form-table select{display:block;box-sizing:border-box;width:100%;min-width:0;max-width:100%;margin:0;padding:9px 8px;border-radius:8px}
+.orbit-form-table .field{margin:0}
+.orbit-test-subject-table th:first-child{width:33.3333%}
+.orbit-test-subject-table td{width:33.3333%}
+.orbit-test-subject-table input{padding:8px 5px}
+@media(max-width:520px){.orbit-form-table{font-size:12px}.orbit-form-table th,.orbit-form-table td{padding:8px 6px}.orbit-form-table th,.orbit-form-table td{width:50%}.orbit-test-subject-table th:first-child,.orbit-test-subject-table td{width:33.3333%}}
+.orbit-form-table textarea{display:block;box-sizing:border-box;width:100%;min-width:0;max-width:100%;min-height:76px;margin:0;padding:9px 8px;border-radius:8px;resize:vertical}
+.orbit-form-table output{display:block;font-weight:700;padding:9px 8px}
+.orbit-daily-entry-table th,.orbit-daily-entry-table td{white-space:normal}
+
+/* S7.4.12 Daily Log: compact text fields with a centered landscape editor. */
+.orbit-daily-entry-table thead th{background:#253d5b;color:#e7f2ff;font-weight:800;padding:12px 9px;border-bottom:2px solid #667b98}
+.orbit-daily-entry-table .orbit-daily-total-row th,.orbit-daily-entry-table .orbit-daily-total-row td{background:#253d5b;color:#f1f6ff;font-weight:800;border-top:2px solid #7389a7}
+.orbit-daily-entry-table input{max-width:100%!important}
+.orbit-text-open{display:block;width:100%;min-height:38px;padding:8px 6px;border-radius:8px;border:1px solid #68748c;background:#111e34;color:#dce8fb;font-size:12px;line-height:1.25}
+.orbit-form-table .orbit-text-value{min-height:0;height:0;padding:0;border:0;opacity:0;position:absolute;pointer-events:none}
+.orbit-text-modal{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:3vw;background:rgba(3,8,20,.12);backdrop-filter:none}
+.orbit-text-modal.is-open{display:flex}
+.orbit-text-modal-card{position:relative;width:94vw;max-width:720px;height:28vh;min-height:150px;max-height:36vh;overflow:auto;box-sizing:border-box;padding:15px 14px 12px;border:1px solid #6f83a5;border-radius:16px;background:linear-gradient(145deg,rgba(27,42,69,.97),rgba(16,26,46,.97));box-shadow:0 10px 34px #0007}
+.orbit-text-modal-card h3{margin:2px 44px 8px 0;color:#eaf2ff;font-size:16px}
+.orbit-text-modal-card textarea{display:block;box-sizing:border-box;width:100%;height:13vh;min-height:70px;max-height:18vh;resize:vertical;padding:10px;border:1px solid #687895;border-radius:10px;background:#0d182b;color:#f2f6ff;font-size:15px;line-height:1.4}
+.orbit-text-modal-close{position:absolute;top:10px;right:10px;width:38px;height:38px;min-height:38px;padding:0;border-radius:50%;border:1px solid #a6b5cf;background:#263653;color:#fff;font-size:27px;line-height:1;display:grid;place-items:center}
+@media(min-width:600px){.orbit-text-modal-card{width:70vw;height:28vh;min-height:190px}.orbit-text-modal-card textarea{height:14vh;min-height:90px}}
