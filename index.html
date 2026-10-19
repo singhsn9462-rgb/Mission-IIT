@@ -332,16 +332,20 @@ body .motivation-toast,body .note,body .status,body pre{font-weight:400!importan
 /* StudyOrbit IIT brand assets */
 .studyorbit-logo{display:block;width:min(140px,42vw);height:auto;max-height:150px;margin:0 auto 12px;object-fit:contain;position:relative;z-index:1}
 body:before{background-image:linear-gradient(180deg,rgba(4,9,20,.70),rgba(5,12,25,.82)),url("./studyorbit-background.png");background-size:cover;background-position:center;background-repeat:no-repeat}
-</style><link rel="stylesheet" href="./studyorbit-features.css?v=7411"><style id="orbit-architect-credit-style">
+</style><link rel="stylesheet" href="./studyorbit-features.css?v=7500"><style id="orbit-architect-credit-style">
 .orbit-architect-credit{position:relative;z-index:2;box-sizing:border-box;width:fit-content;max-width:100%;margin:13px auto 1px;padding:10px 17px;text-align:center;border:2px solid #f8c75b;border-radius:11px;background:rgba(6,15,34,.55);box-shadow:0 0 5px #ffcf64,0 0 14px #ffc24a88,inset 0 0 8px #e5b44b22;color:#d7ecf4;font-size:clamp(11px,2.7vw,14px);line-height:1.6;overflow-wrap:anywhere}
 .orbit-architect-credit strong{font-weight:850!important;color:#e0f6ff!important;background:none!important;box-shadow:none!important;text-shadow:none!important}
+
+.orbit-brand-line{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.orbit-model-version{display:inline-flex;align-items:center;justify-content:center;padding:5px 9px;border:1px solid #9db7ff;border-radius:10px;background:#14284bcc;color:#dce8ff;font-weight:800;letter-spacing:.04em;box-shadow:0 0 12px #6c8eff35}.orbit-architect-credit>div{margin-top:3px}
+.orb-inline-fields{display:flex;gap:6px;align-items:center;flex-wrap:nowrap}.orb-inline-fields label{display:flex;align-items:center;gap:4px;min-width:0;font-size:11px;white-space:nowrap}.orb-inline-fields input{width:68px;min-width:0;padding:7px 5px!important}.orbit-test-subject-table input,.orbit-form-table input{max-width:100%;box-sizing:border-box}.orb-test-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.orb-test-toolbar button{min-width:38px}.orbit-data-table input{width:100%;min-width:48px}.orbit-legend span{cursor:pointer;display:inline-block;padding:3px 5px;border-radius:5px;touch-action:manipulation}.orbit-legend span:focus-visible{outline:2px solid currentColor}.orbit-legend span.is-muted{opacity:.35;text-decoration:line-through}
+@media(max-width:430px){.orb-inline-fields{gap:3px}.orb-inline-fields label{font-size:10px;gap:2px}.orb-inline-fields input{width:52px;padding:6px 3px!important}.orbit-test-subject-table th,.orbit-test-subject-table td{padding:5px 3px;font-size:11px}}
 </style></head><body>
 <div id="symbolRain" class="symbol-rain" aria-hidden="true"></div>
 <main class="wrap">
 <header class="hero">
-<img src="./studyorbit-logo.png" alt="StudyOrbit IIT logo" class="studyorbit-logo" width="140" onerror="this.hidden=true">
+<div class="orbit-brand-line"><img src="./studyorbit-logo.png" alt="StudyOrbit IIT logo" class="studyorbit-logo" width="140" onerror="this.hidden=true"><span class="orbit-model-version">S7.5</span></div>
 <h1>StudyOrbit IIT</h1>
-<div class="orbit-architect-credit" aria-label="StudyOrbit IIT creator credit"><div>System Architect: <strong>SATYA SINGH</strong></div><div>Author Tag : <strong>singhsn9462</strong> , Age:<strong>16</strong> Developed by <strong>Passion</strong></div></div>
+<div class="orbit-architect-credit" aria-label="StudyOrbit IIT creator credit"><div>System Architect: <strong>SATYA SINGH</strong></div><div>Author Tag : <strong>singhsn9462</strong> , Age:<strong>16</strong></div><div>Developed by <strong>Passion</strong></div></div>
 </header>
 <section class="card" id="summary"><h2>📋🏷Summary dashboard</h2><div class="stats"><div class="stat"><span>Total Chapters</span><strong id="totalChapters">51</strong></div><div class="stat"><span>Completed Chapters</span><strong id="completedCount">0</strong></div><div class="stat"><span>Overall Progress</span><strong id="percent">0%</strong></div></div><div class="bar"><div id="progressBar"></div></div><div class="small" id="distribution"></div><div class="stats" style="margin-top:14px"><div class="stat"><span>Avg. Study hr/Day</span><strong id="medianStudyHours">—</strong></div><div class="stat"><span>Consistency Meter</span><strong id="consistencyPercent">—</strong></div></div><div class="bar" aria-label="Consistency meter"><div id="consistencyBar" style="width:0%"></div></div><div class="small" id="studyMetricsHint">Log daily study time to start measuring consistency.</div></section>
 <section class="card accordion-section collapsed" id="chapterPlanSection"><h2 tabindex="0" role="button" aria-expanded="false">📑 Chapter plan</h2><div class="field"><label for="planSubject">Planning Subject</label><select id="planSubject"></select></div><p class="section-label"></p><div id="drawers"></div></section>
@@ -691,11 +695,10 @@ initSelects();el('planSubject').value=state.planSubject;state.drawers=activeDraw
 <script>
 if("serviceWorker" in navigator){
  window.addEventListener("load",()=>{
-  let reloadingForWorker=false;
+  // Do not force-reload a live tracker when a new worker takes control.
+  // This avoids an old-shell/new-shell flash and preserves an in-progress restore.
   navigator.serviceWorker.addEventListener("controllerchange",()=>{
-   if(reloadingForWorker)return;
-   reloadingForWorker=true;
-   window.location.reload();
+   console.info("StudyOrbit update is ready; it will be used on the next navigation.");
   });
   navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).then(registration=>{
    // Check for a newer worker on each app launch; browser may throttle repeated checks.
@@ -703,7 +706,7 @@ if("serviceWorker" in navigator){
   }).catch(error=>console.error("StudyOrbit service worker registration failed:",error));
  });
 }
-</script><script src="./studyorbit-features.js?v=7411"></script><script>
+</script><script src="./studyorbit-features.js?v=7500"></script><script>
 (()=>{
 const count=document.getElementById('completedCount');if(!count)return;
 const card=count.closest('.stat');

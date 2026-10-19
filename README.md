@@ -46,3 +46,10 @@ The application uses browser `localStorage` for saved records. Clearing browser/
 
 ## S7.4.11 — Daily Log table layout
 Daily Log entry fields are arranged in the shared two-column table style. Testing subject-score columns use equal widths for symmetry.
+
+
+## S7.5 release notes (2026-10-19)
+- Built from the S7.4.15 foundation.
+- Added manual percentile and test question-count fields, subject negative-mark/question-count tables, My Tests management, session filtering, and test-analysis charts.
+- Removed forced page reload on Service Worker controller changes to reduce old-UI/new-UI flashes during updates.
+- Test data remains in this browser's existing localStorage store; export a JSON backup before restoring large snapshots.

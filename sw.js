@@ -1,12 +1,12 @@
 /* StudyOrbit IIT S7.4.12 — update-aware PWA cache. */
-const CACHE_NAME = 'studyorbit-tracker-v7415';
+const CACHE_NAME = 'studyorbit-tracker-v7500';
 const CACHE_PREFIX = 'studyorbit-tracker-';
 const CORE = [
   './',
   './index.html',
   './manifest.json',
-  './studyorbit-features.js?v=7411',
-  './studyorbit-features.css?v=7411'
+  './studyorbit-features.js?v=7500',
+  './studyorbit-features.css?v=7500'
 ];
 
 self.addEventListener('install', event => {
@@ -47,12 +47,17 @@ self.addEventListener('fetch', event => {
     // Network-first keeps updated app files current; cache is only the offline fallback.
     event.respondWith((async () => {
       const cache = await caches.open(CACHE_NAME);
+      const cachedFallback = async () => (await caches.match(request)) || (isNavigation ? await caches.match('./index.html') : null);
       try {
-        const response = await fetch(request, { cache: 'no-cache' });
-        if (response && response.ok) await cache.put(request, response.clone());
-        return response;
+        // Bound the network-first wait so a slow connection cannot leave the app shell spinning indefinitely.
+        const network = fetch(request, { cache: 'no-cache' }).then(async response => {
+          if (response && response.ok) await cache.put(request, response.clone());
+          return response;
+        });
+        const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('network timeout')), 2800));
+        return await Promise.race([network, timeout]);
       } catch (_) {
-        const cached = await caches.match(request) || await caches.match('./index.html');
+        const cached = await cachedFallback();
         return cached || Response.error();
       }
     })());
