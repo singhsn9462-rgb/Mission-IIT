@@ -104,3 +104,9 @@ Daily Log entry fields are arranged in the shared two-column table style. Testin
 - Test analysis includes selected/all/particular modes, efficiency calculations, subject comparisons, data-table modal controls, and legend-series visibility controls.
 - Numeric blanks normalize to zero on save; metrics with invalid denominators are treated as unavailable rather than penalized.
 - Header model label updated to S7.6 and service-worker cache namespace bumped.
+
+
+## S7.6 correction pass
+- Creator credit border styling is restored to the S7.5 gold glow.
+- Test subject inputs are rendered as two separate tables (marks/negative marks; question counts).
+- Test Analysis uses saved-test-only short date labels, preventing calendar holiday markers and gap connectors from being applied to test points.

@@ -50,3 +50,10 @@ Daily Log entry fields are arranged in the shared two-column table style. Testin
 
 ## S7.6
 S7.6 is built directly from the S7.4.15 foundation. It adds expanded test analytics, manual percentile and negative-mark recording, blank numeric input normalization, test record editing, graph data tables, and updated graph legend interactions.
+
+
+## S7.6 correction pass
+- Restored the S7.5 golden glowing frame around the three-line creator credit; the S7.6 model label remains a small absolute-positioned label and does not reserve layout space.
+- Restored the two-table subject input layout: subject marks/negative marks in the first table, and subject question counts in the second.
+- Test Analysis chart X-axis labels now use only saved test entries in `DD-Mon` format. These charts do not expand dates across the calendar, so no holiday `H`, vertical holiday markers, or white dotted leave-gap connectors are drawn.
+- Bumped CSS/JS asset query versions and the StudyOrbit cache namespace so the corrected S7.6 files can refresh after deployment.
