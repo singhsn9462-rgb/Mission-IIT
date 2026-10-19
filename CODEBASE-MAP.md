@@ -97,3 +97,10 @@ Original accordion sections are collapsed by default except the summary. Dynamic
 
 ## S7.4.11 — Daily Log table layout
 Daily Log entry fields are arranged in the shared two-column table style. Testing subject-score columns use equal widths for symmetry.
+
+
+## S7.6 additions
+- Test records now include manually entered percentile, negative marks, overall and subject question counts, and inline edit/delete actions.
+- Test analysis includes selected/all/particular modes, efficiency calculations, subject comparisons, data-table modal controls, and legend-series visibility controls.
+- Numeric blanks normalize to zero on save; metrics with invalid denominators are treated as unavailable rather than penalized.
+- Header model label updated to S7.6 and service-worker cache namespace bumped.
