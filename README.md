@@ -1,4 +1,4 @@
-# StudyOrbit IIT — S7.8
+# StudyOrbit IIT — S7.9
 
 StudyOrbit IIT is a static, browser-based study tracker published through GitHub Pages and installable as a Progressive Web App (PWA). Study records are stored in browser `localStorage`; GitHub Pages does not sync them between devices.
 
@@ -6,7 +6,7 @@ StudyOrbit IIT is a static, browser-based study tracker published through GitHub
 
 - S7.8 is the next feature release after the corrected S7.7 codebase and retains the S7.6 Math Integrity Fix lineage.
 - Existing StudyOrbit sections and the S7.6 Testing/Analysis features are retained.
-- The S7.5 creator-credit golden glow and existing identity typography are preserved. The S7.8 label is placed at the hero's top-right without a surrounding badge.
+- The S7.5 creator-credit golden glow and existing identity typography are preserved. The creator-credit placement and typography are preserved; the visible model label advances to S7.9.
 
 ## Retained Testing/Analysis features and integration fixes
 
@@ -17,7 +17,7 @@ StudyOrbit IIT is a static, browser-based study tracker published through GitHub
 - Normalizes legacy S7.5 test record field names in memory so older saved test entries remain readable.
 - Fixes a startup-order bug where `testHTML` referenced `testSubjects` before initialization. That ReferenceError stopped `studyorbit-features.js` before it could inject Leave, Testing, and Analysis sections; the static old layout therefore remained visible under the new header.
 - Keeps saved-test edit/delete controls behind the existing settings-style toggle and uses the form for editing instead of sequential prompts.
-- Aligns the versioned JavaScript/CSS URLs with the Service Worker cache URLs (`v=7802`) and keeps cache cleanup scoped to StudyOrbit caches.
+- At the S7.8 release, aligned the versioned JavaScript/CSS URLs with that release’s Service Worker cache URLs (`v=7802`); the S7.9 release below bumps the feature assets separately.
 - Preserves S7.5's no-forced-reload behavior when a new Service Worker takes control.
 
 ## To-Do List and S7.8 refinements
@@ -34,7 +34,7 @@ StudyOrbit IIT is a static, browser-based study tracker published through GitHub
 - `index.html` — app shell, original chapter/stage engine, summary, static sections, service-worker registration, and model/creator header.
 - `studyorbit-features.js` — dynamically injects and operates Leave, date-based QB/Revision/Daily Log, Testing, Analysis, graphs, data tables, and saved-record editing.
 - `studyorbit-features.css` — feature section layout, responsive tables, modal, graph controls, and Improvement Insights styling.
-- `sw.js` — PWA cache install/activation/fetch behavior; cache name `studyorbit-tracker-s78-todo2`.
+- `sw.js` — PWA cache install/activation/fetch behavior; S7.9 cache name: `studyorbit-tracker-s79-test-analysis1` (S7.8 used `studyorbit-tracker-s78-todo2`).
 - `manifest.json` — app metadata and icon references.
 - `icon-192.png`, `icon-512.png`, `icon-512-maskable.png` — app icons.
 - `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png` — visual assets.
@@ -53,7 +53,18 @@ StudyOrbit IIT is a static, browser-based study tracker published through GitHub
 ## Verification status
 
 - ZIP integrity, JavaScript syntax (including inline scripts), manifest JSON, internal asset references, and versioned CSS/JS-to-Service-Worker URL alignment checked.
-- Simulated To-Do interactions passed for duplicate names, carry-forward, completion, deletion, Undo, persistence, and state rebinding after restore.
-- A headless Chromium DOM run timed out in this environment, so full end-to-end visual/mobile/offline browser testing is **not verified**.
+- Headless Chromium interaction simulation passed for JEE ADV/JEE MAIN form visibility and saving, fixed JEE MAIN values, separated Saved Tests tables, Test Type filtering, 11 graph assignments across 4 single-open drawers, and Analysis Mode options/Selected Tests list. No page or console errors occurred in this simulated run.
+- Live GitHub Pages deployment, real-origin localStorage/Service Worker behavior, offline launch, and full visual/device regression testing are **not verified** in this environment.
 
 - S7.8 visual refinement: compacted the NOTE❗ divider box and message typography; separated the plain “To DO List” label below the floating parchment icon so the label and icon move as one control; Integrated Question Bank retains only the 🏅 emoji. Asset query version is `v=7802`.
+
+
+## S7.9 — Test Type Analysis and JEE MAIN Fixed Inputs
+
+- Based directly on the updated S7.8 Compact Note and Floating To-Do Label package.
+- Test Type Filter now offers only JEE ADV and JEE MAIN. Analysis data is filtered to the selected type.
+- Generated test-analysis graphs are organised into four single-open category drawers in the requested order. Existing graph construction and calculation functions are retained.
+- JEE MAIN uses fixed overall values (Out Of 300, 75 questions), subject maxima (100 each), and subject question counts (25 each); fixed input rows/columns are hidden only while JEE MAIN is selected.
+- Saved Tests are shown in two tables: JEE ADV first, then JEE MAIN. Existing test edit/delete controls and test-analysis modes remain.
+- Updated feature asset query versions to `v=7901` and service-worker cache name to `studyorbit-tracker-s79-test-analysis1`.
+- Startup audit note: the selected S7.8 archive was missing the S7.8-era dynamic QB/Daily form mounting, `makeSection`/`analysisHTML`, and Add Leave mounting code referenced elsewhere in the same script. These baseline connections were restored minimally so the existing sections and requested Testing features load; the later S7.9 focused-main-section redesign was not imported.

@@ -98,3 +98,10 @@
 .orbit-managing-note-label{position:absolute;top:0;left:10px;transform:translateY(-55%);padding:0 6px;background:#151e35;color:#ff4659;font-family:inherit;font-size:.72em;font-weight:400;line-height:1.2;text-shadow:0 0 6px #ff394d99;white-space:nowrap;}
 .orbit-managing-note-red{color:#ff4659;font-weight:400;}
 @media(max-width:520px){.orbit-managing-note{width:calc(100% - 28px);max-width:520px;padding:14px 8px 8px;font-size:.96em;}}
+
+/* S7.9: test-type-specific fixed fields, separated saved-test lists, and graph category drawers. */
+.orbit-test-list-heading{margin:16px 0 7px;padding:9px 11px;border-left:3px solid #e9c77e;border-radius:5px;background:linear-gradient(100deg,#253352,#28253f);color:#f0e2bb;font-size:15px}
+.orbit-test-analysis-categories{margin-top:12px}
+.orbit-test-analysis-drawer{margin:10px 0}
+.orbit-test-analysis-drawer>.orbit-inside{padding:8px 10px}
+.orbit-test-analysis-drawer .orbit-graph{margin:10px 0}

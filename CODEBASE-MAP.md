@@ -1,6 +1,6 @@
-# StudyOrbit IIT S7.8 — Codebase & UI Map
+# StudyOrbit IIT S7.9 — Codebase & UI Map
 
-This map documents the S7.8 source, following the corrected S7.7 codebase and retaining the S7.6 Math Integrity Fix lineage. It is a navigation guide, not a substitute for testing the live GitHub Pages deployment.
+This map documents S7.9, built directly from the updated S7.8 package. The S7.8/S7.7 lineage notes below are retained as history. It is a navigation guide, not a substitute for testing the live GitHub Pages deployment.
 
 ## File responsibilities
 
@@ -8,7 +8,7 @@ This map documents the S7.8 source, following the corrected S7.7 codebase and re
 - `studyorbit-features.js`: runtime enhancement layer. It preserves legacy QB/Daily Log DOM, injects dated practice forms and Leave/Testing/Analysis sections, loads/saves records through the existing tracker state, draws charts, and handles edit modes.
 - `studyorbit-features.css`: dynamic section/table/modal/chart styling, responsive layouts, and Improvement Insights panel.
 - `studyorbit-todo.js` / `studyorbit-todo.css`: To-Do List tasks, carry-forward, history/statistics, floating control, and parchment-panel styles.
-- `sw.js`: PWA cache install, activation, and fetch behavior. Cache: `studyorbit-tracker-s78-todo2`.
+- `sw.js`: PWA cache install, activation, and fetch behavior. Cache: `studyorbit-tracker-s79-test-analysis1`.
 - `manifest.json`: app metadata, start URL, scope, display mode, theme, and icons.
 - `icon-192.png`, `icon-512.png`, `icon-512-maskable.png`: declared PWA icons.
 - `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png`: image assets referenced by the page/metadata.
@@ -61,10 +61,10 @@ At runtime, `studyorbit-features.js` moves existing section nodes into this orde
 
 `testSubjects` must be declared **before** the `testHTML` template is evaluated because that template calls `testSubjects.map(...)`. A temporal-dead-zone `ReferenceError` here aborts the whole feature script before Leave, Testing, and Analysis are inserted. This was the cause of the new header appearing above the old static tracker layout.
 
-## Cache/link alignment (S7.8)
+## Cache/link alignment (S7.9)
 
-- `index.html` loads the feature and To-Do JavaScript/CSS assets with query version `v=7802`.
-- `sw.js` caches those exact versioned URLs in `CORE`; its cache name `studyorbit-tracker-s78-todo2` and UI model label are versioned for S7.8.
+- `index.html` loads the changed feature JavaScript/CSS assets with `v=7901`; unchanged To-Do assets retain `v=7802`.
+- `sw.js` caches the corresponding versioned URLs in `CORE`; its cache name is `studyorbit-tracker-s79-test-analysis1` and the UI model label is S7.9.
 - The HTML registers `./sw.js` with `updateViaCache: 'none'`.
 - Cache cleanup is scoped to names beginning `studyorbit-tracker-`; localStorage is not cleared by cache activation.
 
@@ -75,3 +75,12 @@ At runtime, `studyorbit-features.js` moves existing section nodes into this orde
 3. For runtime-injected sections, inspect HTML generation, CSS selectors, IDs, handlers, state shape, and render order together.
 4. Before deployment, check JavaScript syntax, ZIP integrity, all referenced local assets, CSS/JS query versions, and Service Worker `CORE` URLs.
 5. Test live section injection, saving/editing, JSON export/restore, graphs, and offline launch on the target browser. Static checks alone do not prove interactive correctness.
+
+
+## S7.9 Testing changes
+
+- `studyorbit-features.js`: Test Type Filter options, JEE MAIN fixed-value enforcement, separate Saved Tests tables, and graph grouping are implemented here. The graph calculation routines remain unchanged; existing graph DOM nodes are moved into category drawers after generation.
+- `studyorbit-features.css`: styles added only for the new test list headings and analysis drawers.
+- `index.html`: visible model label and changed feature asset query version updated.
+- `sw.js`: cache identity and changed feature asset URLs updated.
+- Startup wiring audit: restored the missing existing S7.8 dynamic entry-form mounting and generated-section helper because the supplied base ZIP referenced them but did not define/execute them. The focused-main-section navigation from the S7.9 reference package was not copied.

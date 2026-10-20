@@ -1,12 +1,12 @@
-/* StudyOrbit IIT S7.8 — update-aware PWA cache. */
-const CACHE_NAME = 'studyorbit-tracker-s78-todo2';
+/* StudyOrbit IIT S7.9 — update-aware PWA cache. */
+const CACHE_NAME = 'studyorbit-tracker-s79-test-analysis1';
 const CACHE_PREFIX = 'studyorbit-tracker-';
 const CORE = [
   './',
   './index.html',
   './manifest.json',
-  './studyorbit-features.js?v=7802',
-  './studyorbit-features.css?v=7802',
+  './studyorbit-features.js?v=7901',
+  './studyorbit-features.css?v=7901',
   './studyorbit-todo.js?v=7802',
   './studyorbit-todo.css?v=7802'
 ];
