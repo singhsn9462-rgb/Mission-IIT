@@ -93,3 +93,8 @@
 
 /* Preserved from S7.5: JEE Improvement Insights panel. */
 .orbit-insight-panel{margin:14px 0;padding:12px 14px;border:1px solid #6f8dc566;border-radius:12px;background:#101b2acc}.orbit-insight-panel h3{margin:0 0 8px;color:#c8ddff}.orbit-insight-panel ul{margin:7px 0;padding-left:22px}.orbit-insight-panel li{margin:5px 0;line-height:1.45}
+/* S7.8 NOTE divider: app-native font, normal weight, red glowing rectangular edge. */
+.orbit-managing-note{position:relative;box-sizing:border-box;width:calc(100% - 20px);max-width:850px;margin:22px auto 18px;padding:23px 12px 14px;border:2px solid #ff394d;border-radius:4px;background:linear-gradient(135deg,rgba(23,30,55,.97),rgba(12,21,40,.96));box-shadow:0 0 7px #ff394d,0 0 17px #ff394d88,inset 0 0 12px #ff394d1e;text-align:center;font-family:inherit;font-size:1.5em;font-weight:400;line-height:1.45;color:#ffd84a;}
+.orbit-managing-note-label{position:absolute;top:0;left:14px;transform:translateY(-55%);padding:0 8px;background:#151e35;color:#ff4659;font-family:inherit;font-size:.68em;font-weight:400;line-height:1.25;text-shadow:0 0 7px #ff394d99;white-space:nowrap;}
+.orbit-managing-note-red{color:#ff4659;font-weight:400;}
+@media(max-width:520px){.orbit-managing-note{width:calc(100% - 12px);padding:22px 9px 12px;font-size:1.35em;}}

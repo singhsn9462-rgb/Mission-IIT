@@ -1,6 +1,6 @@
-# StudyOrbit IIT S7.7 — Codebase & UI Map
+# StudyOrbit IIT S7.8 — Codebase & UI Map
 
-This map documents the S7.7 source, built on the designated S7.6 Math Integrity Fix base. It is a navigation guide, not a substitute for testing the live GitHub Pages deployment.
+This map documents the S7.8 source, following the corrected S7.7 codebase and retaining the S7.6 Math Integrity Fix lineage. It is a navigation guide, not a substitute for testing the live GitHub Pages deployment.
 
 ## File responsibilities
 
@@ -8,7 +8,7 @@ This map documents the S7.7 source, built on the designated S7.6 Math Integrity 
 - `studyorbit-features.js`: runtime enhancement layer. It preserves legacy QB/Daily Log DOM, injects dated practice forms and Leave/Testing/Analysis sections, loads/saves records through the existing tracker state, draws charts, and handles edit modes.
 - `studyorbit-features.css`: dynamic section/table/modal/chart styling, responsive layouts, and Improvement Insights panel.
 - `studyorbit-todo.js` / `studyorbit-todo.css`: To-Do List tasks, carry-forward, history/statistics, floating control, and parchment-panel styles.
-- `sw.js`: PWA cache install, activation, and fetch behavior. Cache: `studyorbit-tracker-s77-todo1`.
+- `sw.js`: PWA cache install, activation, and fetch behavior. Cache: `studyorbit-tracker-s78-todo1`.
 - `manifest.json`: app metadata, start URL, scope, display mode, theme, and icons.
 - `icon-192.png`, `icon-512.png`, `icon-512-maskable.png`: declared PWA icons.
 - `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png`: image assets referenced by the page/metadata.
@@ -21,12 +21,16 @@ This map documents the S7.7 source, built on the designated S7.6 Math Integrity 
 The HTML starts with these static sections:
 
 1. `#summary` — summary metrics and study consistency.
-2. `#chapterPlanSection` — Chapter Plan.
-3. `#questionBankSection` — Integrated Question Bank; the feature script moves legacy content into a preserved container and injects the date-based QB form.
-4. `#dailyLogSection` — Daily Log; the feature script preserves the legacy form and injects the subject-hours form.
-5. Snapshot/restore card — retained from the S7.5 source.
+2. `#questionBankSection` — Integrated Question Bank.
+3. `#dailyLogSection` — Daily Log (heading uses the explicitly requested 🔖 marker).
+4. `#chapterPlanSection` — Chapter Plan.
+5. `#orbTestingSection` — Testing.
+6. `#orbAnalysisSection` — Analysis.
+7. `#orbLeaveSection` — Add Leave.
+8. Red glowing `NOTE❗` divider message.
+9. Snapshot/restore card.
 
-At runtime, `studyorbit-features.js` inserts `#orbLeaveSection` before `#summary`, then inserts `#orbTestingSection` and `#orbAnalysisSection` before the snapshot card. If the snapshot card is absent, the script appends Testing and Analysis to `<main>` instead of failing.
+At runtime, `studyorbit-features.js` moves existing section nodes into this order; IDs, forms, and handlers are preserved.
 
 ## Important IDs
 
@@ -57,10 +61,10 @@ At runtime, `studyorbit-features.js` inserts `#orbLeaveSection` before `#summary
 
 `testSubjects` must be declared **before** the `testHTML` template is evaluated because that template calls `testSubjects.map(...)`. A temporal-dead-zone `ReferenceError` here aborts the whole feature script before Leave, Testing, and Analysis are inserted. This was the cause of the new header appearing above the old static tracker layout.
 
-## Cache/link alignment
+## Cache/link alignment (S7.8)
 
-- `index.html` loads the feature and To-Do JavaScript/CSS assets with query version `v=7701`.
-- `sw.js` caches those exact versioned URLs in `CORE`; its cache name `studyorbit-tracker-s77-todo1` and UI model label are versioned for S7.7.
+- `index.html` loads the feature and To-Do JavaScript/CSS assets with query version `v=7801`.
+- `sw.js` caches those exact versioned URLs in `CORE`; its cache name `studyorbit-tracker-s78-todo1` and UI model label are versioned for S7.8.
 - The HTML registers `./sw.js` with `updateViaCache: 'none'`.
 - Cache cleanup is scoped to names beginning `studyorbit-tracker-`; localStorage is not cleared by cache activation.
 

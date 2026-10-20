@@ -3,7 +3,7 @@
 
 .todo-history-chevron{display:inline-block;transition:transform .12s ease;font-size:17px;line-height:1}.todo-history-drawer[open] .todo-history-chevron{transform:rotate(90deg)}
 
-/* S7.7 visual correction: wider, shorter, stiff folded parchment and modal input lock */
+/* S7.8 carried-forward visual refinement: wider, shorter, stiff folded parchment and modal input lock */
 html.todo-modal-open,body.todo-modal-open{overflow:hidden!important;overscroll-behavior:none!important}
 .todo-overlay.is-open{overscroll-behavior:contain;touch-action:none}
 .todo-panel{width:90vw;height:70dvh;max-width:780px;border-width:5px;border-radius:18px 24px 16px 22px;background-color:#dfbd7e;background-image:radial-gradient(ellipse at 7% 5%,#fff0c8 0 2%,transparent 19%),radial-gradient(ellipse at 95% 97%,#8a5b2e44 0 3%,transparent 20%),linear-gradient(90deg,#9b6a3828 0 1.2%,transparent 2.2% 96%,#8b5a2c30 98%),linear-gradient(180deg,#f5dfab 0%,#dfbd7e 48%,#f0d59b 100%);box-shadow:inset 0 0 0 3px #f6e2b2,inset 0 0 0 8px #9b6a3c,inset 0 0 0 11px #f2d8a1,inset 0 0 24px #80522b,0 12px 35px #0008}
@@ -19,3 +19,6 @@ html.todo-modal-open,body.todo-modal-open{overflow:hidden!important;overscroll-b
 .todo-task-text{font-family:inherit!important;font-style:normal!important}
 .todo-add input,.todo-add button,.todo-actions button,.todo-close,.todo-undo{touch-action:manipulation}
 @media(max-width:520px){.todo-panel{width:92vw;height:70dvh;padding:13px 10px 10px}.todo-heading{font-size:22px}.todo-scroll-content{height:calc(100% - 43px)}.todo-stat-line{font-size:12px}}
+
+/* S7.8 refinement: label is attached beneath the draggable parchment control. */
+.todo-fab{height:88px;display:flex;flex-direction:column;gap:0;overflow:visible;padding:4px 2px 2px}.todo-fab:before{inset:4px 5px 27px}.todo-fab-scroll{font-size:34px;line-height:1.05;display:block}.todo-fab-label{position:relative;z-index:2;display:block;white-space:nowrap;font-size:10px;line-height:1.1;color:#17110b;background:#e4c58a;border:1px solid #80552e;border-radius:2px;padding:2px 3px;margin-top:2px;text-shadow:none}.todo-fab.is-moving .todo-fab-label{background:#f0d7a0}@media(max-width:520px){.todo-fab{height:88px;width:78px}.todo-fab:before{inset:4px 5px 27px}}
