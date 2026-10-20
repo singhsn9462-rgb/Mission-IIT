@@ -1,13 +1,14 @@
-# StudyOrbit IIT S7.6 — Codebase & UI Map
+# StudyOrbit IIT S7.7 — Codebase & UI Map
 
-This map documents the available S7.5-based S7.6 source. It is a navigation guide, not a substitute for testing the live GitHub Pages deployment.
+This map documents the S7.7 source, built on the designated S7.6 Math Integrity Fix base. It is a navigation guide, not a substitute for testing the live GitHub Pages deployment.
 
 ## File responsibilities
 
 - `index.html`: static app shell, original chapter/stage engine, summary dashboard, original Chapter Plan / Integrated Question Bank / Daily Log containers, snapshot/restore card, header, inline styling, and Service Worker registration.
 - `studyorbit-features.js`: runtime enhancement layer. It preserves legacy QB/Daily Log DOM, injects dated practice forms and Leave/Testing/Analysis sections, loads/saves records through the existing tracker state, draws charts, and handles edit modes.
-- `studyorbit-features.css`: dynamic section/table/modal/chart styling, responsive layouts, and S7.5 Improvement Insights panel.
-- `sw.js`: PWA cache install, activation, and fetch behavior. Cache: `studyorbit-tracker-s76-fix1`.
+- `studyorbit-features.css`: dynamic section/table/modal/chart styling, responsive layouts, and Improvement Insights panel.
+- `studyorbit-todo.js` / `studyorbit-todo.css`: To-Do List tasks, carry-forward, history/statistics, floating control, and parchment-panel styles.
+- `sw.js`: PWA cache install, activation, and fetch behavior. Cache: `studyorbit-tracker-s77-todo1`.
 - `manifest.json`: app metadata, start URL, scope, display mode, theme, and icons.
 - `icon-192.png`, `icon-512.png`, `icon-512-maskable.png`: declared PWA icons.
 - `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png`: image assets referenced by the page/metadata.
@@ -47,7 +48,7 @@ At runtime, `studyorbit-features.js` inserts `#orbLeaveSection` before `#summary
 ## State and compatibility
 
 - Original tracker state remains under localStorage key `teraJEEAdvancedTracker_v3_51chapters`.
-- Feature records are stored under `state.orbit` (`daily`, `qb`, `rev`, `tests`, `leaves`, `start`).
+- Feature records are stored under `state.orbit` (`daily`, `qb`, `rev`, `tests`, `leaves`, `start`). To-Do data is stored under `state.todo` (`tasks`, `events`, `position`, transient `undo` snapshots).
 - `ensure()` supplies missing containers and normalizes legacy S7.5 test property names (`negative` → `negativeMarks`, `totalQ` → `totalQuestions`, including subject records) in memory. Existing values are preserved; normal persistence occurs through the existing save flow.
 - Optional percentile is stored separately from whether it was actually supplied. A blank percentile must not be interpreted as an observed percentile of zero.
 - Browser `localStorage` is device/browser-origin-specific. The Service Worker cache is separate from saved study data.
@@ -58,8 +59,8 @@ At runtime, `studyorbit-features.js` inserts `#orbLeaveSection` before `#summary
 
 ## Cache/link alignment
 
-- `index.html` loads `./studyorbit-features.js?v=7601` and `./studyorbit-features.css?v=7601`.
-- `sw.js` caches those exact versioned URLs in `CORE`.
+- `index.html` loads the feature and To-Do JavaScript/CSS assets with query version `v=7701`.
+- `sw.js` caches those exact versioned URLs in `CORE`; its cache name `studyorbit-tracker-s77-todo1` and UI model label are versioned for S7.7.
 - The HTML registers `./sw.js` with `updateViaCache: 'none'`.
 - Cache cleanup is scoped to names beginning `studyorbit-tracker-`; localStorage is not cleared by cache activation.
 
