@@ -8,7 +8,7 @@ This map documents the S7.8 source, following the corrected S7.7 codebase and re
 - `studyorbit-features.js`: runtime enhancement layer. It preserves legacy QB/Daily Log DOM, injects dated practice forms and Leave/Testing/Analysis sections, loads/saves records through the existing tracker state, draws charts, and handles edit modes.
 - `studyorbit-features.css`: dynamic section/table/modal/chart styling, responsive layouts, and Improvement Insights panel.
 - `studyorbit-todo.js` / `studyorbit-todo.css`: To-Do List tasks, carry-forward, history/statistics, floating control, and parchment-panel styles.
-- `sw.js`: PWA cache install, activation, and fetch behavior. Cache: `studyorbit-tracker-s78-todo1`.
+- `sw.js`: PWA cache install, activation, and fetch behavior. Cache: `studyorbit-tracker-s78-todo2`.
 - `manifest.json`: app metadata, start URL, scope, display mode, theme, and icons.
 - `icon-192.png`, `icon-512.png`, `icon-512-maskable.png`: declared PWA icons.
 - `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png`: image assets referenced by the page/metadata.
@@ -63,8 +63,8 @@ At runtime, `studyorbit-features.js` moves existing section nodes into this orde
 
 ## Cache/link alignment (S7.8)
 
-- `index.html` loads the feature and To-Do JavaScript/CSS assets with query version `v=7801`.
-- `sw.js` caches those exact versioned URLs in `CORE`; its cache name `studyorbit-tracker-s78-todo1` and UI model label are versioned for S7.8.
+- `index.html` loads the feature and To-Do JavaScript/CSS assets with query version `v=7802`.
+- `sw.js` caches those exact versioned URLs in `CORE`; its cache name `studyorbit-tracker-s78-todo2` and UI model label are versioned for S7.8.
 - The HTML registers `./sw.js` with `updateViaCache: 'none'`.
 - Cache cleanup is scoped to names beginning `studyorbit-tracker-`; localStorage is not cleared by cache activation.
 

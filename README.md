@@ -17,7 +17,7 @@ StudyOrbit IIT is a static, browser-based study tracker published through GitHub
 - Normalizes legacy S7.5 test record field names in memory so older saved test entries remain readable.
 - Fixes a startup-order bug where `testHTML` referenced `testSubjects` before initialization. That ReferenceError stopped `studyorbit-features.js` before it could inject Leave, Testing, and Analysis sections; the static old layout therefore remained visible under the new header.
 - Keeps saved-test edit/delete controls behind the existing settings-style toggle and uses the form for editing instead of sequential prompts.
-- Aligns the versioned JavaScript/CSS URLs with the Service Worker cache URLs (`v=7801`) and keeps cache cleanup scoped to StudyOrbit caches.
+- Aligns the versioned JavaScript/CSS URLs with the Service Worker cache URLs (`v=7802`) and keeps cache cleanup scoped to StudyOrbit caches.
 - Preserves S7.5's no-forced-reload behavior when a new Service Worker takes control.
 
 ## To-Do List and S7.8 refinements
@@ -27,14 +27,14 @@ StudyOrbit IIT is a static, browser-based study tracker published through GitHub
 - Saves task records and floating-button position in browser storage. The full JSON export/copy includes To-Do tasks, task-event history, and button position; restoring a backup rebinds the module to the restored state. Undo snapshots are intentionally transient and are not included in backups. This is browser/device-specific and does not automatically synchronize across devices.
 - The History drawer shows only completed task names and dates for the latest seven calendar days; event-type labels are excluded. Completion/deletion counts and rates are retained in aggregate data.
 - Regularity returns “Not enough data” until at least one task is completed or deleted. It uses bounded per-task scoring; deleted tasks receive a strong penalty plus a capped pending-delay penalty.
-- S7.8 restores the original section names except for the explicitly requested Daily Log heading, keeps the requested section order, adds the red glowing NOTE❗ divider box, and updates the visible model label plus Service Worker cache/versioned asset URLs to S7.8 (`v=7801`).
+- S7.8 restores the original section names except for the explicitly requested Daily Log heading, keeps the requested section order, adds the red glowing NOTE❗ divider box, and updates the visible model label plus Service Worker cache/versioned asset URLs to S7.8 (`v=7802`).
 
 ## Files
 
 - `index.html` — app shell, original chapter/stage engine, summary, static sections, service-worker registration, and model/creator header.
 - `studyorbit-features.js` — dynamically injects and operates Leave, date-based QB/Revision/Daily Log, Testing, Analysis, graphs, data tables, and saved-record editing.
 - `studyorbit-features.css` — feature section layout, responsive tables, modal, graph controls, and Improvement Insights styling.
-- `sw.js` — PWA cache install/activation/fetch behavior; cache name `studyorbit-tracker-s78-todo1`.
+- `sw.js` — PWA cache install/activation/fetch behavior; cache name `studyorbit-tracker-s78-todo2`.
 - `manifest.json` — app metadata and icon references.
 - `icon-192.png`, `icon-512.png`, `icon-512-maskable.png` — app icons.
 - `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png` — visual assets.
@@ -55,3 +55,5 @@ StudyOrbit IIT is a static, browser-based study tracker published through GitHub
 - ZIP integrity, JavaScript syntax (including inline scripts), manifest JSON, internal asset references, and versioned CSS/JS-to-Service-Worker URL alignment checked.
 - Simulated To-Do interactions passed for duplicate names, carry-forward, completion, deletion, Undo, persistence, and state rebinding after restore.
 - A headless Chromium DOM run timed out in this environment, so full end-to-end visual/mobile/offline browser testing is **not verified**.
+
+- S7.8 visual refinement: compacted the NOTE❗ divider box and message typography; separated the plain “To DO List” label below the floating parchment icon so the label and icon move as one control; Integrated Question Bank retains only the 🏅 emoji. Asset query version is `v=7802`.
