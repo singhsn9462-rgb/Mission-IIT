@@ -91,8 +91,6 @@
 .orbit-test-subject-table input{width:100%;min-width:0;box-sizing:border-box}
 @media(min-width:650px){.orbit-data-modal-card{width:78vw;padding:20px}}
 
-/* Preserved from S7.5: JEE Improvement Insights panel. */
-.orbit-insight-panel{margin:14px 0;padding:12px 14px;border:1px solid #6f8dc566;border-radius:12px;background:#101b2acc}.orbit-insight-panel h3{margin:0 0 8px;color:#c8ddff}.orbit-insight-panel ul{margin:7px 0;padding-left:22px}.orbit-insight-panel li{margin:5px 0;line-height:1.45}
 /* S7.8 NOTE divider: app-native font, normal weight, red glowing rectangular edge. */
 .orbit-managing-note{position:relative;box-sizing:border-box;width:calc(100% - 36px);max-width:640px;margin:16px auto 14px;padding:15px 10px 9px;border:2px solid #ff394d;border-radius:4px;background:linear-gradient(135deg,rgba(23,30,55,.97),rgba(12,21,40,.96));box-shadow:0 0 5px #ff394d,0 0 11px #ff394d77,inset 0 0 8px #ff394d1e;text-align:center;font-family:inherit;font-size:1em;font-weight:400;line-height:1.35;color:#ffd84a;}
 .orbit-managing-note-label{position:absolute;top:0;left:10px;transform:translateY(-55%);padding:0 6px;background:#151e35;color:#ff4659;font-family:inherit;font-size:.72em;font-weight:400;line-height:1.2;text-shadow:0 0 6px #ff394d99;white-space:nowrap;}
@@ -105,3 +103,9 @@
 .orbit-test-analysis-drawer{margin:10px 0}
 .orbit-test-analysis-drawer>.orbit-inside{padding:8px 10px}
 .orbit-test-analysis-drawer .orbit-graph{margin:10px 0}
+
+/* S7.9 focused Analysis category drawers. */
+.orbit-analysis-category{margin:12px 0;border-color:#8c7dde88;background:linear-gradient(140deg,#171d38,#111a30)}
+.orbit-analysis-category>summary{background:linear-gradient(100deg,#352b61,#253553 72%,#3b2c48);color:#f0e5ff;font-weight:750;font-size:14px}
+.orbit-analysis-category>.orbit-inside{padding:7px 10px 10px}
+.orbit-analysis-category .orbit-drawer{margin:9px 0}
