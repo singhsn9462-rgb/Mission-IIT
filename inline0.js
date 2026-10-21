@@ -100,7 +100,7 @@
 })();
 const CHAPTERS={
 'Maths':['RACE','Sets','Number System','Inequality & Modulus','FOA','Quadratic Equations','Logarithm','Sequence and Series','Compound Angle Trigo','SOT & FOG','Trigo Equations','Determinant','Straight Line (Co-Geo)','Circle','Parabola','Ellipse','Hyperbola','Binomial Theorem','P&C'],
-'Physics':['RACE','Mathematical Tools for Physics','Kinematics 1D','Kinematics 2D & Relative Motion','NLM','Circular Motion','WPE','COM','Rotation','Elasticity','Thermal Expansion','Calorimetry & Heat Transfer','NTG & Thermodynamics','Fluid Mechanics'],
+'Physics':['RACE','Mathematical Tools for Physics','Kinematics 1D','Kinematics 2D & Relative Motion','NLM','Circular Motion','WPE','COM','Rotation','Elasticity, Thermal Expansion & Calorimetry','KTG & Thermodynamics','Fluid Mechanics'],
 'Physical Chemistry':['RACE','Mole Concept','Concentration Terms','Redox','Ideal Gas','Real Gas','Atomic Structure','Chemical Equilibrium'],
 'Organic Chemistry':['RACE','GOC','Acidic & Basic Strength','Isomerism','IUPAC Naming & Common Names','Purification & Characterisation'],
 'Inorganic Chemistry':['RACE','Quantum Numbers','Periodic Table & Properties','Chemical Bonding-1'],
@@ -116,7 +116,7 @@ const TEST_STAGES=['PP(Allen)','PYP®','CLASS TEST','OTHER PHASE','DESIGNED'];
 const SUBJECTS=Object.keys(CHAPTERS);
 const STORE='teraJEEAdvancedTracker_v3_51chapters';
 const drawerNames=(subject)=>subject==='TEST'?['Current Chapter']:['Current Chapter','Backlog','Revision'];
-const NEW_CHAPTERS={'Maths':['Binomial Theorem','P&C'],'Physics':['Thermal Expansion','Calorimetry & Heat Transfer','NTG & Thermodynamics','Fluid Mechanics'],'Physical Chemistry':['Chemical Equilibrium']};
+const NEW_CHAPTERS={'Maths':['Binomial Theorem','P&C'],'Physics':['Elasticity, Thermal Expansion & Calorimetry','KTG & Thermodynamics','Fluid Mechanics'],'Physical Chemistry':['Chemical Equilibrium']};
 const chaptersFor=(subject,drawer)=>drawer==='Backlog'?CHAPTERS[subject].filter(c=>c!=='RACE'&&!(NEW_CHAPTERS[subject]||[]).includes(c)):CHAPTERS[subject];
 const stagesFor=(subject,chapter,drawer)=>{
  if(subject==='TEST')return TEST_STAGES;

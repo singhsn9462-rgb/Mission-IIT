@@ -1,5 +1,5 @@
 /* StudyOrbit IIT S7.9 — update-aware PWA cache. */
-const CACHE_NAME = 'studyorbit-tracker-s79-percentile-graph2';
+const CACHE_NAME = 'studyorbit-tracker-s79-percentile-graph3';
 const CACHE_PREFIX = 'studyorbit-tracker-';
 const CORE = [
   './',
