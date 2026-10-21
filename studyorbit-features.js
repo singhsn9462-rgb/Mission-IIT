@@ -48,7 +48,7 @@ const analysisHTML=`${select('Analysis Window','orbWindow',['All time','Last 7 d
 // Restore the updated S7.8 entry forms that are referenced by the handlers below.
 const qbSection=$('questionBankSection'),dailySection=$('dailyLogSection');
 const oldQB=document.createElement('div');oldQB.className='hidden';while(qbSection.children.length>1)oldQB.appendChild(qbSection.children[1]);qbSection.appendChild(oldQB);
-const legacyQB=document.createElement('details');legacyQB.className='orbit-drawer';legacyQB.innerHTML='<summary>Existing / legacy Question Bank records (preserved)</summary><p class="note">Older cumulative entries have no reliable practice dates. They remain editable and backed up here, but cannot be assigned to dated analytics without a date.</p>';oldQB.classList.remove('hidden');legacyQB.appendChild(oldQB);qbSection.appendChild(legacyQB);
+/* Legacy Question Bank UI removed as requested; stored records and data logic remain untouched. */
 const qbNew=document.createElement('div');qbNew.className='orbit-new-form';qbNew.innerHTML=stageHTML('orbQB');qbSection.appendChild(qbNew);
 qbNew.addEventListener('click',event=>{if(event.target.closest('input,select,button,a,summary'))return;const row=event.target.closest('.field');if(!row||!qbNew.contains(row))return;const control=row.querySelector('input:not([type=hidden]),select');if(!control||control.disabled||control.readOnly)return;control.focus({preventScroll:true});if(control.matches('select,input[type=date]')){try{control.showPicker?.()}catch(_){/* native picker not supported */}}});
 const oldDaily=document.createElement('div');oldDaily.className='hidden';while(dailySection.children.length>1)oldDaily.appendChild(dailySection.children[1]);dailySection.appendChild(oldDaily);
