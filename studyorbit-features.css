@@ -131,3 +131,34 @@ body.orbit-focus-active .photo-credit{display:none!important}
 .orb-test-select-drawer h3{margin:0 0 10px;font-size:15px;color:#f0e2bb}
 .orb-test-select-drawer .orbit-check{display:flex;gap:9px;align-items:flex-start;margin:8px 0;padding:7px 8px;border-radius:8px;background:#ffffff08}
 @media(max-width:560px){.orb-test-home{grid-template-columns:1fr;gap:8px}.orb-test-home-option{min-height:64px;padding:11px 12px}.orb-test-home-option span{font-size:12px}main.orbit-focus-mode>section.orbit-focused{padding-left:0;padding-right:0}}
+
+
+/* S7.9.3: focused navigation, clean section re-entry, and mobile field-label clarity. */
+.orbit-focus-nav{justify-content:flex-end!important;align-items:center!important;min-height:72px;padding:5px 4px 8px!important;background:linear-gradient(180deg,#071020fa 0%,#0b172bf0 84%,#0b172b00 100%)!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.orbit-focus-nav button{min-width:72px!important;gap:3px!important;padding:0 2px 3px!important}
+.orbit-focus-x{width:49px!important;height:49px!important;border:2px solid #71f4ff!important;border-radius:50%!important;background:linear-gradient(145deg,#173c58,#34245f)!important;color:#fff!important;font-size:31px!important;font-weight:800!important;box-shadow:0 0 0 2px #3eeaff26,0 0 13px #1dd9f7aa,0 0 25px #8c4dffaa!important;text-shadow:0 0 9px #ffffffb8}
+.orbit-focus-back-label{font-size:12px!important;font-weight:850!important;letter-spacing:.15px;color:#a8f8ff!important;text-shadow:0 0 8px #11d8f899}
+main.orbit-focus-mode>section.orbit-focused{overflow:visible!important;isolation:isolate;min-height:calc(100svh - 78px)!important;margin-top:0!important;padding-top:6px!important;animation:orbitFocusEnter .18s ease-out both}main.orbit-focus-mode>section.orbit-focused.orbit-focus-leaving{animation:orbitFocusExit .12s ease-in both!important}
+main.orbit-focus-mode>section.orbit-focused>h2,main.orbit-focus-mode>section.orbit-focused>.qb-title-row{position:sticky!important;top:78px!important;z-index:900!important;min-height:48px!important;display:flex!important;align-items:center!important;gap:10px!important;padding:10px 6px!important;margin:0 0 12px!important;border-radius:10px 10px 0 0!important;background:linear-gradient(110deg,#172b48f8,#17152ff7 62%,#282039f7)!important;border-bottom:1px solid #8deeff7a!important;box-shadow:0 7px 18px #0007,0 0 12px #31def71b!important;scroll-margin-top:86px!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+main.orbit-focus-mode>section.orbit-focused>.qb-title-row h2{min-width:0!important;flex:1 1 auto!important;overflow-wrap:anywhere;line-height:1.25!important}
+body.orbit-focus-active #todoFab{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+body.orbit-focus-active #todoOverlay{display:none!important}
+.orb-test-panel>.orb-test-back{display:flex!important;align-items:center;justify-content:center;float:none!important;width:max-content;max-width:100%;margin:0 0 10px auto!important;min-height:42px!important;padding:8px 13px!important;border:1px solid #65f3ff!important;border-radius:12px!important;background:linear-gradient(120deg,#152d4b,#342254)!important;color:#c9fbff!important;box-shadow:0 0 11px #1dd7f755,0 0 20px #ab63ff30!important}
+.orb-test-panel>h3{clear:both;padding-top:2px}
+/* Labels are deliberately distinct from input values across all tracker sections. */
+.field>label,.field label,.orbit-form-table th,.orbit-form-table th label,.orbit-data-table thead th{color:#fff0b8!important;font-size:13px!important;font-weight:800!important;line-height:1.4!important;letter-spacing:.18px!important;text-shadow:0 1px 5px #0008,0 0 8px #e6bc5b22!important}
+.field>label,.grid>.field>label{display:block;margin:0 0 7px!important;padding:2px 0!important}
+.orbit-form-table th{background:linear-gradient(110deg,#304b70,#263858)!important}
+.orbit-form-table th label{display:block;width:100%;overflow-wrap:anywhere}
+.orbit-form-table td input,.orbit-form-table td select,.orbit-form-table td textarea{min-height:40px}
+.orbit-drawer>summary,.drawerhead h3,.stage-menu>summary{font-weight:800!important;color:#f7e6b4!important;line-height:1.4!important}
+.orb-test-home-option strong{font-size:16px!important;color:#fff0ba!important;text-shadow:0 0 9px #d5aa4f25}
+.orb-test-home-option span{color:#e2eaf7!important;font-size:12px!important;line-height:1.45!important}
+@keyframes orbitFocusEnter{from{opacity:.78;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@keyframes orbitFocusExit{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(4px)}}
+@media(max-width:560px){.orbit-focus-nav{min-height:70px;padding-right:2px!important}.orbit-focus-x{width:47px!important;height:47px!important}main.orbit-focus-mode>section.orbit-focused{padding-left:0!important;padding-right:0!important}main.orbit-focus-mode>section.orbit-focused>h2,main.orbit-focus-mode>section.orbit-focused>.qb-title-row{top:76px!important;scroll-margin-top:83px!important}.field>label,.field label,.orbit-form-table th,.orbit-form-table th label{font-size:13px!important}.orb-test-panel>.orb-test-back{margin-right:0!important}}
+@media(prefers-reduced-motion:reduce){main.orbit-focus-mode>section.orbit-focused{animation:none!important}main.orbit-focus-mode>section.orbit-focused.orbit-focus-leaving{animation:none!important}}
+
+/* Keep focused mobile workspaces light: pause decoration and avoid costly live blur. */
+body.orbit-focus-active .symbol-rain .drop{animation-play-state:paused!important}
+.orbit-focus-nav,main.orbit-focus-mode>section.orbit-focused>h2,main.orbit-focus-mode>section.orbit-focused>.qb-title-row{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
