@@ -162,3 +162,15 @@ body.orbit-focus-active #todoOverlay{display:none!important}
 /* Keep focused mobile workspaces light: pause decoration and avoid costly live blur. */
 body.orbit-focus-active .symbol-rain .drop{animation-play-state:paused!important}
 .orbit-focus-nav,main.orbit-focus-mode>section.orbit-focused>h2,main.orbit-focus-mode>section.orbit-focused>.qb-title-row{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+
+/* S7.9.4: keep the section title and Back Home control together on the top row. */
+main.orbit-focus-mode>section.orbit-focused>h2,main.orbit-focus-mode>section.orbit-focused>.qb-title-row{top:0!important;scroll-margin-top:0!important;justify-content:space-between!important;align-items:center!important;min-height:58px!important;padding:6px 8px 6px 12px!important;margin:0 0 10px!important;border-radius:10px!important;}
+main.orbit-focus-mode>section.orbit-focused>.qb-title-row h2{flex:1 1 auto!important;min-width:0!important;}
+main.orbit-focus-mode .orbit-heading-with-back>#orbitBackHome{display:flex!important;position:static!important;flex:0 0 auto!important;align-items:center!important;justify-content:center!important;min-width:52px!important;width:52px!important;padding:0!important;margin-left:8px!important;background:transparent!important;border:0!important;}
+main.orbit-focus-mode .orbit-heading-with-back>#orbitBackHome .orbit-focus-back-label{display:none!important}
+main.orbit-focus-mode .orbit-heading-with-back>#orbitBackHome .orbit-focus-x{width:43px!important;height:43px!important;font-size:29px!important;}
+.orbit-focus-nav:not(.is-visible){display:none!important}
+#orbTestingSection .orb-test-back{position:sticky!important;top:64px!important;z-index:850!important;display:block!important;width:100%!important;text-align:left!important;margin:0 0 10px!important;padding:10px 12px!important;border:1px solid #57e8ff!important;border-radius:10px!important;background:linear-gradient(100deg,#142f4b,#282044)!important;color:#c8fbff!important;box-shadow:0 4px 12px #0005,0 0 10px #29dff733!important;}
+#orbTestingSection .orb-test-panel{overflow:visible!important}
+#orbTestingSection .orb-test-panel>h3{scroll-margin-top:125px!important}
+@media(max-width:560px){main.orbit-focus-mode>section.orbit-focused>h2,main.orbit-focus-mode>section.orbit-focused>.qb-title-row{top:0!important;padding:5px 6px 5px 10px!important;min-height:54px!important}main.orbit-focus-mode .orbit-heading-with-back>#orbitBackHome{width:46px!important;min-width:46px!important;margin-left:5px!important}main.orbit-focus-mode .orbit-heading-with-back>#orbitBackHome .orbit-focus-x{width:40px!important;height:40px!important}#orbTestingSection .orb-test-back{top:58px!important}}

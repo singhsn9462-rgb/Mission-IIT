@@ -1,0 +1,19 @@
+StudyOrbit IIT S7.9.4 — Changed files
+Base: StudyOrbit-IIT-S7.9.3-Neon-Navigation-Visibility-Fix.zip
+
+1. studyorbit-features.js
+   - Moves the Back Home control into the focused section heading row, aligned right.
+   - Makes section exit immediate (removes the artificial 120 ms exit delay).
+   - Changes the Testing panel's return-to-home scroll to instant rather than smooth scrolling.
+
+2. studyorbit-features.css
+   - Pins focused section heading at the very top.
+   - Styles the Back Home control at the right side of the heading.
+   - Keeps Back to Testing buttons sticky immediately below the heading while scrolling.
+   - Keeps focused layout lightweight by avoiding blur-dependent effects.
+
+3. sw.js
+   - Bumps cache name and feature JS/CSS cache query versions so updated files can load.
+
+Deleted files: None.
+Data schema / saved records: Not changed.

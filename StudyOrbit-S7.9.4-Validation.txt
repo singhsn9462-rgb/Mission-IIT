@@ -1,0 +1,19 @@
+StudyOrbit IIT S7.9.4 — Validation report
+
+Passed:
+- JavaScript syntax check: studyorbit-features.js
+- ZIP archive integrity test
+- Confirmed updated service-worker cache name and JS/CSS query versions
+- Confirmed only 3 existing application files are modified; no files deleted
+- Reviewed focused section heading/back-button DOM handling and sticky return buttons
+
+Not verified in this environment:
+- Full live GitHub Pages browser interaction
+- Android installed PWA visual/scroll test on a physical device
+- Real-world performance across low-memory devices
+
+Notes:
+- Back Home now sits in the focused section heading row, aligned right.
+- The section heading remains pinned at the top.
+- Back to Testing remains sticky directly below the section heading during scroll.
+- Exit no longer waits for an artificial 120 ms animation timer; section transitions prioritize responsiveness.
