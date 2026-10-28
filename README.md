@@ -1,6 +1,6 @@
-# StudyOrbit IIT — C 1.0 (Completed)
+# StudyOrbit IIT — C 1.1 (Completed)
 
-C 1.0 is the completed model based on the accepted S7.9.3 Summary Graph Fit-to-Screen build. The earlier S7.x release notes below are retained as historical lineage.
+C 1.1 is the completed model based on C 1.0, which was built on the accepted S7.9.3 Summary Graph Fit-to-Screen baseline. C 1.0 and S7.x notes below are retained as historical lineage.
 
 StudyOrbit IIT is a static, browser-based study tracker published through GitHub Pages and installable as a Progressive Web App (PWA). Study records are stored in browser `localStorage`; GitHub Pages does not sync them between devices.
 
@@ -8,7 +8,7 @@ StudyOrbit IIT is a static, browser-based study tracker published through GitHub
 
 - S7.8 is the next feature release after the corrected S7.7 codebase and retains the S7.6 Math Integrity Fix lineage.
 - Existing StudyOrbit sections and the S7.6 Testing/Analysis features are retained.
-- Historical S7.9 baseline note: S7.5 creator-credit styling/typography remained preserved and the label was then S7.9. The current C 1.0 visible label is updated in `index.html`.
+- Historical S7.9 baseline note: S7.5 creator-credit styling/typography remained preserved and the label was then S7.9. The current C 1.1 visible label is updated in `index.html`.
 
 ## Retained Testing/Analysis features and integration fixes
 
@@ -36,7 +36,7 @@ StudyOrbit IIT is a static, browser-based study tracker published through GitHub
 - `index.html` — app shell, original chapter/stage engine, summary, static sections, service-worker registration, and model/creator header.
 - `studyorbit-features.js` — dynamically injects and operates Leave, date-based QB/Revision/Daily Log, Testing, Analysis, graphs, data tables, and saved-record editing.
 - `studyorbit-features.css` — feature section layout, responsive tables, modal, graph controls, and Improvement Insights styling.
-- `sw.js` — PWA cache install/activation/fetch behavior; Current C 1.0 cache name: `studyorbit-tracker-c100-completed-1`; earlier S7.9/S7.8 names are historical lineage.
+- `sw.js` — PWA cache install/activation/fetch behavior; Current C 1.1 cache name: `studyorbit-tracker-c110-graph-interaction-1`; earlier S7.9/S7.8 names are historical lineage.
 - `manifest.json` — app metadata and icon references.
 - `icon-192.png`, `icon-512.png`, `icon-512-maskable.png` — app icons.
 - `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png` — visual assets.
@@ -71,7 +71,7 @@ StudyOrbit IIT is a static, browser-based study tracker published through GitHub
 - Startup audit note: the selected S7.8 archive was missing the S7.8-era dynamic QB/Daily form mounting, `makeSection`/`analysisHTML`, and Add Leave mounting code referenced elsewhere in the same script. These baseline connections were restored minimally so the existing sections and requested Testing features load; the later S7.9 focused-main-section redesign was not imported.
 
 
-## C 1.0 — requested tracker completion updates
+## C 1.0 — requested tracker completion updates (historical)
 
 - Summary chapter list: `☑` appears after completed chapter names only in the Total Chapters list; the Completed Chapters list shows `🔖 🎗` when that chapter's entire Revision stage set is complete. Chapter Plan lists show only `🎗` when all stages (including optional stages) are complete.
 - Summary sublabels are compacted to eligible stage ticks and recorded study-day count only.
@@ -80,8 +80,19 @@ StudyOrbit IIT is a static, browser-based study tracker published through GitHub
 - Chapter Plan drawers marked OFF are hidden and cannot be expanded or edited until switched ON.
 - Assets/Service Worker references use `v=c100`; cache is `studyorbit-tracker-c100-completed-1`.
 
-## C 1.0 deployment and verification notes
+## C 1.0 deployment and verification notes (historical)
 
 - Upload the ZIP's root files into the same GitHub Pages source directory, replacing matching files in place. No files were removed from the 20-file base package.
 - `inline0.js`–`inline3.js` are retained source/reference copies and are not loaded by the current HTML shell; `index.html` remains the active chapter engine and `studyorbit-features.js` the active injected Analysis/Leave/QB layer.
 - Static syntax, asset/cache version alignment, ZIP integrity and file-count checks are performed for this build. Live GitHub Pages/PWA visual behavior and on-device saved-data regression still require deployment testing.
+
+
+## C 1.1 — requested graph and test-analysis interaction updates
+
+- Test Analysis: choosing `Selected Tests` opens a page-style selection panel. Checkbox edits remain pending until `Yes Select`; the circular X closes without applying pending choices. The `Select Test` button remains available to reopen the panel.
+- `Marks & Accuracy (OVERALL)`: long per-test Out Of text was replaced with `Know more!`, opening a date/type/session table with Out Of and Scored columns. The Particular Test details table renames `% of overall obtained marks` to `Contribution in Total` and lightly highlights the Overall row.
+- All feature-analysis graph panels receive side-by-side `Open data table` and `Show Marking` controls. Show Marking allows per-series label selection and only commits after `Select`; closing/crossing cancels. Legend clicks hide/show lines without automatically adding labels.
+- Tapped data points on feature-analysis canvas graphs keep their numeric annotations until a tracker drawer/section changes. Summary Dashboard metric graph points similarly retain selected annotations for the lifetime of that graph modal. Transient markings are cleared on drawer/section transitions, not saved to tracker data.
+- Percentage-based table columns are normalized to display `%` on numeric readings when not already present. `Contribution in Total` is centered beneath its wrapped heading.
+- Feature asset query versions use `v=c110`; Service Worker cache name is `studyorbit-tracker-c110-graph-interaction-1`.
+- Static syntax, inventory, asset/cache alignment and archive checks are run for C 1.1. This environment may block browser-driven interaction, so real-device/GitHub Pages verification must be done after deployment.

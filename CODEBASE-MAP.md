@@ -1,6 +1,6 @@
-# StudyOrbit IIT C 1.0 — Codebase & UI Map
+# StudyOrbit IIT C 1.1 — Codebase & UI Map
 
-This map documents the completed C 1.0 model, based on the accepted S7.9.3 Summary Graph Fit-to-Screen build. S7.x details below are retained as historical lineage. It is a navigation guide, not a substitute for testing the live GitHub Pages deployment.
+This map documents completed C 1.1, based on C 1.0 and the accepted S7.9.3 Summary Graph Fit-to-Screen build. C 1.0 and S7.x details are retained as historical lineage. It is a navigation guide, not a substitute for testing the live GitHub Pages deployment.
 
 ## File responsibilities
 
@@ -8,7 +8,7 @@ This map documents the completed C 1.0 model, based on the accepted S7.9.3 Summa
 - `studyorbit-features.js`: runtime enhancement layer. It preserves legacy QB/Daily Log DOM, injects dated practice forms and Leave/Testing/Analysis sections, loads/saves records through the existing tracker state, draws charts, and handles edit modes.
 - `studyorbit-features.css`: dynamic section/table/modal/chart styling, responsive layouts, and Improvement Insights panel.
 - `studyorbit-todo.js` / `studyorbit-todo.css`: To-Do List tasks, carry-forward, history/statistics, floating control, and parchment-panel styles.
-- `sw.js`: PWA cache install, activation, and fetch behavior. Current cache: `studyorbit-tracker-c100-completed-1`.
+- `sw.js`: PWA cache install, activation, and fetch behavior. Current cache: `studyorbit-tracker-c110-graph-interaction-1`.
 - `manifest.json`: app metadata, start URL, scope, display mode, theme, and icons.
 - `icon-192.png`, `icon-512.png`, `icon-512-maskable.png`: declared PWA icons.
 - `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png`: image assets referenced by the page/metadata.
@@ -61,10 +61,10 @@ At runtime, `studyorbit-features.js` moves existing section nodes into this orde
 
 `testSubjects` must be declared **before** the `testHTML` template is evaluated because that template calls `testSubjects.map(...)`. A temporal-dead-zone `ReferenceError` here aborts the whole feature script before Leave, Testing, and Analysis are inserted. This was the cause of the new header appearing above the old static tracker layout.
 
-## Cache/link alignment (C 1.0)
+## Cache/link alignment (C 1.1)
 
-- `index.html` loads the changed feature JavaScript/CSS assets with `v=c100` for feature and To-Do JS/CSS assets.
-- `sw.js` caches the corresponding versioned URLs in `CORE`; its cache name is `studyorbit-tracker-c100-completed-1` and the UI model label is C 1.0.
+- `index.html` loads the changed feature JavaScript/CSS assets with `v=c110` for feature and To-Do JS/CSS assets.
+- `sw.js` caches the corresponding versioned URLs in `CORE`; its cache name is `studyorbit-tracker-c110-graph-interaction-1` and the UI model label is C 1.1.
 - The HTML registers `./sw.js` with `updateViaCache: 'none'`.
 - Cache cleanup is scoped to names beginning `studyorbit-tracker-`; localStorage is not cleared by cache activation.
 
@@ -86,7 +86,7 @@ At runtime, `studyorbit-features.js` moves existing section nodes into this orde
 - Startup wiring audit: restored the missing existing S7.8 dynamic entry-form mounting and generated-section helper because the supplied base ZIP referenced them but did not define/execute them. The focused-main-section navigation from the S7.9 reference package was not copied.
 
 
-## C 1.0 current behavior map
+## C 1.1 current behavior map
 
 - The summary's Total Chapters modal adds `☑` after completed chapter names only. The Completed Chapters modal adds `🔖 🎗` before a chapter only when every Revision stage, including its ribbon stages, is complete. Chapter Plan dropdowns show only `🎗` when all configured stages (including optional stages) are complete.
 - Study consistency is a damped running score, not a count of days above the mean. Its update is `score += 6 × tanh(1.25 × relativeDeviation)`, clamped to 0–100; overall scoring begins with a 4-hour reference, and average vacant-time penalties remain applied. Subject-level scoring starts from the first positive subject-study day at 100 and compares later days to that subject's previous mean.
@@ -94,3 +94,13 @@ At runtime, `studyorbit-features.js` moves existing section nodes into this orde
 - `#orbStudyCharts` contains an average/consistency line for Daily Study Hours and a table beneath Subject-wise Daily Study Hours. Each Speed & Accuracy graph has an adjacent table strip for accuracy and average time/question.
 - Leave Analysis displays the same From/To/Reason/Days entries held in `o.leaves`, matching My Leaves.
 - OFF Chapter Plan drawers are hidden and ignore edit events until switched ON.
+
+
+## C 1.1 additions
+
+- `studyorbit-features.js` renders the page-style Selected Tests panel, pending selection state, Know more! Out Of/Scored panel, and per-graph Show Marking modal.
+- Graph series selection controls only which series are drawn. Separate Show Marking selections control numeric labels. Tapped point annotations are temporary graph UI state stored on each canvas element (not in the tracker JSON), and `clearGraphTransientState()` clears them when graph drawers or sections transition.
+- Summary Dashboard metric graph annotations are managed by the local `pinnedMetricPoints` set and are discarded when that modal is removed.
+- `analysisTable()` and the table-normalization pass ensure numeric readings in percentage-labelled columns display `%`; this is presentation-only and does not alter stored numeric values.
+- Global modal close controls are enlarged while `orbit-focus` Back controls are deliberately untouched.
+- Current runtime query versions are `v=c110`; `inline0.js` and `inline3.js` remain retained reference copies and are not runtime entry points.

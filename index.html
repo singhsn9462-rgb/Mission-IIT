@@ -332,7 +332,7 @@ body .motivation-toast,body .note,body .status,body pre{font-weight:400!importan
 /* StudyOrbit IIT brand assets */
 .studyorbit-logo{display:block;width:min(140px,42vw);height:auto;max-height:150px;margin:0 auto 12px;object-fit:contain;position:relative;z-index:1}
 body:before{background-image:linear-gradient(180deg,rgba(4,9,20,.70),rgba(5,12,25,.82)),url("./studyorbit-background.png");background-size:cover;background-position:center;background-repeat:no-repeat}
-</style><link rel="stylesheet" href="./studyorbit-features.css?v=c100"><link rel="stylesheet" href="./studyorbit-todo.css?v=c100"><style id="orbit-architect-credit-style">
+</style><link rel="stylesheet" href="./studyorbit-features.css?v=c110"><link rel="stylesheet" href="./studyorbit-todo.css?v=c110"><style id="orbit-architect-credit-style">
 .orbit-architect-credit{position:relative;z-index:2;box-sizing:border-box;width:fit-content;max-width:100%;margin:13px auto 1px;padding:10px 17px;text-align:center;border:2px solid #f8c75b;border-radius:11px;background:rgba(6,15,34,.55);box-shadow:0 0 5px #ffcf64,0 0 14px #ffc24a88,inset 0 0 8px #e5b44b22;color:#d7ecf4;font-size:clamp(11px,2.7vw,14px);line-height:1.6;overflow-wrap:anywhere}.orbit-model-label{position:absolute;top:5px;right:5px;z-index:4;font-size:9px;line-height:1;color:#d7c9a3;opacity:.82;white-space:nowrap;pointer-events:none}.hero{position:relative}
 .orbit-architect-credit strong{font-weight:850!important;color:#e0f6ff!important;background:none!important;box-shadow:none!important;text-shadow:none!important}
 </style></head><body>
@@ -341,7 +341,7 @@ body:before{background-image:linear-gradient(180deg,rgba(4,9,20,.70),rgba(5,12,2
 <header class="hero">
 <img src="./studyorbit-logo.png" alt="StudyOrbit IIT logo" class="studyorbit-logo" width="140" onerror="this.hidden=true">
 <h1>StudyOrbit IIT</h1>
-<span class="orbit-model-label" aria-label="Model C 1.0">C 1.0</span><div class="orbit-architect-credit" aria-label="StudyOrbit IIT creator credit"><div>System Architect: <strong>SATYA SINGH</strong></div><div>Author Tag : <strong>singhsn9462</strong> , Age:<strong>16</strong></div><div>Developed by <strong>Passion</strong></div></div>
+<span class="orbit-model-label" aria-label="Model C 1.1">C 1.1</span><div class="orbit-architect-credit" aria-label="StudyOrbit IIT creator credit"><div>System Architect: <strong>SATYA SINGH</strong></div><div>Author Tag : <strong>singhsn9462</strong> , Age:<strong>16</strong></div><div>Developed by <strong>Passion</strong></div></div>
 </header>
 <section class="card" id="summary"><h2>📋🏷Summary dashboard<small class="summary-details-instruction">Tap on boxes for details</small></h2><div class="stats"><div class="stat"><span>Total Chapters</span><strong id="totalChapters">51</strong><small class="summary-tap-hint">🔍Tap to view</small></div><div class="stat"><span>Completed Chapters</span><strong id="completedCount">0</strong><small class="summary-tap-hint">🔍Tap to view</small></div><div class="stat"><span>Overall Progress</span><strong id="percent">0%</strong><small class="summary-tap-hint">🔍Tap to view</small></div></div><div class="bar"><div id="progressBar"></div></div><div class="small" id="distribution"></div><div class="stats" style="margin-top:14px"><div class="stat"><span>Avg. Study hr/Day</span><strong id="medianStudyHours">—</strong><small class="summary-tap-hint">🔍Tap to view</small></div><div class="stat"><span>Consistency Meter</span><strong id="consistencyPercent">—</strong><small class="summary-tap-hint">🔍Tap to view</small></div><div class="stat"><span>Avg. Vacant Time</span><strong id="vacantTimeAverage">—</strong><small class="summary-tap-hint">🔍Tap to view</small></div></div><div class="bar" aria-label="Consistency meter"><div id="consistencyBar" style="width:0%"></div></div><div class="small" id="studyMetricsHint">Log daily study time to start measuring consistency.</div></section>
 <section class="card accordion-section collapsed" id="chapterPlanSection"><h2 tabindex="0" role="button" aria-expanded="false">📑 Chapter plan</h2><div class="field"><label for="planSubject">Planning Subject</label><select id="planSubject"></select></div><p class="section-label"></p><div id="drawers"></div></section>
@@ -715,7 +715,7 @@ if("serviceWorker" in navigator){
   }).catch(error=>console.error("StudyOrbit service worker registration failed:",error));
  });
 }
-</script><script src="./studyorbit-features.js?v=c100"></script><script src="./studyorbit-todo.js?v=c100"></script><script>
+</script><script src="./studyorbit-features.js?v=c110"></script><script src="./studyorbit-todo.js?v=c110"></script><script>
 (()=>{'use strict';
  const completedCard=document.querySelector('#summary .stat:has(#completedCount)');
  const totalCard=document.querySelector('#summary .stat:has(#totalChapters)');
@@ -787,7 +787,7 @@ if("serviceWorker" in navigator){
   // Start in fit-to-screen mode: the complete timeline is visible without horizontal sliding.
   // Zoom-in may expand beyond the viewport; zoom-out returns only as far as this fitted baseline.
   const fitScale=Math.max(.001,Math.min(.65,(Math.max(240,chartScroll.clientWidth)-84)/(Math.max(1,data.length)*47)));
-  let scale=fitScale;
+  let scale=fitScale;const pinnedMetricPoints=new Set();
   function drawMetricChart(){
    const vals=data.map(p=>p.value).filter(Number.isFinite);
    if(!data.length){chart.innerHTML='<div class="orb-metric-empty">No dated records available yet.</div>';panel.querySelector('.orb-metric-summary').textContent='';panel.querySelectorAll('[data-metric-zoom]').forEach(b=>b.disabled=true);return}
@@ -809,9 +809,9 @@ if("serviceWorker" in navigator){
     for(let j=1;j<breaks.length;j++){const p1=breaks[j-1],p2=breaks[j],mid=(p1.v+p2.v)/2,xx1=x(i-1)+(x(i)-x(i-1))*p1.t,xx2=x(i-1)+(x(i)-x(i-1))*p2.t;svg+=`<path d="M ${xx1} ${y(p1.v)} L ${xx2} ${y(p2.v)}" fill="none" stroke="${colorFor(kind,mid)}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`}
    }
    const targetLabels=Math.max(4,Math.floor((W-L-R)/56)),labelEvery=Math.max(1,Math.ceil(data.length/targetLabels));
-   data.forEach((p,i)=>{const px=x(i),py=y(p.value),color=colorFor(kind,p.value),val=kind==='consistency'||kind==='progress'?nice(p.value)+'%':nice(p.value)+' h';svg+=`<circle cx="${px}" cy="${py}" r="3.7" fill="${color}" stroke="#10182a" stroke-width="1.3"><title>${p.date}: ${val}</title></circle>`;if(i%labelEvery===0||i===data.length-1){svg+=`<text x="${px}" y="${Math.max(T+11,py-8)}" text-anchor="middle" fill="${color}" font-size="10" font-weight="700">${kind==='consistency'||kind==='progress'?nice(p.value)+'%':nice(p.value)}</text>`;svg+=`<text x="${px}" y="${H-28}" text-anchor="middle" fill="#cbd8e9" font-size="10">${p.date.slice(5)}</text>`}});
+   data.forEach((p,i)=>{const px=x(i),py=y(p.value),color=colorFor(kind,p.value),val=kind==='consistency'||kind==='progress'?nice(p.value)+'%':nice(p.value)+' h';svg+=`<circle cx="${px}" cy="${py}" r="12" data-metric-point="${i}" tabindex="0" role="button" aria-label="Show ${p.date} value ${val}" style="cursor:pointer" fill="${color}" fill-opacity="0.001" stroke="transparent"><title>${p.date}: ${val}</title></circle><circle cx="${px}" cy="${py}" r="3.7" pointer-events="none" fill="${color}" stroke="#10182a" stroke-width="1.3"/>`;if(i%labelEvery===0||i===data.length-1){svg+=`<text x="${px}" y="${Math.max(T+11,py-8)}" text-anchor="middle" fill="${color}" font-size="10" font-weight="700">${kind==='consistency'||kind==='progress'?nice(p.value)+'%':nice(p.value)}</text>`;svg+=`<text x="${px}" y="${H-28}" text-anchor="middle" fill="#cbd8e9" font-size="10">${p.date.slice(5)}</text>`}if(pinnedMetricPoints.has(i)){const shown=kind==='consistency'||kind==='progress'?nice(p.value)+'%':nice(p.value)+' h';const boxW=shown.length*6.3+10,boxY=Math.max(T+12,py-24);svg+=`<rect x="${px-boxW/2}" y="${boxY-11}" width="${boxW}" height="16" rx="4" fill="#071322" stroke="${color}" stroke-width=".8"/><text x="${px}" y="${boxY}" text-anchor="middle" fill="${color}" font-size="11" font-weight="800">${shown}</text>`}});
    svg+=`<text x="${L+iw/2}" y="${H-7}" text-anchor="middle" fill="#d9e7f4" font-size="12">Time (Date)</text></svg>`;
-   chart.innerHTML=svg;
+   chart.innerHTML=svg;chart.querySelectorAll('[data-metric-point]').forEach(point=>{const show=()=>{pinnedMetricPoints.add(Number(point.dataset.metricPoint));drawMetricChart()};point.addEventListener('click',show);point.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();show()}})});
    const last=data[data.length-1];panel.querySelector('.orb-metric-summary').textContent=`${data.length===1?'Current snapshot':data.length+' recorded days'} · Latest: ${last.value.toFixed(2)}${meta.unit==='%'?'%':' h'}${last.date?' · '+last.date:''}`;
   }
   drawMetricChart();

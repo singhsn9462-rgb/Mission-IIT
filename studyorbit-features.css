@@ -177,9 +177,46 @@ main.orbit-focus-mode .orbit-focus-heading-row>#orbitBackHome .orbit-focus-back-
 @media(max-width:560px){main.orbit-focus-mode>section.orbit-focused>.orbit-focus-heading-row{min-height:68px!important;padding:4px 5px!important;gap:4px!important}main.orbit-focus-mode .orbit-focus-heading-row>#orbitBackHome{flex-basis:58px!important;width:58px!important;min-width:58px!important;min-height:58px!important}main.orbit-focus-mode .orbit-focus-heading-row>#orbitBackHome .orbit-focus-x{width:42px!important;height:42px!important;font-size:27px!important}main.orbit-focus-mode .orbit-focus-heading-row>#orbitBackHome .orbit-focus-back-label{font-size:9px!important}#orbTestingSection .orb-test-back{top:72px!important}}
 
 
-/* C 1.0: compact table strips directly below study and speed/accuracy graphs. */
+/* C 1.1: responsive graph controls, modal selectors and explicit percentage values. */
 .orbit-study-summary-strip,.orbit-graph-summary-strip{margin-top:8px;margin-bottom:12px}
 .orbit-study-summary-strip .orbit-data-table,.orbit-graph-summary-strip .orbit-data-table{margin-top:0;font-size:12px}
 .orbit-study-summary-strip .orbit-data-table th,.orbit-study-summary-strip .orbit-data-table td,.orbit-graph-summary-strip .orbit-data-table th,.orbit-graph-summary-strip .orbit-data-table td{padding:7px 8px;white-space:nowrap}
 .orbit-study-summary-strip .orbit-data-table th,.orbit-graph-summary-strip .orbit-data-table th{font-size:11px}
 @media(max-width:560px){.orbit-study-summary-strip,.orbit-graph-summary-strip{max-width:100%;overflow-x:auto}}
+
+
+/* C 1.1: full-page list panels and graph interaction controls. */
+.orbit-graph-controls{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:nowrap;width:100%;margin:8px auto 2px}
+.orbit-graph-controls button{flex:1 1 0;max-width:230px;min-width:0;box-sizing:border-box;min-height:36px;padding:6px 10px;font-size:12px;white-space:nowrap}
+.orbit-graph-controls .orbit-open-table{display:block;margin:0}
+.orbit-show-marking{border:1px solid #d4b66c!important;border-radius:9px!important;background:linear-gradient(135deg,#273653,#312644)!important;color:#fff0bb!important}
+.orbit-page-modal{position:fixed;inset:0;z-index:12000;display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box;background:rgba(2,7,18,.84);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.orbit-page-modal[hidden]{display:none!important}
+.orbit-page-panel{position:relative;display:flex;flex-direction:column;box-sizing:border-box;width:min(94vw,720px);height:min(86vh,780px);min-height:260px;max-height:90vh;padding:16px 13px 12px;overflow:hidden;border:1px solid #e2c575;border-radius:16px;background:linear-gradient(150deg,#16233b,#0b1227);color:#edf5ff;box-shadow:0 0 26px #cda85a45}
+.orbit-page-panel h3{flex:0 0 auto;margin:2px 80px 12px 0;color:#f4e0ad;font-size:16px;line-height:1.3}
+.orbit-page-close-wrap{position:absolute;top:8px;right:8px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:1px;min-width:44px;color:#d7e8f4;font-size:10px;line-height:1.1}
+.orbit-page-close{display:grid;place-items:center;width:46px;height:46px;min-height:46px;padding:0;border:1.5px solid #71f4ff;border-radius:50%;background:linear-gradient(145deg,#173c58,#34245f);color:#fff;font-size:29px;font-weight:800;line-height:1;box-shadow:0 0 0 2px #3eeaff1c,0 0 12px #1dd9f777}
+.orbit-page-scroll{flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;padding:2px 1px 10px}
+.orbit-page-scroll .orbit-check{display:flex;align-items:flex-start;gap:10px;margin:7px 0;padding:11px 9px;border:1px solid #ffffff12;border-radius:9px;background:#ffffff08;color:#eef4ff;line-height:1.45}
+.orbit-page-scroll .orbit-check input{flex:0 0 auto;margin-top:3px;transform:scale(1.15)}
+.orbit-page-footer{flex:0 0 auto;display:flex;justify-content:flex-end;align-items:center;margin-top:7px;padding:11px 2px 0;border-top:1px solid #d9c07866}
+.orbit-page-footer button{min-width:118px;min-height:42px}
+.orbit-marking-options{display:flex;flex-direction:column;gap:7px}
+.orbit-marking-option{display:grid;grid-template-columns:14px minmax(0,1fr) 24px;align-items:center;gap:10px;padding:10px 9px;border:1px solid #ffffff16;border-radius:9px;background:#ffffff08;color:#eff5ff}
+.orbit-marking-swatch{display:block;width:12px;height:12px;border-radius:50%;box-shadow:0 0 0 1px #ffffff55}
+.orbit-marking-option input{width:18px;height:18px;justify-self:center}
+.orbit-page-table .orbit-data-table{margin:0;width:100%}
+.orbit-page-table .orbit-data-table th,.orbit-page-table .orbit-data-table td{padding:10px 8px;white-space:normal}
+.orbit-data-table th.orbit-contribution-header{width:108px;min-width:98px;max-width:115px;text-align:center;white-space:normal;line-height:1.25;overflow-wrap:anywhere;vertical-align:middle}
+.orbit-data-table td.orbit-contribution-cell{text-align:center;vertical-align:middle;white-space:normal;overflow-wrap:anywhere}
+.orbit-data-table tr.orbit-overall-row td{background:rgba(250,211,100,.09)}
+.orbit-data-table tr.orbit-overall-row td.orbit-overall-cell{background:rgba(250,211,100,.19);color:#fff0b8;font-weight:800}
+.orb-test-select-modal .orbit-page-panel{width:min(94vw,600px)}
+.orbit-outof-values{display:flex;justify-content:flex-end;margin:4px 0 10px}
+.orbit-know-more{min-height:34px;padding:6px 14px;font-size:12px}
+/* Increase all tracker modal/list close circles by approximately 1.2x; section Back buttons are untouched. */
+.orbit-data-modal-close,.orbit-text-modal-close{width:46px;height:46px;min-height:46px;font-size:31px}
+.orb-completed-close{width:36px;height:36px;font-size:24px}
+@media(max-width:520px){.orbit-graph-controls{gap:7px}.orbit-graph-controls button{font-size:11px;padding:6px 5px}.orbit-page-panel{width:96vw;height:88vh;padding:14px 10px 10px}.orbit-page-panel h3{font-size:15px}.orbit-page-close{width:42px;height:42px;min-height:42px;font-size:27px}.orbit-data-table th.orbit-contribution-header{width:92px;min-width:88px;max-width:98px}}
+
+body.orbit-page-modal-open{overflow:hidden!important}
