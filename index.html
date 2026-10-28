@@ -332,7 +332,7 @@ body .motivation-toast,body .note,body .status,body pre{font-weight:400!importan
 /* StudyOrbit IIT brand assets */
 .studyorbit-logo{display:block;width:min(140px,42vw);height:auto;max-height:150px;margin:0 auto 12px;object-fit:contain;position:relative;z-index:1}
 body:before{background-image:linear-gradient(180deg,rgba(4,9,20,.70),rgba(5,12,25,.82)),url("./studyorbit-background.png");background-size:cover;background-position:center;background-repeat:no-repeat}
-</style><link rel="stylesheet" href="./studyorbit-features.css?v=7933"><link rel="stylesheet" href="./studyorbit-todo.css?v=7802"><style id="orbit-architect-credit-style">
+</style><link rel="stylesheet" href="./studyorbit-features.css?v=c100"><link rel="stylesheet" href="./studyorbit-todo.css?v=c100"><style id="orbit-architect-credit-style">
 .orbit-architect-credit{position:relative;z-index:2;box-sizing:border-box;width:fit-content;max-width:100%;margin:13px auto 1px;padding:10px 17px;text-align:center;border:2px solid #f8c75b;border-radius:11px;background:rgba(6,15,34,.55);box-shadow:0 0 5px #ffcf64,0 0 14px #ffc24a88,inset 0 0 8px #e5b44b22;color:#d7ecf4;font-size:clamp(11px,2.7vw,14px);line-height:1.6;overflow-wrap:anywhere}.orbit-model-label{position:absolute;top:5px;right:5px;z-index:4;font-size:9px;line-height:1;color:#d7c9a3;opacity:.82;white-space:nowrap;pointer-events:none}.hero{position:relative}
 .orbit-architect-credit strong{font-weight:850!important;color:#e0f6ff!important;background:none!important;box-shadow:none!important;text-shadow:none!important}
 </style></head><body>
@@ -341,7 +341,7 @@ body:before{background-image:linear-gradient(180deg,rgba(4,9,20,.70),rgba(5,12,2
 <header class="hero">
 <img src="./studyorbit-logo.png" alt="StudyOrbit IIT logo" class="studyorbit-logo" width="140" onerror="this.hidden=true">
 <h1>StudyOrbit IIT</h1>
-<span class="orbit-model-label" aria-label="Model S7.9">S7.9</span><div class="orbit-architect-credit" aria-label="StudyOrbit IIT creator credit"><div>System Architect: <strong>SATYA SINGH</strong></div><div>Author Tag : <strong>singhsn9462</strong> , Age:<strong>16</strong></div><div>Developed by <strong>Passion</strong></div></div>
+<span class="orbit-model-label" aria-label="Model C 1.0">C 1.0</span><div class="orbit-architect-credit" aria-label="StudyOrbit IIT creator credit"><div>System Architect: <strong>SATYA SINGH</strong></div><div>Author Tag : <strong>singhsn9462</strong> , Age:<strong>16</strong></div><div>Developed by <strong>Passion</strong></div></div>
 </header>
 <section class="card" id="summary"><h2>📋🏷Summary dashboard<small class="summary-details-instruction">Tap on boxes for details</small></h2><div class="stats"><div class="stat"><span>Total Chapters</span><strong id="totalChapters">51</strong><small class="summary-tap-hint">🔍Tap to view</small></div><div class="stat"><span>Completed Chapters</span><strong id="completedCount">0</strong><small class="summary-tap-hint">🔍Tap to view</small></div><div class="stat"><span>Overall Progress</span><strong id="percent">0%</strong><small class="summary-tap-hint">🔍Tap to view</small></div></div><div class="bar"><div id="progressBar"></div></div><div class="small" id="distribution"></div><div class="stats" style="margin-top:14px"><div class="stat"><span>Avg. Study hr/Day</span><strong id="medianStudyHours">—</strong><small class="summary-tap-hint">🔍Tap to view</small></div><div class="stat"><span>Consistency Meter</span><strong id="consistencyPercent">—</strong><small class="summary-tap-hint">🔍Tap to view</small></div><div class="stat"><span>Avg. Vacant Time</span><strong id="vacantTimeAverage">—</strong><small class="summary-tap-hint">🔍Tap to view</small></div></div><div class="bar" aria-label="Consistency meter"><div id="consistencyBar" style="width:0%"></div></div><div class="small" id="studyMetricsHint">Log daily study time to start measuring consistency.</div></section>
 <section class="card accordion-section collapsed" id="chapterPlanSection"><h2 tabindex="0" role="button" aria-expanded="false">📑 Chapter plan</h2><div class="field"><label for="planSubject">Planning Subject</label><select id="planSubject"></select></div><p class="section-label"></p><div id="drawers"></div></section>
@@ -548,7 +548,7 @@ function studyRecords(){
 }
 function consistencyTrend(records){
  let score=100;const prior=[];const out=[];
- for(const item of records){const hours=Math.max(0,Number(item.hours)||0);const reference=prior.length?prior.reduce((sum,v)=>sum+v,0)/prior.length:4;const scale=Math.max(reference,1);const relative=(hours-reference)/scale;score=Math.max(0,Math.min(100,score+12*Math.tanh(2*relative)));out.push({date:item.date,hours,reference,score});prior.push(hours)}
+ for(const item of records){const hours=Math.max(0,Number(item.hours)||0);const reference=prior.length?prior.reduce((sum,v)=>sum+v,0)/prior.length:4;const scale=Math.max(reference,1);const relative=(hours-reference)/scale;/* Cap each recorded-day adjustment to 6 points to reduce one-day volatility. */score=Math.max(0,Math.min(100,score+6*Math.tanh(1.25*relative)));out.push({date:item.date,hours,reference,score});prior.push(hours)}
  return out;
 }
 function renderSummary(){
@@ -568,14 +568,14 @@ function renderSummary(){
  const progressDate=localISODate(),progressSnapshot=Number(p.toFixed(1));
  if(state.orbit.progressHistory[progressDate]!==progressSnapshot){state.orbit.progressHistory[progressDate]=progressSnapshot;try{localStorage.setItem(STORE,JSON.stringify(state))}catch(_){}}
  el('percent').textContent=p.toFixed(1)+'%';el('progressBar').style.width=p+'%';
- el('distribution').textContent=`${doneStages} / ${totalStages} eligible stage ticks · Current + Backlog shared · TEST, Revision & subject-specific optional stages excluded`;
+ el('distribution').textContent=`${doneStages} / ${totalStages} eligible stage ticks`;
  const records=studyRecords();
- if(!records.length){el('medianStudyHours').textContent='—';el('consistencyPercent').textContent='100.0%';el('consistencyBar').style.width='100%';el('studyMetricsHint').textContent='Starts at 100% before the first study record · first recorded day is compared with a 4 h reference';return}
+ if(!records.length){el('medianStudyHours').textContent='—';el('consistencyPercent').textContent='100.0%';el('consistencyBar').style.width='100%';el('studyMetricsHint').textContent='0 recorded study days';return}
  const days=records.map(x=>x.hours),ordered=[...days].sort((a,b)=>a-b),middle=Math.floor(ordered.length/2),median=ordered.length%2?ordered[middle]:(ordered[middle-1]+ordered[middle])/2;
  const mean=days.reduce((a,b)=>a+b,0)/days.length;
  const trend=consistencyTrend(records);let consistency=trend.length?trend[trend.length-1].score:100;const dailyMap=state.orbit?.daily||{};const vacantPenalty=records.reduce((sum,r)=>{const vacant=Math.max(0,Number(dailyMap[r.date]?.vacantTime)||0),study=Math.max(0,Number(r.hours)||0);if(vacant<=study*.25)return sum;if(study===0)return sum+50;const ratio=vacant/study;const excess=Math.max(0,(ratio-.25)/(2-.25));return sum+50*Math.min(1,Math.pow(excess,1.5))},0)/Math.max(1,records.length);consistency=Math.max(0,consistency-vacantPenalty);
  el('medianStudyHours').textContent=mean.toFixed(2)+' h';el('consistencyPercent').textContent=consistency.toFixed(1)+'%';el('consistencyBar').style.width=consistency+'%';
- el('studyMetricsHint').textContent=`${records.length} recorded study day${records.length===1?'':'s'} · compares each day with the previous recorded average (first reference: 4 h)`;
+ el('studyMetricsHint').textContent=`${records.length} recorded study day${records.length===1?'':'s'}`;
 }
 function premiumTintWords(root){ /* Deliberately disabled: consistent text hierarchy. */ }
 
@@ -597,13 +597,13 @@ function renderDrawers(){
   const cDone=completionInfo(subject,d.chapter,name).complete;
   const sDone=!!state.stageStatus[stageKey(subject,d.chapter,d.stage,name)] || (name==='Backlog' && !!state.stageStatus[stageKey(subject,d.chapter,d.stage,'Current Chapter')]) || (name==='Current Chapter' && !!state.stageStatus[stageKey(subject,d.chapter,d.stage,'Backlog')]);
   const wrap=document.createElement('div');wrap.className='drawer';wrap.dataset.drawer=name;
-  wrap.innerHTML=`<div class="drawerhead"><div class="row" style="justify-content:flex-start"><button data-action="collapse" data-name="${name}" aria-expanded="${d.open}">${d.open?'▾':'▸'}</button><h3>${name}</h3></div><button data-action="toggle" data-name="${name}" aria-pressed="${d.on}">${d.on?'ON':'OFF'}</button></div><div class="drawerbody ${d.on?'':'off'} ${d.open?'':'hidden'}"><div class="field"><label>Chapter</label><select data-role="chapter" data-name="${name}">${chapters.map(c=>`<option value="${c}" ${c===d.chapter?'selected':''}>${completionInfo(subject,c,name).complete ? (name==='Revision'?'🔖🔖 ':name==='Backlog'?'🛡️ ':'🔖 ') : ''}${completionInfo(subject,c,name).ribbon?'🎗 ':''}${c}</option>`).join('')}</select></div><div class="check"><input type="checkbox" data-role="chapterDone" data-name="${name}" ${cDone?'checked':''}><label class="${cDone?'strike':''}">Chapter completed ${completionInfo(subject,d.chapter,name).ribbon?'🎗':''}</label></div><div class="field stage-picker"><label>Current Stage · tap a stage to select it, tick its box to complete</label><details class="stage-menu"><summary><span>${stageDisplay(d.stage,name)}</span><span class="stage-caret">▾</span></summary><div class="stage-options">${availableStages.map(st=>{const done=!!state.stageStatus[stageKey(subject,d.chapter,st,name)] || ((name==='Current Chapter'||name==='Backlog') && !!state.stageStatus[stageKey(subject,d.chapter,st,name==='Current Chapter'?'Backlog':'Current Chapter')]);return `<div class="stage-option ${st===d.stage?'selected':''}"><input type="checkbox" aria-label="Mark ${st} completed" data-role="stageItemDone" data-name="${name}" data-stage-value="${st.replace(/&/g,'&amp;').replace(/"/g,'&quot;')}" ${done?'checked':''}><button type="button" data-action="select-stage" data-name="${name}" data-stage-value="${st.replace(/&/g,'&amp;').replace(/"/g,'&quot;')}" class="stage-choice ${done?'strike':''}">${stageDisplay(st,name)}${st===d.stage?' <span class="current-tag">CURRENT</span>':''}</button></div>`}).join('')}</div></details></div></div>`;
+  wrap.innerHTML=`<div class="drawerhead"><div class="row" style="justify-content:flex-start"><button data-action="collapse" data-name="${name}" aria-expanded="${d.on&&d.open}" ${d.on?'':'disabled'}>${d.on&&d.open?'▾':'▸'}</button><h3>${name}</h3></div><button data-action="toggle" data-name="${name}" aria-pressed="${d.on}">${d.on?'ON':'OFF'}</button></div><div class="drawerbody ${d.on?'':'off'} ${d.on&&d.open?'':'hidden'}"><div class="field"><label>Chapter</label><select data-role="chapter" data-name="${name}">${chapters.map(c=>`<option value="${c}" ${c===d.chapter?'selected':''}>${completionInfo(subject,c,name).ribbon?'🎗 ':completionInfo(subject,c,name).complete ? (name==='Revision'?'🔖🔖 ':name==='Backlog'?'🛡️ ':'🔖 ') : ''}${c}</option>`).join('')}</select></div><div class="check"><input type="checkbox" data-role="chapterDone" data-name="${name}" ${cDone?'checked':''}><label class="${cDone?'strike':''}">Chapter completed ${completionInfo(subject,d.chapter,name).ribbon?'🎗':''}</label></div><div class="field stage-picker"><label>Current Stage · tap a stage to select it, tick its box to complete</label><details class="stage-menu"><summary><span>${stageDisplay(d.stage,name)}</span><span class="stage-caret">▾</span></summary><div class="stage-options">${availableStages.map(st=>{const done=!!state.stageStatus[stageKey(subject,d.chapter,st,name)] || ((name==='Current Chapter'||name==='Backlog') && !!state.stageStatus[stageKey(subject,d.chapter,st,name==='Current Chapter'?'Backlog':'Current Chapter')]);return `<div class="stage-option ${st===d.stage?'selected':''}"><input type="checkbox" aria-label="Mark ${st} completed" data-role="stageItemDone" data-name="${name}" data-stage-value="${st.replace(/&/g,'&amp;').replace(/"/g,'&quot;')}" ${done?'checked':''}><button type="button" data-action="select-stage" data-name="${name}" data-stage-value="${st.replace(/&/g,'&amp;').replace(/"/g,'&quot;')}" class="stage-choice ${done?'strike':''}">${stageDisplay(st,name)}${st===d.stage?' <span class="current-tag">CURRENT</span>':''}</button></div>`}).join('')}</div></details></div></div>`;
   host.appendChild(wrap);
   const previous=menuStates.get(name);
   if(previous){
    const menu=wrap.querySelector('.stage-menu');
-   menu.open=previous.open;
-   if(previous.open)menu.querySelector('.stage-options').scrollTop=previous.scrollTop;
+   menu.open=d.on&&previous.open;
+   if(d.on&&previous.open)menu.querySelector('.stage-options').scrollTop=previous.scrollTop;
   }
  }
  premiumTintWords(host);
@@ -634,7 +634,7 @@ function celebrateCompletion(target){
  }
 }
 function redraw(){renderSummary();renderDrawers();persist()}
-el('planSubject').addEventListener('change',()=>{state.planSubject=el('planSubject').value;state.drawers=activeDrawers();renderDrawers();persist()});el('drawers').addEventListener('click',e=>{let b=e.target.closest('button[data-action]');if(!b)return;if(b.dataset.action==='select-stage'){const name=b.dataset.name,d=activeDrawers()[name];d.stage=b.dataset.stageValue;renderDrawers();const drawerEl=Array.from(el('drawers').querySelectorAll('.drawer')).find(x=>x.dataset.drawer===name);const menu=drawerEl?.querySelector('.stage-menu');if(menu)menu.open=true;persist();return}const d=activeDrawers()[b.dataset.name];if(b.dataset.action==='toggle')d.on=!d.on;else d.open=!d.open;redraw()});el('drawers').addEventListener('change',e=>{let role=e.target.dataset.role,name=e.target.dataset.name;if(!role)return;let d=activeDrawers()[name],subject=el('planSubject').value;if(role==='chapter'){d.chapter=e.target.value;const opts=stagesFor(subject,d.chapter,name);if(!opts.includes(d.stage))d.stage=opts[0];renderDrawers()}else if(role==='stage'){d.stage=e.target.value;renderDrawers()}else if(role==='chapterDone'){
+el('planSubject').addEventListener('change',()=>{state.planSubject=el('planSubject').value;state.drawers=activeDrawers();renderDrawers();persist()});el('drawers').addEventListener('click',e=>{let b=e.target.closest('button[data-action]');if(!b)return;if(b.dataset.action==='select-stage'){const name=b.dataset.name,d=activeDrawers()[name];if(!d||!d.on)return;d.stage=b.dataset.stageValue;renderDrawers();const drawerEl=Array.from(el('drawers').querySelectorAll('.drawer')).find(x=>x.dataset.drawer===name);const menu=drawerEl?.querySelector('.stage-menu');if(menu)menu.open=true;persist();return}const d=activeDrawers()[b.dataset.name];if(b.dataset.action==='toggle'){d.on=!d.on;if(!d.on)d.open=false;}else{if(!d.on){d.open=false;redraw();return;}d.open=!d.open;}redraw()});el('drawers').addEventListener('change',e=>{let role=e.target.dataset.role,name=e.target.dataset.name;if(!role)return;let d=activeDrawers()[name],subject=el('planSubject').value;if(!d||!d.on)return;if(role==='chapter'){d.chapter=e.target.value;const opts=stagesFor(subject,d.chapter,name);if(!opts.includes(d.stage))d.stage=opts[0];renderDrawers()}else if(role==='stage'){d.stage=e.target.value;renderDrawers()}else if(role==='chapterDone'){
  const done=e.target.checked;
  if(subject==='TEST')state.chapterStatus[chapterKey(subject,d.chapter,name)]=done;
  else {
@@ -715,7 +715,7 @@ if("serviceWorker" in navigator){
   }).catch(error=>console.error("StudyOrbit service worker registration failed:",error));
  });
 }
-</script><script src="./studyorbit-features.js?v=7933"></script><script src="./studyorbit-todo.js?v=7802"></script><script>
+</script><script src="./studyorbit-features.js?v=c100"></script><script src="./studyorbit-todo.js?v=c100"></script><script>
 (()=>{'use strict';
  const completedCard=document.querySelector('#summary .stat:has(#completedCount)');
  const totalCard=document.querySelector('#summary .stat:has(#totalChapters)');
@@ -739,7 +739,7 @@ if("serviceWorker" in navigator){
     if(!chapters.length)continue;any=true;
     const h4=document.createElement('h4');h4.textContent=subject+' ('+chapters.length+')';content.appendChild(h4);
     const ul=document.createElement('ul');
-    for(const chapter of chapters){const li=document.createElement('li');li.textContent=(isChapterDone(subject,chapter)?'✅ ':'')+chapter;ul.appendChild(li)}
+    for(const chapter of chapters){const li=document.createElement('li');const revisionComplete=completionInfo(subject,chapter,'Revision').ribbon;li.textContent=onlyCompleted?(revisionComplete?'🔖 🎗 '+chapter:chapter):(isChapterDone(subject,chapter)?chapter+' ☑':chapter);ul.appendChild(li)}
     content.appendChild(ul);
    }
    if(!any)content.textContent=onlyCompleted?'No completed chapters yet.':'No chapters available.';
@@ -784,11 +784,14 @@ if("serviceWorker" in navigator){
   const panel=document.createElement('div');panel.className='orb-completed-panel orb-metric-panel';panel.innerHTML=`<h3>${meta.title}</h3><button type="button" class="orb-completed-close orb-metric-close" aria-label="Close graph">×</button><div class="orb-metric-tools"><button type="button" data-metric-zoom="out" aria-label="Zoom out">−</button><span>Zoom / horizontal slide</span><button type="button" data-metric-zoom="in" aria-label="Zoom in">+</button></div><div class="orb-metric-chart-scroll"><div class="orb-metric-chart"></div></div><div class="orb-metric-summary"></div>`;
   overlay.appendChild(panel);const chart=panel.querySelector('.orb-metric-chart'),chartScroll=panel.querySelector('.orb-metric-chart-scroll');
   document.body.appendChild(overlay);
-  let scale=Math.min(.65,Math.max(.035,(Math.max(320,chartScroll.clientWidth)-84)/(Math.max(1,data.length)*47)));
+  // Start in fit-to-screen mode: the complete timeline is visible without horizontal sliding.
+  // Zoom-in may expand beyond the viewport; zoom-out returns only as far as this fitted baseline.
+  const fitScale=Math.max(.001,Math.min(.65,(Math.max(240,chartScroll.clientWidth)-84)/(Math.max(1,data.length)*47)));
+  let scale=fitScale;
   function drawMetricChart(){
    const vals=data.map(p=>p.value).filter(Number.isFinite);
    if(!data.length){chart.innerHTML='<div class="orb-metric-empty">No dated records available yet.</div>';panel.querySelector('.orb-metric-summary').textContent='';panel.querySelectorAll('[data-metric-zoom]').forEach(b=>b.disabled=true);return}
-   const W=Math.max(360,chartScroll.clientWidth,data.length*47*scale+84),H=374,L=62,R=16,T=28,B=62,iw=W-L-R,ih=H-T-B;
+   const W=Math.max(1,chartScroll.clientWidth,data.length*47*scale+84),H=374,L=62,R=16,T=28,B=62,iw=W-L-R,ih=H-T-B;
    let max=kind==='consistency'?100:kind==='progress'?100:kind==='study'?Math.max(6,Math.ceil((Math.max(0,...vals)+.5)*2)/2):Math.max(3,Math.ceil((Math.max(0,...vals)+.25)*2)/2);
    const min=0;if(max<=min)max=1;
    const x=i=>data.length===1?L+iw/2:L+i*iw/(data.length-1),y=v=>T+(max-Math.max(min,Math.min(max,v)))*ih/(max-min);
@@ -812,7 +815,7 @@ if("serviceWorker" in navigator){
    const last=data[data.length-1];panel.querySelector('.orb-metric-summary').textContent=`${data.length===1?'Current snapshot':data.length+' recorded days'} · Latest: ${last.value.toFixed(2)}${meta.unit==='%'?'%':' h'}${last.date?' · '+last.date:''}`;
   }
   drawMetricChart();
-  panel.querySelectorAll('[data-metric-zoom]').forEach(button=>button.addEventListener('click',()=>{const oldWidth=chartScroll.scrollWidth,oldLeft=chartScroll.scrollLeft,ratio=oldWidth>chartScroll.clientWidth?oldLeft/(oldWidth-chartScroll.clientWidth):0;scale=Math.max(.02,Math.min(4.5,scale*(button.dataset.metricZoom==='in'?1.4:1/1.4)));drawMetricChart();const newMax=Math.max(0,chartScroll.scrollWidth-chartScroll.clientWidth);chartScroll.scrollLeft=ratio*newMax}));
+  panel.querySelectorAll('[data-metric-zoom]').forEach(button=>button.addEventListener('click',()=>{const oldWidth=chartScroll.scrollWidth,oldLeft=chartScroll.scrollLeft,ratio=oldWidth>chartScroll.clientWidth?oldLeft/(oldWidth-chartScroll.clientWidth):0;scale=Math.max(fitScale,Math.min(4.5,scale*(button.dataset.metricZoom==='in'?1.4:1/1.4)));drawMetricChart();const newMax=Math.max(0,chartScroll.scrollWidth-chartScroll.clientWidth);chartScroll.scrollLeft=ratio*newMax}));
   const close=()=>{if(!overlay.isConnected)return;overlay.remove();document.removeEventListener('keydown',onKey);body.style.overflow=priorStyles.overflow;body.style.position=priorStyles.position;body.style.top=priorStyles.top;body.style.width=priorStyles.width;window.scrollTo(0,scrollY);cards[kind]?.focus()};
   const onKey=e=>{if(e.key==='Escape')close()};panel.querySelector('.orb-metric-close').onclick=close;overlay.addEventListener('click',e=>{if(e.target===overlay)close()});overlay.addEventListener('wheel',e=>{if(!chartScroll.contains(e.target))e.preventDefault()},{passive:false});overlay.addEventListener('touchmove',e=>{if(!chartScroll.contains(e.target))e.preventDefault()},{passive:false});document.addEventListener('keydown',onKey);panel.querySelector('.orb-metric-close').focus();
  }

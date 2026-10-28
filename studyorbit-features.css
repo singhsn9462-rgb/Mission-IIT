@@ -175,3 +175,11 @@ main.orbit-focus-mode .orbit-focus-heading-row>#orbitBackHome .orbit-focus-back-
 #orbTestingSection .orb-test-back{position:sticky!important;top:74px!important;z-index:850!important;float:none!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;margin:0 0 10px!important;padding:10px 12px!important;min-height:42px!important;border:1px solid #57e8ff!important;border-radius:10px!important;background:linear-gradient(100deg,#142f4b,#282044)!important;color:#c8fbff!important;box-shadow:0 4px 12px #0005,0 0 10px #29dff733!important;transition:none!important}
 #orbTestingSection .orb-test-panel>h3{scroll-margin-top:122px!important}
 @media(max-width:560px){main.orbit-focus-mode>section.orbit-focused>.orbit-focus-heading-row{min-height:68px!important;padding:4px 5px!important;gap:4px!important}main.orbit-focus-mode .orbit-focus-heading-row>#orbitBackHome{flex-basis:58px!important;width:58px!important;min-width:58px!important;min-height:58px!important}main.orbit-focus-mode .orbit-focus-heading-row>#orbitBackHome .orbit-focus-x{width:42px!important;height:42px!important;font-size:27px!important}main.orbit-focus-mode .orbit-focus-heading-row>#orbitBackHome .orbit-focus-back-label{font-size:9px!important}#orbTestingSection .orb-test-back{top:72px!important}}
+
+
+/* C 1.0: compact table strips directly below study and speed/accuracy graphs. */
+.orbit-study-summary-strip,.orbit-graph-summary-strip{margin-top:8px;margin-bottom:12px}
+.orbit-study-summary-strip .orbit-data-table,.orbit-graph-summary-strip .orbit-data-table{margin-top:0;font-size:12px}
+.orbit-study-summary-strip .orbit-data-table th,.orbit-study-summary-strip .orbit-data-table td,.orbit-graph-summary-strip .orbit-data-table th,.orbit-graph-summary-strip .orbit-data-table td{padding:7px 8px;white-space:nowrap}
+.orbit-study-summary-strip .orbit-data-table th,.orbit-graph-summary-strip .orbit-data-table th{font-size:11px}
+@media(max-width:560px){.orbit-study-summary-strip,.orbit-graph-summary-strip{max-width:100%;overflow-x:auto}}

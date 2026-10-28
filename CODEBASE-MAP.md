@@ -1,6 +1,6 @@
-# StudyOrbit IIT S7.9 — Codebase & UI Map
+# StudyOrbit IIT C 1.0 — Codebase & UI Map
 
-This map documents S7.9, built directly from the updated S7.8 package. The S7.8/S7.7 lineage notes below are retained as history. It is a navigation guide, not a substitute for testing the live GitHub Pages deployment.
+This map documents the completed C 1.0 model, based on the accepted S7.9.3 Summary Graph Fit-to-Screen build. S7.x details below are retained as historical lineage. It is a navigation guide, not a substitute for testing the live GitHub Pages deployment.
 
 ## File responsibilities
 
@@ -8,7 +8,7 @@ This map documents S7.9, built directly from the updated S7.8 package. The S7.8/
 - `studyorbit-features.js`: runtime enhancement layer. It preserves legacy QB/Daily Log DOM, injects dated practice forms and Leave/Testing/Analysis sections, loads/saves records through the existing tracker state, draws charts, and handles edit modes.
 - `studyorbit-features.css`: dynamic section/table/modal/chart styling, responsive layouts, and Improvement Insights panel.
 - `studyorbit-todo.js` / `studyorbit-todo.css`: To-Do List tasks, carry-forward, history/statistics, floating control, and parchment-panel styles.
-- `sw.js`: PWA cache install, activation, and fetch behavior. Cache: `studyorbit-tracker-s79-test-analysis1`.
+- `sw.js`: PWA cache install, activation, and fetch behavior. Current cache: `studyorbit-tracker-c100-completed-1`.
 - `manifest.json`: app metadata, start URL, scope, display mode, theme, and icons.
 - `icon-192.png`, `icon-512.png`, `icon-512-maskable.png`: declared PWA icons.
 - `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png`: image assets referenced by the page/metadata.
@@ -61,10 +61,10 @@ At runtime, `studyorbit-features.js` moves existing section nodes into this orde
 
 `testSubjects` must be declared **before** the `testHTML` template is evaluated because that template calls `testSubjects.map(...)`. A temporal-dead-zone `ReferenceError` here aborts the whole feature script before Leave, Testing, and Analysis are inserted. This was the cause of the new header appearing above the old static tracker layout.
 
-## Cache/link alignment (S7.9)
+## Cache/link alignment (C 1.0)
 
-- `index.html` loads the changed feature JavaScript/CSS assets with `v=7901`; unchanged To-Do assets retain `v=7802`.
-- `sw.js` caches the corresponding versioned URLs in `CORE`; its cache name is `studyorbit-tracker-s79-test-analysis1` and the UI model label is S7.9.
+- `index.html` loads the changed feature JavaScript/CSS assets with `v=c100` for feature and To-Do JS/CSS assets.
+- `sw.js` caches the corresponding versioned URLs in `CORE`; its cache name is `studyorbit-tracker-c100-completed-1` and the UI model label is C 1.0.
 - The HTML registers `./sw.js` with `updateViaCache: 'none'`.
 - Cache cleanup is scoped to names beginning `studyorbit-tracker-`; localStorage is not cleared by cache activation.
 
@@ -84,3 +84,13 @@ At runtime, `studyorbit-features.js` moves existing section nodes into this orde
 - `index.html`: visible model label and changed feature asset query version updated.
 - `sw.js`: cache identity and changed feature asset URLs updated.
 - Startup wiring audit: restored the missing existing S7.8 dynamic entry-form mounting and generated-section helper because the supplied base ZIP referenced them but did not define/execute them. The focused-main-section navigation from the S7.9 reference package was not copied.
+
+
+## C 1.0 current behavior map
+
+- The summary's Total Chapters modal adds `☑` after completed chapter names only. The Completed Chapters modal adds `🔖 🎗` before a chapter only when every Revision stage, including its ribbon stages, is complete. Chapter Plan dropdowns show only `🎗` when all configured stages (including optional stages) are complete.
+- Study consistency is a damped running score, not a count of days above the mean. Its update is `score += 6 × tanh(1.25 × relativeDeviation)`, clamped to 0–100; overall scoring begins with a 4-hour reference, and average vacant-time penalties remain applied. Subject-level scoring starts from the first positive subject-study day at 100 and compares later days to that subject's previous mean.
+- `#orbAnalysisOverview` uses the same overall scoring method within the chosen Analysis Window; the dashboard score is all recorded days, so Last 7/Last 30 Days can correctly differ from the all-time dashboard. The small caption now says `Study-hour consistency · selected window`, not the incorrect `Days ≥ average study hours`.
+- `#orbStudyCharts` contains an average/consistency line for Daily Study Hours and a table beneath Subject-wise Daily Study Hours. Each Speed & Accuracy graph has an adjacent table strip for accuracy and average time/question.
+- Leave Analysis displays the same From/To/Reason/Days entries held in `o.leaves`, matching My Leaves.
+- OFF Chapter Plan drawers are hidden and ignore edit events until switched ON.
