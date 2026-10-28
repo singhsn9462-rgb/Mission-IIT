@@ -219,7 +219,7 @@ function graph(title,labels,series,unit='',type='line'){
  const isTestDateLabels=labels.length>0&&labels.every(d=>/^\d{2}-[A-Za-z]{3}$/.test(String(d)));
  const isTestAnalysisGraph=/^(Percentile by Test Date|%Efficiency|Efficiency Variations|Total Marks & -ve marks|Overall Accuracy|Marks Subject Wise|Accuracy Subject Wise|%Scored|Chemistry · Score|Maths · Score|Physics · Score|Subject contribution to total marks)$/.test(title);
  const xAxis=(isDates||isTestDateLabels)?'Date':(/month/i.test(title)?'Month':/subject|efficiency/i.test(title)?'Subject':'Test / Category');
- const yAxis=type==='status'?'Percentage (%)':unit==='%'||/accuracy|percentage|efficiency/i.test(title)?'Percentage (%)':unit==='marks'?'Marks':/hours/i.test(title)?'Hours':/time|speed/i.test(title)?'Minutes / Question':/leave/i.test(title)?'Leave Days':'Questions';
+ const yAxis=title==='Percentile by Test Date'?'%ile':title==='%Scored'||title==='Subject contribution to total marks'?'%Scored':title==='Overall Accuracy'||title==='Accuracy Subject Wise'?'Accuracy%':title==='%Efficiency'||title==='Efficiency Variations'||title==='Subject-wise Efficiency Index (%)'?'Efficiency%':type==='status'?'Percentage (%)':unit==='%'||/accuracy|percentage|efficiency/i.test(title)?'Percentage (%)':unit==='marks'?'Marks':/hours/i.test(title)?'Hours':/time|speed/i.test(title)?'Minutes / Question':/leave/i.test(title)?'Leave Days':'Questions';
  const chartLabels=isDates?range(($('orbWindow')?.value==='All time'&&firstDate()?firstDate():labels[0]),today()):labels;
  const indexed=new Map(labels.map((d,i)=>[d,i]));
  const plotted=series.map(item=>({...item,values:isDates?chartLabels.map(d=>isLeave(d)?null:indexed.has(d)?item.values[indexed.get(d)]:null):item.values}));
