@@ -825,6 +825,10 @@ if("serviceWorker" in navigator){
 #summary>h2 .summary-details-instruction{display:block;margin:3px 0 0;color:#d7bd55!important;font-size:10px;font-weight:500;line-height:1.25;letter-spacing:.12px;opacity:.78}
 #summary .stat:has(.summary-tap-hint){display:flex;flex-direction:column;align-items:flex-start;min-height:88px}
 #summary .summary-tap-hint{display:block;margin-top:auto;padding-top:6px;color:#d7bd55!important;font-size:9px!important;line-height:1.1;opacity:.76;letter-spacing:.1px}
+/* Match each Tap to view hint to its own card accent; preserve the existing faded intensity. */
+#summary .stats .stat:nth-child(1) .summary-tap-hint{color:#f2a8d2!important}
+#summary .stats .stat:nth-child(2) .summary-tap-hint{color:#8be4b4!important}
+#summary .stats .stat:nth-child(3) .summary-tap-hint{color:#f0c46a!important}
 .orb-completed-backdrop{position:fixed;inset:0;z-index:100000;background:#020714d9;display:flex;align-items:center;justify-content:center;padding:14px;overscroll-behavior:contain;touch-action:pan-y}
 .orb-completed-panel{position:relative;width:min(78vw,330px);height:min(54vh,430px);max-height:80vh;min-height:240px;overflow:hidden;display:flex;flex-direction:column;border:1px solid #e9c977;border-radius:16px;background:linear-gradient(150deg,#16233b,#0b1227);box-shadow:0 0 25px #cda85a50;padding:15px;color:#edf5ff;overscroll-behavior:contain}
 .orb-completed-panel h3{flex:0 0 auto;margin:0 42px 12px 0;color:#f4e0ad;font-size:16px}
