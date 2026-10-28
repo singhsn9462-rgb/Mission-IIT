@@ -1,12 +1,12 @@
 /* StudyOrbit IIT S7.9 — update-aware PWA cache. */
-const CACHE_NAME = 'studyorbit-tracker-s7931-focus-navigation-1';
+const CACHE_NAME = 'studyorbit-tracker-s7932-summary-insights-1';
 const CACHE_PREFIX = 'studyorbit-tracker-';
 const CORE = [
   './',
   './index.html',
   './manifest.json',
-  './studyorbit-features.js?v=7931',
-  './studyorbit-features.css?v=7931',
+  './studyorbit-features.js?v=7932',
+  './studyorbit-features.css?v=7932',
   './studyorbit-todo.js?v=7802',
   './studyorbit-todo.css?v=7802'
 ];
