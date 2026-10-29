@@ -1,15 +1,18 @@
-# StudyOrbit IIT C1.3O — Codebase & UI Map
+# StudyOrbit IIT C 2.0 — Codebase & UI Map
 
-This map documents C1.3O, based on the accepted C 1.1 build. C 1.1, C 1.0 and S7.x details are retained as historical lineage. It is a navigation guide, not a substitute for testing live GitHub Pages deployment.
+This map documents C 2.0, based on the C1.3O release. Earlier C1.3O/C1.1/C1.0/S7.x details are historical lineage. It is a navigation guide, not a substitute for testing live GitHub Pages deployment.
 
+## C 2.0 current interaction map
 
-## C1.3O current interaction map
+- `index.html`: visible model label `C 2.0`; feature and To-Do assets use `v=c20`. Summary metric detail panels are non-blocking and use a slightly shorter plotted SVG height so more of the graph fits vertically.
+- `studyorbit-features.js`: the shared `drawGraphs()` path creates `Show Readings` controls for generated graphs. Point-reading labels show only the plotted Y-axis value; point choices retain series/date/value to disambiguate close points. Enabling readings does not change graph spacing/zoom.
+- `studyorbit-features.css`: the Show Readings and point-choice headings/close controls remain fixed while only their option lists scroll. Reading panels are narrower and taller. Data-table panels use the Completed Chapters navy/gold theme, remain about 12% smaller in area than C1.3O, and keep title/close controls fixed while compactly spaced table rows scroll.
+- `Open data table` remains on Testing & Analysis graphs; `#orbAnalysisSection .orbit-analysis-category` graph controls omit it. Opening a table resets both vertical and horizontal scroll to the start.
+- `sw.js`: current cache is `studyorbit-tracker-c20-reading-layout-1`, with aligned `?v=c20` URLs.
 
-- `index.html`: visible model label `C1.3O`; feature and To-Do assets use `v=c13o`. Summary metric detail views use a non-blocking overlay so the tracker outside the panel remains interactive. The focused section's first-stage boundary follows the actual content height.
-- `studyorbit-features.js`: the common `drawGraphs()` path adds `Show Readings` controls to all generated graphs. Selected series values use per-point annotation keys; tapped points can be individually toggled; overlapping nearby candidates open a small series/date/value chooser. Reading selectors and point choosers are transient and close during section/drawer transitions.
-- Present-day missing values are `null` until a matching record exists; plot functions skip non-finite values rather than connecting to zero.
-- `Open data table` remains on Testing & Analysis graphs; `#orbAnalysisSection .orbit-analysis-category` graph controls omit it. The graph table's card keeps title/close fixed and scrolls the table area separately.
-- `sw.js`: current cache is `studyorbit-tracker-c13o-readings-layout-1`, with aligned `?v=c13o` URLs.
+## C1.3O baseline behavior retained
+
+- Existing C1.3O section-stage sizing, graph-point toggling, missing current-day values, selected-test panel behavior, and non-blocking summary metric overlay remain. C 2.0 only refines reading text/graph width behavior, reading-selector scroll mechanics, table modal sizing/spacing/theme, and summary metric chart height/reading text.
 
 ## File responsibilities
 
@@ -17,7 +20,7 @@ This map documents C1.3O, based on the accepted C 1.1 build. C 1.1, C 1.0 and S7
 - `studyorbit-features.js`: runtime enhancement layer. It preserves legacy QB/Daily Log DOM, injects dated practice forms and Leave/Testing/Analysis sections, loads/saves records through the existing tracker state, draws charts, and handles edit modes.
 - `studyorbit-features.css`: dynamic section/table/modal/chart styling, responsive layouts, and Improvement Insights panel.
 - `studyorbit-todo.js` / `studyorbit-todo.css`: To-Do List tasks, carry-forward, history/statistics, floating control, and parchment-panel styles.
-- `sw.js`: PWA cache install, activation, and fetch behavior. Current cache: `studyorbit-tracker-c13o-readings-layout-1`.
+- `sw.js`: PWA cache install, activation, and fetch behavior. Current cache: `studyorbit-tracker-c20-reading-layout-1`.
 - `manifest.json`: app metadata, start URL, scope, display mode, theme, and icons.
 - `icon-192.png`, `icon-512.png`, `icon-512-maskable.png`: declared PWA icons.
 - `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png`: image assets referenced by the page/metadata.
@@ -112,4 +115,4 @@ At runtime, `studyorbit-features.js` moves existing section nodes into this orde
 - Summary Dashboard metric graph annotations are managed by the local `pinnedMetricPoints` set and are discarded when that modal is removed.
 - `analysisTable()` and the table-normalization pass ensure numeric readings in percentage-labelled columns display `%`; this is presentation-only and does not alter stored numeric values.
 - Global modal close controls are enlarged while `orbit-focus` Back controls are deliberately untouched.
-- Current runtime query versions are `v=c13o`; `inline0.js` and `inline3.js` remain retained reference copies and are not runtime entry points.
+- Current runtime query versions are `v=c20`; `inline0.js` and `inline3.js` remain retained reference copies and are not runtime entry points.

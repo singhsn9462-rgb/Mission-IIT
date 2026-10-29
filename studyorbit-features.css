@@ -222,7 +222,7 @@ main.orbit-focus-mode .orbit-focus-heading-row>#orbitBackHome .orbit-focus-back-
 body.orbit-page-modal-open{overflow:hidden!important}
 
 
-/* C1.3O: compact, non-blocking graph readings and point-picker overlays. */
+/* C1.3O baseline: compact, non-blocking graph readings and point-picker overlays. */
 .orbit-graph{position:relative}
 .orbit-graph-controls{position:relative;z-index:2}
 .orbit-graph-controls button{min-width:0}
@@ -252,10 +252,52 @@ body.orbit-page-modal-open{overflow:hidden!important}
 .orb-test-select-modal .orbit-page-close-wrap{color:#d7e8f4}
 @media(max-width:520px){.orbit-readings-popup{top:64px;right:5px;width:min(82vw,330px);max-height:18vh;padding:6px}.orbit-marking-options{gap:4px}.orbit-marking-option{font-size:9px;padding:4px}.orbit-point-chooser{max-height:16vh}.orb-test-select-modal .orbit-page-panel{width:84.24vw;height:58.32vh;min-height:min(264px,44vh);padding:14px 10px 10px}.orbit-data-modal-card{padding:13px 9px 10px}}
 
-/* C1.3O refinement: data-table view is modestly smaller while its heading and close control remain fixed. */
+/* C1.3O baseline: data-table view is smaller while its heading and close control remain fixed. */
 .orbit-data-modal-card{width:89.3vw;height:64.6vh;max-height:722px}
 @media(min-width:650px){.orbit-data-modal-card{width:74vw}}
 @media(max-width:520px){.orbit-data-modal-card{width:89.3vw;height:64.6vh;max-height:80vh;padding:13px 9px 10px}}
 .orbit-readings-popup{max-height:14vh;min-height:82px;width:min(78vw,350px)}
 .orbit-point-chooser{width:min(78%,320px);max-height:12vh;min-height:68px}
 @media(max-width:520px){.orbit-readings-popup{width:min(78vw,320px);max-height:15vh;min-height:78px}.orbit-point-chooser{max-height:12vh;min-height:68px}}
+
+/* C 2.0: numeric-only graph readings; compact panels with fixed controls. */
+.orbit-readings-popup,.orbit-point-chooser{
+  display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;
+}
+.orbit-readings-head,.orbit-point-chooser-head{
+  position:relative;top:auto;z-index:2;flex:0 0 auto;min-height:29px;
+  padding:2px 2px 6px;margin:0 0 5px;border-bottom:1px solid #d9c07845;
+  background:linear-gradient(145deg,#1b2a45,#101a2e);color:#f4e0ad;
+}
+.orbit-marking-options,.orbit-point-chooser-list{
+  flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;
+  overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+}
+.orbit-readings-footer{flex:0 0 auto;position:relative;bottom:auto;z-index:2;background:linear-gradient(145deg,#1b2a45,#101a2e)}
+/* Around 12% more panel area than the previous C1.3O compact panel, with narrower width and more vertical room. */
+.orbit-readings-popup{width:min(72vw,320px);max-height:17vh;min-height:90px;padding:7px;}
+.orbit-point-chooser{width:min(72%,295px);max-height:14.5vh;min-height:78px;padding:6px;}
+.orbit-point-chooser-list{display:flex;flex-direction:column;gap:3px;}
+.orbit-point-choice{flex:0 0 auto;min-height:26px;padding:4px 6px;font-size:10px;}
+/* Match the Completed Chapters navy/gold panel; only the table body scrolls, never its title or close control. */
+.orbit-data-modal-card{
+  width:86vw;height:59vh;max-height:680px;min-height:240px;
+  border:1px solid #e9c977;border-radius:16px;
+  background:linear-gradient(150deg,#16233b,#0b1227);
+  box-shadow:0 0 25px #cda85a50;overflow:hidden;
+}
+.orbit-data-modal-card h3{flex:0 0 auto;position:relative;margin:3px 48px 8px 0;color:#f4e0ad;}
+.orbit-data-modal-close{z-index:5;border-color:#e9c977;background:#263653;color:#fff0bb;}
+.orbit-data-modal-body{flex:1 1 auto;min-height:0;overflow:hidden;}
+.orbit-data-modal-body>.orbit-table-scroll{height:100%;max-height:100%;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;}
+.orbit-data-modal .orbit-data-table{margin:0;width:100%;}
+.orbit-data-modal .orbit-data-table th,.orbit-data-modal .orbit-data-table td{
+  padding:3px 6px;line-height:1.15;vertical-align:middle;
+}
+.orbit-data-modal .orbit-data-table thead th{position:sticky;top:0;z-index:3;background:#253d5b;}
+@media(min-width:650px){.orbit-data-modal-card{width:71vw;height:59.5vh;}}
+@media(max-width:520px){
+  .orbit-readings-popup{width:min(72vw,300px);max-height:18vh;min-height:90px;padding:6px;}
+  .orbit-point-chooser{width:min(72%,280px);max-height:14.5vh;min-height:78px;}
+  .orbit-data-modal-card{width:86vw;height:59vh;max-height:76vh;padding:13px 9px 10px;}
+}
