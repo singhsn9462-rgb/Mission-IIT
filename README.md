@@ -1,14 +1,27 @@
-# StudyOrbit IIT — C 1.1 (Completed)
+# StudyOrbit IIT — C1.3O (Completed)
 
-C 1.1 is the completed model based on C 1.0, which was built on the accepted S7.9.3 Summary Graph Fit-to-Screen baseline. C 1.0 and S7.x notes below are retained as historical lineage.
+C1.3O is based on the accepted C 1.1 model. Earlier C 1.1, C 1.0 and S7.x notes below are retained as historical lineage.
 
 StudyOrbit IIT is a static, browser-based study tracker published through GitHub Pages and installable as a Progressive Web App (PWA). Study records are stored in browser `localStorage`; GitHub Pages does not sync them between devices.
+
+
+## C1.3O — requested reading, modal and stage-layout correction
+
+- Renames graph control `Show Marking` to `Show Readings` in all generated graphs. The non-blocking graph-attached panel supports one active selector at a time and applies the selected series only after `Select`.
+- Graph-point taps independently toggle a reading. When close points overlap, a compact point chooser distinguishes series/date/value. Labels include series, date and value; collision-aware placement tries alternate positions and uses a faint dotted connector in the series colour when a label is displaced.
+- Reading overrides are reset when the tracker changes section/drawer. Selecting a series still shows its readings; tapping an individual marked point can hide/show that one reading without hiding the rest of the series.
+- Missing present-day study/QB input is kept as a missing chart value rather than being plotted as a recorded zero. Real recorded zeros remain zero.
+- Dashboard metric detail panels use the Completed Chapters gold/navy theme at approximately 110% of its dimensions and no longer lock background scrolling/clicks outside their boundary.
+- Focused section drawers shrink-wrap their current content instead of enclosing unused first-screen space; they can grow as later-stage content appears.
+- Test Analysis keeps the `All Tests`, `Selected Tests`, `Particular Test` order with `All Tests` selected by default. Selected Tests has a compact non-blocking picker, a circular `× Cancel`, and `Yes Select`.
+- Test Analysis graphs retain `Open data table` and `Show Readings`. Main Analysis and Formality Analysis no longer show `Open data table`. Data-table headings and close control remain fixed while the table body scrolls, with a slightly reduced modal size and compact row spacing.
+- Cache and runtime asset query versions are aligned to `v=c13o`.
 
 ## Build lineage
 
 - S7.8 is the next feature release after the corrected S7.7 codebase and retains the S7.6 Math Integrity Fix lineage.
 - Existing StudyOrbit sections and the S7.6 Testing/Analysis features are retained.
-- Historical S7.9 baseline note: S7.5 creator-credit styling/typography remained preserved and the label was then S7.9. The current C 1.1 visible label is updated in `index.html`.
+- Historical S7.9 baseline note: S7.5 creator-credit styling/typography remained preserved and the label was then S7.9. The visible model label is updated in `index.html`.
 
 ## Retained Testing/Analysis features and integration fixes
 
@@ -36,7 +49,7 @@ StudyOrbit IIT is a static, browser-based study tracker published through GitHub
 - `index.html` — app shell, original chapter/stage engine, summary, static sections, service-worker registration, and model/creator header.
 - `studyorbit-features.js` — dynamically injects and operates Leave, date-based QB/Revision/Daily Log, Testing, Analysis, graphs, data tables, and saved-record editing.
 - `studyorbit-features.css` — feature section layout, responsive tables, modal, graph controls, and Improvement Insights styling.
-- `sw.js` — PWA cache install/activation/fetch behavior; Current C 1.1 cache name: `studyorbit-tracker-c110-graph-interaction-1`; earlier S7.9/S7.8 names are historical lineage.
+- `sw.js` — PWA cache install/activation/fetch behavior; Current C1.3O cache name: `studyorbit-tracker-c13o-readings-layout-1`; earlier S7.9/S7.8 names are historical lineage.
 - `manifest.json` — app metadata and icon references.
 - `icon-192.png`, `icon-512.png`, `icon-512-maskable.png` — app icons.
 - `studyorbit-logo.png`, `studyorbit-background.png`, `studyorbit-master.png` — visual assets.

@@ -220,3 +220,42 @@ main.orbit-focus-mode .orbit-focus-heading-row>#orbitBackHome .orbit-focus-back-
 @media(max-width:520px){.orbit-graph-controls{gap:7px}.orbit-graph-controls button{font-size:11px;padding:6px 5px}.orbit-page-panel{width:96vw;height:88vh;padding:14px 10px 10px}.orbit-page-panel h3{font-size:15px}.orbit-page-close{width:42px;height:42px;min-height:42px;font-size:27px}.orbit-data-table th.orbit-contribution-header{width:92px;min-width:88px;max-width:98px}}
 
 body.orbit-page-modal-open{overflow:hidden!important}
+
+
+/* C1.3O: compact, non-blocking graph readings and point-picker overlays. */
+.orbit-graph{position:relative}
+.orbit-graph-controls{position:relative;z-index:2}
+.orbit-graph-controls button{min-width:0}
+.orbit-readings-popup,.orbit-point-chooser{position:absolute;z-index:80;box-sizing:border-box;pointer-events:auto;border:1px solid #e9c977;border-radius:12px;background:linear-gradient(145deg,#1b2a45f7,#101a2ef7);color:#edf5ff;box-shadow:0 8px 24px #000b,0 0 16px #cda85a35;padding:7px;width:min(82vw,380px);max-height:17vh;min-height:96px;overflow:auto;overscroll-behavior:contain}
+.orbit-readings-popup{top:68px;right:7px}
+.orbit-readings-head,.orbit-point-chooser-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 5px;color:#f4e0ad;font-size:12px;line-height:1.2}
+.orbit-readings-close,.orbit-point-chooser-close{display:grid;place-items:center;flex:0 0 28px;width:28px;height:28px;min-height:28px;padding:0;border:1px solid #9cabc2;border-radius:50%;background:#263653;color:#fff;font-size:21px;line-height:1}
+.orbit-marking-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 6px}
+.orbit-marking-option{grid-template-columns:9px minmax(0,1fr) 17px;gap:5px;padding:5px 5px;border-radius:7px;font-size:10px;line-height:1.15;min-width:0}
+.orbit-marking-swatch{width:8px;height:8px}
+.orbit-marking-option input{width:14px;height:14px;margin:0}
+.orbit-readings-footer{display:flex;justify-content:flex-end;padding-top:5px;margin-top:4px;border-top:1px solid #d9c07845}
+.orbit-readings-footer button{min-height:28px;min-width:70px;padding:4px 12px;font-size:11px}
+.orbit-point-chooser{width:min(82%,360px);max-height:15vh;min-height:72px;padding:6px}
+.orbit-point-chooser-list{display:flex;flex-direction:column;gap:4px}
+.orbit-point-choice{display:block;width:100%;min-height:27px;padding:5px 7px;text-align:left;border-left:3px solid var(--point-color,#e9c977);border-radius:6px;background:#ffffff0c;color:#eef5ff;font-size:10px;line-height:1.25;overflow-wrap:anywhere}
+.orbit-data-modal-card{display:flex;flex-direction:column;overflow:hidden}
+.orbit-data-modal-card h3{flex:0 0 auto;padding-right:52px}
+.orbit-data-modal-body{flex:1 1 auto;min-height:0;overflow:hidden;overscroll-behavior:contain}
+.orbit-data-modal-body>.orbit-table-scroll{height:100%;margin:0;max-height:100%;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.orbit-data-modal .orbit-data-table th,.orbit-data-modal .orbit-data-table td{padding:6px 7px;line-height:1.25;vertical-align:middle}
+.orbit-data-modal .orbit-data-table{margin:0}
+.orb-test-select-modal .orbit-page-panel{width:min(84.24vw,356px);height:min(58.32vh,464px);min-height:min(264px,44vh);max-height:80vh;border-color:#e9c977;background:linear-gradient(150deg,#16233b,#0b1227);box-shadow:0 0 25px #cda85a50}
+.orb-test-select-modal{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;pointer-events:none!important}
+.orb-test-select-modal .orbit-page-panel{pointer-events:auto!important}
+.orb-test-select-modal .orbit-page-footer{justify-content:flex-end}
+.orb-test-select-modal .orbit-page-close-wrap{color:#d7e8f4}
+@media(max-width:520px){.orbit-readings-popup{top:64px;right:5px;width:min(82vw,330px);max-height:18vh;padding:6px}.orbit-marking-options{gap:4px}.orbit-marking-option{font-size:9px;padding:4px}.orbit-point-chooser{max-height:16vh}.orb-test-select-modal .orbit-page-panel{width:84.24vw;height:58.32vh;min-height:min(264px,44vh);padding:14px 10px 10px}.orbit-data-modal-card{padding:13px 9px 10px}}
+
+/* C1.3O refinement: data-table view is modestly smaller while its heading and close control remain fixed. */
+.orbit-data-modal-card{width:89.3vw;height:64.6vh;max-height:722px}
+@media(min-width:650px){.orbit-data-modal-card{width:74vw}}
+@media(max-width:520px){.orbit-data-modal-card{width:89.3vw;height:64.6vh;max-height:80vh;padding:13px 9px 10px}}
+.orbit-readings-popup{max-height:14vh;min-height:82px;width:min(78vw,350px)}
+.orbit-point-chooser{width:min(78%,320px);max-height:12vh;min-height:68px}
+@media(max-width:520px){.orbit-readings-popup{width:min(78vw,320px);max-height:15vh;min-height:78px}.orbit-point-chooser{max-height:12vh;min-height:68px}}
